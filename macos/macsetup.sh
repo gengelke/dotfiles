@@ -445,7 +445,7 @@ tell application "Terminal"
 	local windowID
 	(* Store the IDs of all the open terminal windows. *)
 	set initialOpenedWindows to id of every window
-	set themeName to "genmac.itermcolors"
+	set themeName to "genmac_grey.itermcolors"
 	(* Open the custom theme so that it gets added to the list
 	   of available terminal themes (note: this will open two
 	   additional terminal windows). *)
@@ -485,7 +485,7 @@ defaults write com.apple.Terminal ShowLineMarks -int 0
 
 # Install the Solarized Dark theme for iTerm
 #open "${HOME}/init/Solarized Dark.itermcolors"
-open "./genmac.itermcolors"
+open "./genmac_grey.itermcolors"
 
 # Donâ€™t display the annoying prompt when quitting iTerm
 defaults write com.googlecode.iterm2 PromptOnQuit -bool false
