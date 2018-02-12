@@ -142,6 +142,7 @@ sudo nvram SystemAudioVolume=" "
 
 # Enable transparency in the menu bar and elsewhere
 defaults write com.apple.universalaccess reduceTransparency -bool false
+defaults write NSGlobalDomain AppleEnableMenuBarTransparency -bool true
 
 # Set sidebar icon size to medium
 defaults write NSGlobalDomain NSTableViewDefaultSizeMode -int 2
