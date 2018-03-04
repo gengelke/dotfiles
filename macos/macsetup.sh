@@ -28,6 +28,7 @@ cp tmux.conf ~/.tmux.conf
 brew install \
      ack \
      ansible \
+     bash \
      gdb \
      git \
      mono \
@@ -39,6 +40,7 @@ brew install \
      python \
      python3 \
      socat \
+     telnet \
      tmux \
      tree \
      wget
