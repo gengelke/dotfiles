@@ -62,7 +62,7 @@ brew cask install \
      caffeine \
      cakebrew \
      calibre \
-     carbon-copy-cloner \
+#     carbon-copy-cloner \
      clementine \
      dia \
      firefox \
@@ -106,6 +106,12 @@ fi
 ###############################################################################
 # General UI/UX                                                               #
 ###############################################################################
+
+# Set UI interface theme to dark
+sudo defaults write /Library/Preferences/.GlobalPreferences AppleInterfaceTheme Dark
+
+# Set background color to "Solid Gray Pro Dark"
+osascript -e 'tell application "Finder" to set desktop picture to POSIX file "/Library/Desktop Pictures/Solid Colors/Solid Gray Pro Dark.png"'
 
 # Set computer name (as done via System Preferences -> Sharing)
 sudo scutil --set ComputerName $systemname
@@ -203,7 +209,10 @@ defaults write com.apple.screensaver askForPassword -int 1
 defaults write com.apple.screensaver askForPasswordDelay -int 0
 
 # Save screenshots to the desktop
-defaults write com.apple.screencapture location -string "${HOME}/Desktop"
+#defaults write com.apple.screencapture location -string "${HOME}/Desktop"
+
+# Save screenshots to directory ~/Pictures
+defaults write com.apple.screencapture location -string "${HOME}/Pictures"
 
 # Save screenshots in PNG format (other options: BMP, GIF, JPG, PDF, TIFF)
 defaults write com.apple.screencapture type -string "png"
