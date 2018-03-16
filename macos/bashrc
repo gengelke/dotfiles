@@ -123,7 +123,8 @@ if ! [[ "$OSTYPE" == "darwin"* ]]; then
 fi
 
 if [[ "$OSTYPE" == "darwin"* ]]; then
-#  open -a XQuartz
+  open -a XQuartz
+  socat TCP-LISTEN:6000,reuseaddr,fork UNIX-CLIENT:\"$DISPLAY\" &
   export HOSTIP=$(ifconfig en0 | grep inet | awk '$1=="inet" {print $2}')
   xhost + $HOSTIP
 fi
