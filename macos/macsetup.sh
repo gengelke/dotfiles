@@ -576,4 +576,9 @@ defaults -currentHost write com.apple.ImageCapture disableHotPlug -bool true
 # Prevent XQuartz from opening an xterm when it starts
 defaults write org.macosforge.xquartz.X11 app_to_run /usr/bin/true
 
+# Restart UI services in order to enable previously made changes
+killall Dock
+killall SystemUIServer
+killall Finder
+
 echo "Done. Note that some of these changes require a logout/restart to take effect."
