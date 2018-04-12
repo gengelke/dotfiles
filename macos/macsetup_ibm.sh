@@ -62,7 +62,6 @@ brew cask install \
      caffeine \
      cakebrew \
      calibre \
-#     carbon-copy-cloner \
      clementine \
      dia \
      firefox \
@@ -85,8 +84,8 @@ brew cask install \
 brew cask install caskroom/fonts/font-terminus-nerd-font \
                   caskroom/fonts/font-terminus-nerd-font-mono
 
-brew install bash-completion
-brew tap homebrew/completions
+#brew install bash-completion
+#brew tap homebrew/completions
 
 sudo easy_install pip
 
@@ -110,8 +109,25 @@ fi
 # Set UI interface theme to dark
 sudo defaults write /Library/Preferences/.GlobalPreferences AppleInterfaceTheme Dark
 
+# Use a dark menu bar / dock
+defaults write NSGlobalDomain AppleInterfaceStyle -string "Dark"
+
 # Set background color to "Solid Gray Pro Dark"
 osascript -e 'tell application "Finder" to set desktop picture to POSIX file "/Library/Desktop Pictures/Solid Colors/Solid Gray Pro Dark.png"'
+# Show battery status percentage in the menu bar
+defaults write com.apple.menuextra.battery ShowPercent YES;
+
+# Show volume in the menu bar
+defaults write com.apple.systemuiserver "NSStatusItem Visible com.apple.menuextra.volume" -int 0
+
+# Show Bluetooth in the menu bar
+defaults write com.apple.systemuiserver "NSStatusItem Visible com.apple.menuextra.bluetooth" -int 0
+
+# Show Bluetooth, Volume, Battery, Displays in the menu bar
+defaults write com.apple.systemuiserver menuExtras -array "/System/Library/CoreServices/Menu Extras/Volume.menu" "/System/Library/CoreServices/Menu Extras/Bluetooth.menu" "/System/Library/CoreServices/Menu Extras/Displays.menu" "/System/Library/CoreServices/Menu Extras/User.menu"
+
+# Allow fast user switching (icon style, in the menu bar)
+defaults write NSGlobalDomain userMenuExtraStyle -int 2
 
 # Set computer name (as done via System Preferences -> Sharing)
 sudo scutil --set ComputerName $systemname
@@ -220,8 +236,24 @@ defaults write com.apple.screencapture type -string "png"
 # Disable shadow in screenshots
 defaults write com.apple.screencapture disable-shadow -bool true
 
+# Use list view in all Finder windows by default
+# Four-letter codes for the other view modes: `icnv`, `clmv`, `Flwv`
+defaults write com.apple.finder FXPreferredViewStyle -string "Nlsv"
+
+# New Finder windows points to home
+defaults write com.apple.finder NewWindowTarget -string "PfHm"
+
 # Finder: allow quitting via âŒ˜ + Q; doing so will also hide desktop icons
 defaults write com.apple.finder QuitMenuItem -bool true
+
+# Show the status bar in Finder
+defaults write com.apple.finder ShowStatusBar -bool true
+
+# Show absolute path in Finder's title bar.
+defaults write com.apple.finder _FXShowPosixPathInTitle -bool true
+
+# Keep folders on top when sorting by name
+defaults write com.apple.finder _FXSortFoldersFirst -bool true
 
 # Finder: disable window animations and Get Info animations
 defaults write com.apple.finder DisableAllAnimations -bool true
@@ -277,14 +309,14 @@ defaults write com.apple.frameworks.diskimages auto-open-rw-root -bool true
 defaults write com.apple.finder OpenWindowForNewRemovableDisk -bool true
 
 # Enable snap-to-grid for icons on the desktop and in other icon views
-/usr/libexec/PlistBuddy -c "Set :DesktopViewSettings:IconViewSettings:arrangeBy grid" ~/Library/Preferences/com.apple.finder.plist
-/usr/libexec/PlistBuddy -c "Set :FK_StandardViewSettings:IconViewSettings:arrangeBy grid" ~/Library/Preferences/com.apple.finder.plist
-/usr/libexec/PlistBuddy -c "Set :StandardViewSettings:IconViewSettings:arrangeBy grid" ~/Library/Preferences/com.apple.finder.plist
+#/usr/libexec/PlistBuddy -c "Set :DesktopViewSettings:IconViewSettings:arrangeBy grid" ~/Library/Preferences/com.apple.finder.plist
+#/usr/libexec/PlistBuddy -c "Set :FK_StandardViewSettings:IconViewSettings:arrangeBy grid" ~/Library/Preferences/com.apple.finder.plist
+#/usr/libexec/PlistBuddy -c "Set :StandardViewSettings:IconViewSettings:arrangeBy grid" ~/Library/Preferences/com.apple.finder.plist
 
 # Increase grid spacing for icons on the desktop and in other icon views
-/usr/libexec/PlistBuddy -c "Set :DesktopViewSettings:IconViewSettings:gridSpacing 100" ~/Library/Preferences/com.apple.finder.plist
-/usr/libexec/PlistBuddy -c "Set :FK_StandardViewSettings:IconViewSettings:gridSpacing 100" ~/Library/Preferences/com.apple.finder.plist
-/usr/libexec/PlistBuddy -c "Set :StandardViewSettings:IconViewSettings:gridSpacing 100" ~/Library/Preferences/com.apple.finder.plist
+#/usr/libexec/PlistBuddy -c "Set :DesktopViewSettings:IconViewSettings:gridSpacing 100" ~/Library/Preferences/com.apple.finder.plist
+#/usr/libexec/PlistBuddy -c "Set :FK_StandardViewSettings:IconViewSettings:gridSpacing 100" ~/Library/Preferences/com.apple.finder.plist
+#/usr/libexec/PlistBuddy -c "Set :StandardViewSettings:IconViewSettings:gridSpacing 100" ~/Library/Preferences/com.apple.finder.plist
 
 # Use list view in all Finder windows by default
 # Four-letter codes for the other view modes: `icnv`, `clmv`, `Flwv`
@@ -356,8 +388,12 @@ defaults write com.apple.dock autohide-delay -float 0
 # Remove the animation when hiding/showing the Dock
 defaults write com.apple.dock autohide-time-modifier -float 0
 
-# Do not Automatically hide and show the Dock
+# Do not automatically hide and show the Dock
 defaults write com.apple.dock autohide -bool false
+
+# Do not automatically hide and show the system menu bar
+defaults write NSGlobalDomain _HIHideMenuBar -bool false
+
 
 ###############################################################################
 # Safari & WebKit                                                             #
@@ -498,6 +534,10 @@ defaults write com.apple.ActivityMonitor SortDirection -int 0
 # Use plain text mode for new TextEdit documents
 defaults write com.apple.TextEdit RichText -int 0
 
+# Use plain text for new documents in TextEdit.app
+defaults write com.apple.TextEdit RichText -bool false
+
+
 # Open and save files as UTF-8 in TextEdit
 defaults write com.apple.TextEdit PlainTextEncoding -int 4
 defaults write com.apple.TextEdit PlainTextEncodingForWrite -int 4
@@ -540,5 +580,10 @@ defaults -currentHost write com.apple.ImageCapture disableHotPlug -bool true
 
 # Prevent XQuartz from opening an xterm when it starts
 defaults write org.macosforge.xquartz.X11 app_to_run /usr/bin/true
+
+# Restart UI services in order to enable previously made changes
+killall Dock
+killall SystemUIServer
+killall Finder
 
 echo "Done. Note that some of these changes require a logout/restart to take effect."
