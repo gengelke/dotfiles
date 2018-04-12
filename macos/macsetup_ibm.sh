@@ -62,6 +62,7 @@ brew cask install \
      caffeine \
      cakebrew \
      calibre \
+     carbon-copy-cloner \
      clementine \
      dia \
      firefox \
@@ -73,6 +74,7 @@ brew cask install \
      keycastr \
      libreoffice \
      pycharm-ce \
+     slack \
      tigervnc-viewer \
      vagrant \
      virtualbox \
