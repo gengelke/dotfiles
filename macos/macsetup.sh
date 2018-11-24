@@ -2,7 +2,7 @@
 
 # (C) 2017 Gordon Engelke <reject@email.de>
 
-systemname="genmac"
+systemname="genmacpro"
 
 # Close any open System Preferences panes, to prevent them from overriding settings weâ€™re about to change
 osascript -e 'tell application "System Preferences" to quit'
@@ -15,7 +15,7 @@ while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
 xcode-select --install
 #xcode-select --reset
-sleep 120
+#sleep 120
 
 cp bashrc ~/.bashrc
 cp vimrc ~/.vimrc
@@ -62,7 +62,6 @@ brew cask install xquartz
 
 brew cask install \
      alfred \
-     arduino \
      android-platform-tools \
      bartender \
      caffeine \
@@ -84,7 +83,6 @@ brew cask install \
      keycastr \
      libreoffice \
      little-snitch \
-     mactex \
      micro-snitch \
      microsoft-office \
      mountain-duck \
@@ -103,7 +101,7 @@ brew cask install \
      xnviewmp
 
 brew cask install evernote
-#brew cask install vmware-fusion
+brew cask install vmware-fusion
 
 brew cask install caskroom/fonts/font-terminus-nerd-font \
                   caskroom/fonts/font-terminus-nerd-font-mono
@@ -111,8 +109,9 @@ brew cask install caskroom/fonts/font-terminus-nerd-font \
 brew install bash-completion
 brew tap homebrew/completions
 
-brew tap miktex/miktex
-brew install miktex
+#brew cask install mactex
+#brew tap miktex/miktex
+#brew install miktex
 
 sudo easy_install pip
 
@@ -126,6 +125,14 @@ if [ ! -d /Applications/Docker.app ]; then
 else
   echo "Docker for Mac is already installed."
 fi
+
+brew install awscli \
+             azure-cli \
+             freerdp \
+             kubectl
+
+brew tap cloudfoundry/tap
+brew install cf-cli
 
 #exit
 
