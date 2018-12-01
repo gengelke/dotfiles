@@ -73,7 +73,6 @@ brew cask install \
      dia \
      evernote \
      firefox \
-     franz \
      gimp \
      google-chrome \
      growl-fork \
@@ -86,8 +85,10 @@ brew cask install \
      micro-snitch \
      microsoft-office \
      mountain-duck \
+     pdf-expert \
      pycharm-ce \
      slack \
+     snagit \
      spotify \
      textual \
      thunderbird \
@@ -142,6 +143,9 @@ brew install cf-cli
 
 # Set UI interface theme to dark
 sudo defaults write /Library/Preferences/.GlobalPreferences AppleInterfaceTheme Dark
+
+# Make MacOS Mojave Dark Mode less dark
+sudo defaults write -g NSRequiresAquaSystemAppearance -bool Yes
 
 # Set background color to "Solid Gray Pro Dark"
 osascript -e 'tell application "Finder" to set desktop picture to POSIX file "/Library/Desktop Pictures/Solid Colors/Solid Gray Pro Dark.png"'
@@ -237,6 +241,8 @@ sudo systemsetup -settimezone "Europe/Berlin" > /dev/null
 ###############################################################################
 # Screen                                                                      #
 ###############################################################################
+
+sudo defaults write -g NSWindowShouldDragOnGesture -bool true
 
 # Require password immediately after sleep or screen saver begins
 defaults write com.apple.screensaver askForPassword -int 1
@@ -375,8 +381,6 @@ defaults write com.apple.dock persistent-apps -array-add '<dict><key>tile-data</
 defaults write com.apple.dock persistent-apps -array-add '<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>/Applications/XnViewMP.app</string><key>_CFURLStringType</key><integer>0</integer></dict></dict></dict>'
 
 defaults write com.apple.dock persistent-apps -array-add '<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>/Applications/Textual.app</string><key>_CFURLStringType</key><integer>0</integer></dict></dict></dict>'
-
-defaults write com.apple.dock persistent-apps -array-add '<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>/Applications/Franz.app</string><key>_CFURLStringType</key><integer>0</integer></dict></dict></dict>'
 
 defaults write com.apple.dock persistent-apps -array-add '<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>/Applications/Slack.app</string><key>_CFURLStringType</key><integer>0</integer></dict></dict></dict>'
 
