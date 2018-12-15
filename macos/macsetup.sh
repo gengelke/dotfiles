@@ -37,7 +37,7 @@ brew install \
      openssl \
      packer \
      pulseaudio \
-     python \
+     python2 \
      python3 \
      socat \
      telnet \
@@ -130,10 +130,12 @@ fi
 brew install awscli \
              azure-cli \
              freerdp \
-             kubectl
+             kubectl \
+             kubernetes-helm
 
 brew tap cloudfoundry/tap
 brew install cf-cli
+pip install nose tornado msrest msrestazure azure ansible[azure] openshift --upgrade
 
 #exit
 
