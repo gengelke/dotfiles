@@ -62,7 +62,6 @@ brew cask install xquartz
 
 brew cask install \
      alfred \
-     android-platform-tools \
      bartender \
      caffeine \
      cakebrew \
@@ -75,7 +74,6 @@ brew cask install \
      firefox \
      gimp \
      google-chrome \
-     growl-fork \
      hex-fiend \
      iterm2 \
      java \
@@ -132,6 +130,9 @@ brew install awscli \
              freerdp \
              kubectl \
              kubernetes-helm
+
+brew cask install microsoft-azure-storage-explorer \
+                  android-platform-tools \
 
 brew tap cloudfoundry/tap
 brew install cf-cli

@@ -63,7 +63,14 @@ set fileformats=unix,dos,mac
 set ff=unix
 set wrap                        " soft wrap long lines
 set list                        " show invisible characters
-set listchars=tab:>·,trail:·    " but only show tabs and trailing whitespace
+set encoding=utf-8
+if has('gui_running')
+  set listchars=tab:▶‒,nbsp:∙,trail:∙,extends:▶,precedes:◀
+  let &showbreak = '↳'
+else
+  set listchars=tab:>-,nbsp:.,trail:.,extends:>,precedes:<
+  let &showbreak = '>'
+endif
 set report=0                    " report back on all changes
 set shortmess=atI               " shorten messages and don't show intro
 set wildmode=list:longest       " set wildmenu to list choice
