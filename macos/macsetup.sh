@@ -31,9 +31,11 @@ brew install \
      bash \
      gdb \
      git \
+     graphviz \
      mono \
      netcat \
      nmap \
+     node \
      openssl \
      packer \
      pulseaudio \
@@ -61,6 +63,7 @@ brew install vim --with-python --with-ruby --with-perl
 brew cask install xquartz
 
 brew cask install \
+#     avast-security \
      alfred \
      bartender \
      caffeine \
@@ -75,8 +78,10 @@ brew cask install \
      gimp \
      google-chrome \
      hex-fiend \
+     istat-menus \
      iterm2 \
      java \
+     keepassx \
      keycastr \
      libreoffice \
      little-snitch \
@@ -87,17 +92,32 @@ brew cask install \
      pycharm-ce \
      slack \
      snagit \
+     spectacle \
      spotify \
+     telegram \
      textual \
      thunderbird \
      tigervnc-viewer \
      tripmode \
+     tunnelblick \
      vagrant \
+     veracrypt
      virtualbox \
      virtualbox-extension-pack \
+     visual-studio-code \
      vlc \
      wireshark \
      xnviewmp
+
+brew cask install \
+     blockblock \
+     do-not-disturb \
+     KextViewr \
+     knockknock \
+     Lockdown \
+     lulu \
+     RansomWhere \
+     taskexplorer
 
 brew cask install evernote
 brew cask install vmware-fusion
