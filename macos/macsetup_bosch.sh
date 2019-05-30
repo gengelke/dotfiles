@@ -76,9 +76,11 @@ brew cask install \
      iterm2 \
      java \
      karabiner-elements \
+     keepassx \
      keycastr \
      libreoffice \
      mattermost \
+     powershell \
      pycharm-ce \
      spectacle \
      textual \

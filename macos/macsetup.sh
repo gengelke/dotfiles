@@ -75,12 +75,14 @@ brew cask install \
      dia \
      evernote \
      firefox \
+     fluor \
      gimp \
      google-chrome \
      hex-fiend \
      istat-menus \
      iterm2 \
      java \
+     karabiner-elements \
      keepassx \
      keycastr \
      libreoffice \
@@ -89,7 +91,9 @@ brew cask install \
      microsoft-office \
      mountain-duck \
      pdf-expert \
+     powershell \
      pycharm-ce \
+     spectacle \
      slack \
      snagit \
      spectacle \
