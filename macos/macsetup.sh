@@ -47,23 +47,22 @@ brew install \
      tree \
      wget
 
-brew install --with-default-names \
-     coreutils \
-     findutils \
-     gnupg \
-     gnutls \
-     gnu-indent \
-     gnu-sed \
-     gnu-tar \
-     grep
+#brew install --with-default-names \
+#     coreutils \
+#     findutils \
+#     gnupg \
+#     gnutls \
+#     gnu-indent \
+#     gnu-sed \
+#     gnu-tar \
+#     grep
 
-brew install sox --with-lame --with-flac --with-libvorbis
-brew install vim --with-python --with-ruby --with-perl
+#brew install sox --with-lame --with-flac --with-libvorbis
+#brew install vim --with-python --with-ruby --with-perl
 
 brew cask install xquartz
 
 brew cask install \
-#     avast-security \
      alfred \
      bartender \
      caffeine \
