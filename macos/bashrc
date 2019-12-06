@@ -187,7 +187,7 @@ man() {
 
 if command -v tmux>/dev/null; then
         case "/$(ps -p $PPID -o comm=)" in */sshd)
-            [[ $- == *i* ]] && [[ ! $TERM =~ screen ]] && [[ -z $TMUX ]] && tmux attach -t getmux || tmux new -s ge_tmux && return;;
+            [[ $- == *i* ]] && [[ ! $TERM =~ screen ]] && [[ -z $TMUX ]] && tmux attach -t ge_tmux || tmux new -s ge_tmux && return;;
         esac
 fi
 
