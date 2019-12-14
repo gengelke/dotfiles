@@ -39,6 +39,7 @@ brew install \
      openssl \
      packer \
      pulseaudio \
+     pygments \
      python2 \
      python3 \
      socat \
@@ -63,7 +64,9 @@ brew install \
 brew cask install xquartz
 
 brew cask install \
+     1password \
      alfred \
+     balenaetcher \
      bartender \
      caffeine \
      cakebrew \
@@ -81,6 +84,7 @@ brew cask install \
      istat-menus \
      iterm2 \
      java \
+     jumpcut \
      karabiner-elements \
      keepassx \
      keycastr \
@@ -89,6 +93,7 @@ brew cask install \
      micro-snitch \
      microsoft-office \
      mountain-duck \
+     nordvpn \
      pdf-expert \
      powershell \
      pycharm-ce \
@@ -109,6 +114,7 @@ brew cask install \
      virtualbox-extension-pack \
      visual-studio-code \
      vlc \
+     vnc-viewer \
      wireshark \
      xnviewmp
 
