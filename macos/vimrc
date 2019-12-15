@@ -1,69 +1,130 @@
 " (C) 2017 Gordon Engelke <reject@web.de>
 
-"------ Meta ------"
+"------ Meta ------
 "
-"
-" clear all autocommands! (this comment must be on its own line)
+" clear all autocommands!
 autocmd!
-
-syntax on
-
-set background=dark				" set syntax hi to a more eye friendly mode
-set shiftwidth=3
-set tabstop=3						" tabs are 3 spaces
-set pheader=%<%f%h%m%40{strftime(\"%I:%M:%S\ \%p,\ %a\ %b\ %d,\ %Y\")}%=Page\ %N
-
-if has("autocmd")
-  filetype plugin indent on
-endif
-
+set autoread                           " Watch for file changes
 " Uncomment the following to have Vim jump to the last position when reopening a file
-"if has("autocmd")
-"   au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe normal! g'\"" | endif
-"endif
-
-
-set showcmd             		" Show (partial) command in status line.
-set showmatch           		" Show matching brackets.
-set ignorecase          		" Do case insensitive matching
-set smartcase           		" Do smart case matching
-set incsearch           		" Incremental search
-set hidden              		" Hide buffers when they are abandoned
-set ruler               		" show the line number on the bar
-set more                		" use more prompt
-set autoread            		" watch for file changes
-set number              		" line numbers
-
-set cursorline          		" highlight current line
-hi CursorLine term=none cterm=none ctermfg=7 ctermbg=23      " adjust color
-
-"------ Console UI & Text display ------"
-
-set noautowrite                 " don't automagically write on :next
-set lazyredraw                  " don't redraw while in macros
-set showmode
-set nocompatible                " vim, not vi
-set autoindent smartindent      " auto/smart indent
-set smarttab                    " tab and backspace are smart
-set scrolloff=10                " keep at least 5 lines above/below the cursor
-set sidescrolloff=10            " keep at least 5 lines left/right the cursor
+"au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe normal! g'\"" | endif
+set noautowrite                        " Don't automagically write on :next
+set nocompatible                       " vim, not vi
 set history=200
-set backspace=indent,eol,start
-set linebreak
-set cmdheight=1                 " command line two lines high
-set undolevels=1000             " 1000 undos
-set updatecount=100             " switch every 100 chars
-set complete=.,w,b,u,U,t,i,d    " do lots of scanning on tab completion
-set ttyfast                     " we have a fast terminal
-set noerrorbells                " No error bells please...
-set visualbell t_vb=            " ...and don't make faces
+set undolevels=1000                    " 1000 undos
+set updatecount=100                    " switch every 100 chars
+set ttyfast                            " we have a fast terminal
 set shell=bash
-" set fileformats=unix
 set fileformats=unix,dos,mac
-set ff=unix
-set wrap                        " soft wrap long lines
-set list                        " show invisible characters
+set formatoptions=tcrql                " t - autowrap to textwidth
+                                       " c - autowrap comments to textwidth
+                                       " r - autoinsert comment leader with <Enter>
+                                       " q - allow formatting of comments with :gq
+                                       " l - don't format already long lines
 set encoding=utf-8
+set report=0                           " report back on all changes
+set shortmess=atI                      " shorten messages and don't show intro
+set mouse=a                            " try to use a mouse in the console (wimp!)
+set textwidth=80                       " we like 80 columns
+set viminfo=%100,'100,/100,h,\"500,:100,n~/.viminfo
+                                       " Tell vim to remember certain things when we exit
+                                       "  '10  :  marks will be remembered for up to 10 previously edited files
+                                       "   100 :  will save up to 100 lines for each register
+                                       "  :20  :  up to 20 lines of command-line history will be remembered
+                                       "    %  :  saves and restores the buffer list
+                                       "  n... :  where to save the viminfo files
+
+
+"----- Backup and file safety -----
+"
+set swapfile                           " Protect changes between writes. Default values of
+                                       " updatecount (200 keystrokes) and updatetime
+                                       " (4 seconds) are fine
+set directory^=~/.vim/swap//
+
+set writebackup                        " protect against crash-during-write
+set nobackup                           " but do not persist backup after successful write
+"set backupdir=~/.vimbackup
+
+set backupcopy=auto                    " use rename-and-write-new method whenever safe
+" patch required to honor double slash at end
+if has("patch-8.1.0251")
+" consolidate the writebackups -- not a big
+" deal either way, since they usually get deleted
+set backupdir^=~/.vim/backup//
+end
+
+set undofile                           " persist the undo tree for each file
+set undodir^=~/.vim/undo//
+
+
+"------ Colors ------
+"
+syntax enable                          " Enable syntax highlighting
+set background=dark                    " Set syntax highlighting to a more eye friendly mode
+colorscheme codedark                   " Use specific color scheme
+colorscheme molokai                   " Use specific color scheme
+" Change the color used for the line numbers:
+hi LineNr term=bold cterm=NONE ctermfg=DarkGrey ctermbg=NONE gui=NONE guifg=DarkGrey guibg=NONE
+hi Folded term=bold ctermbg=240 ctermfg=254 guibg=#585858 guifg=#e4e4e4
+" Set cursorline to a less dark grey
+hi CursorLine term=none cterm=none ctermfg=none ctermbg=238
+
+
+"----- Spaces, Tabs and Indents -----
+"
+set tabstop=8                          " Number of spaces per TAB
+set softtabstop=4                      " Number of spaces in TAB when editing
+set shiftwidth=4                       " Affects what happens when you press >>, << or == and with auto indents
+set expandtab                          " Eeplace TABs with spaces
+set smarttab                           " TAB and backspace are smart
+set backspace=indent,eol,start
+filetype plugin indent on              " Load filetype plugins and indent settings
+set autoindent                         " set the cursor at same indent as line above
+set smartindent                        " try to be smart about indenting (C-style)
+set shiftround                         " always round indents to multiple of shiftwidth
+set copyindent                         " use existing indents for new indents
+set preserveindent                     " save as much indent structure as possible
+set wrap                               " soft wrap long lines
+
+
+"----- Folding -----
+"
+set foldenable                         " enable folding
+set foldlevelstart=10                  " open most folds by default
+set foldnestmax=10                     " 10 nested fold max
+set foldmethod=indent                  " fold based on indent level
+" space open/closes folds
+nnoremap <space> za
+
+
+"----- UI Configuration -----
+"
+set laststatus=2                       " Show statusline
+set number                             " Show line numbers
+set numberwidth=5                      " Change the width of the "gutter" column used for numbering
+set cpoptions+=n                       " use the number column for the text of wrapped lines
+set showcmd                            " Show (partial) command in status line.
+set wildmode=list:longest              " Show list of autocomplete options
+set wildmenu                           " menu has tab completion
+set complete=.,w,b,u,U,t,i,d           " do lots of scanning on tab completion
+set completeopt=menu,longest,preview   " more autocomplete <Ctrl>-P options
+set lazyredraw                         " Redraw screen only when we need to
+set showmatch                          " Highlight matching brackets [{()}]
+set showmode
+set cmdheight=1                        " command line two lines high
+set hidden                             " Hide buffers when they are abandoned
+set ruler                              " Show the line number on the bar
+set more                               " Use more prompt
+set cursorline                         " Highlight current line
+set scrolloff=10                       " Keep at least 10 lines above/below the cursor
+set sidescrolloff=10                   " Keep at least 10 lines left/right the cursor
+set linebreak
+set cmdheight=1                        " Command line two lines high
+set noerrorbells                       " No error bells please...
+set visualbell t_vb=                   " ...and don't make faces
+set nostartofline                      " leave my cursor position alone!
+set list                               " show invisible characters
+" Customize how invisible characters are displayed:
 if has('gui_running')
   set listchars=tab:▶‒,nbsp:∙,trail:∙,extends:▶,precedes:◀
   let &showbreak = '↳'
@@ -71,178 +132,67 @@ else
   set listchars=tab:>-,nbsp:.,trail:.,extends:>,precedes:<
   let &showbreak = '>'
 endif
-set report=0                    " report back on all changes
-set shortmess=atI               " shorten messages and don't show intro
-set wildmode=list:longest       " set wildmenu to list choice
-set numberwidth=5               " change the width of the "gutter" column used for numbering
-set cpoptions+=n                " use the number column for the text of wrapped lines
-highlight LineNr term=bold cterm=NONE ctermfg=DarkGrey ctermbg=NONE gui=NONE guifg=DarkGrey guibg=NONE   " change the color used for the line numbers
 
+"----- Searching -----
+"
+set ignorecase                         " Do case insensitive matching
+set smartcase                          " Do smart case matching
+set nohlsearch                         " Turn off highlighting for searched expressions
+set incsearch                          " Search as characters are entered
+set hlsearch                           " highlight the search
+set showmatch                          " show matching bracket
+set matchtime=5                        " Blink matching chars for .x seconds
+set diffopt=filler,iwhite              " ignore all whitespace and sync
 
-"------ Text editing and searching behavior ------"
-
-set nohlsearch                  " turn off highlighting for searched expressions
-set incsearch                   " highlight as we search however
-set matchtime=5                 " blink matching chars for .x seconds
-set mouse=a                     " try to use a mouse in the console (wimp!)
-set ignorecase                  " set case insensitivity
-set smartcase                   " unless there's a capital letter
-set completeopt=menu,longest,preview " more autocomplete <Ctrl>-P options
-set nostartofline               " leave my cursor position alone!
-set backspace=2                 " equiv to :set backspace=indent,eol,start
-set textwidth=80                " we like 80 columns
-set showmatch                   " show matching brackets
-set formatoptions=tcrql         " t - autowrap to textwidth
-                                " c - autowrap comments to textwidth
-                                " r - autoinsert comment leader with <Enter>
-                                " q - allow formatting of comments with :gq
-                                " l - don't format already long lines
-
-"------ Indents and tabs ------"
-
-set autoindent                  " set the cursor at same indent as line above
-set smartindent                 " try to be smart about indenting (C-style)
-set expandtab                   " expand <Tab>s with spaces; death to tabs!
-set shiftwidth=4                " spaces for each step of (auto)indent
-set softtabstop=4               " set virtual tab stop (compat for 8-wide tabs)
-set tabstop=8                   " for proper display of files with tabs
-set shiftround                  " always round indents to multiple of shiftwidth
-set copyindent                  " use existing indents for new indents
-set preserveindent              " save as much indent structure as possible
-filetype plugin indent on       " load filetype plugins and indent settings
-
-filetype on                     " Enable filetype detection
-filetype indent on              " Enable filetype-specific indenting
-filetype plugin on              " Enable filetype-specific plugins
-set wildmode=longest:full
-set wildmenu                    " menu has tab completion
-"let maplocalleader=','         " all my macros start with ,
-
-"  searching
-set incsearch                   " incremental search
-set ignorecase                  " search ignoring case
-set hlsearch                    " highlight the search
-set showmatch                   " show matching bracket
-set diffopt=filler,iwhite       " ignore all whitespace and sync
-
-"  backup
-set nobackup
-set backup
-set backupdir=~/.vimbackup
-" Tell vim to remember certain things when we exit
-"  '10  :  marks will be remembered for up to 10 previously edited files
-"   100 :  will save up to 100 lines for each register
-"  :20  :  up to 20 lines of command-line history will be remembered
-"    %  :  saves and restores the buffer list
-"  n... :  where to save the viminfo files
-set viminfo=%100,'100,/100,h,\"500,:100,n~/.viminfo
-"set viminfo=                    " don't use or save viminfo files
-
-" mappings
+"----- Mappings -----
+"
 " toggle list mode
 nmap <LocalLeader>tl :set list!<cr>
 " toggle paste mode
 nmap <LocalLeader>pp :set paste!<cr>"
 nnoremap <F2> :set invpaste paste?<CR>
 set pastetoggle=<F2>
-set showmode
 
 nore ; :
 nore , ;
 
-" => Status line
-""""""""""""""""""""""""""""""
-" 0 = black
-" 1 = red
-" 2 = green
-" 3 = yellow
-" 4 = blue
-" 5 = lila
-" 6 = cyan
-" 7 = gray
-" 8 = white
-" 9 =
+
+"----- Install Vundle and all desired VIM plugins -----
 "
-" Always show the status line
-hi User1 guifg=#ffdad8  guibg=#880c0e ctermfg=7 ctermbg=0
-hi User2 guifg=#000000  guibg=#F4905C ctermfg=7 ctermbg=0 cterm=bold           " gray bold
-hi User3 guifg=#292b00  guibg=#f4f597 ctermfg=3 ctermbg=0 cterm=bold           " yellow bold
-hi User4 guifg=#112605  guibg=#aefe7B ctermfg=6 ctermbg=0 cterm=bold           " cyan bold
-hi User5 guifg=#000000  guibg=#F4905C ctermfg=7 ctermbg=0 cterm=bold,reverse   " gray bold reverse
-hi User7 guifg=#ffffff  guibg=#880c0e ctermfg=8 ctermbg=2 cterm=bold,          " green status
-hi User8 guifg=#ffffff  guibg=#880c0e ctermfg=8 ctermbg=1 cterm=bold,          " red status
-hi User9 guifg=#ffffff  guibg=#810085
-hi User0 guifg=#ffffff  guibg=#094afe
-set laststatus=2
+"  git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+"
+filetype off                           " required
+set rtp+=~/.vim/bundle/Vundle.vim      " set the runtime path to include Vundle and initialize
+call vundle#begin()                    " alternatively, pass a path where Vundle should install plugins
+                                       " call vundle#begin('~/some/path/here')
 
-" Format the status line
-"set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ %l\ Column: %c\
-" set rulerformat=%l,%v
-" set statusline+=%F\ %l\:%c
-" set statusline+=%F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ %l\:%c
-hi StatusLine term=reverse ctermbg=0 ctermfg=1 gui=undercurl guisp=Magenta
-set statusline=
-"display a warning if &paste is set
-set statusline +=%7*%{&paste?'\ \ -paste-\ ':''}%*
-"set statusline +=%{'*'[!&list]}                 "show a '*' if in list mode
-"set statusline +=%{'~'[&pm=='']}                "show a '~' if in patchmode
-set statusline +=%1*\ buf:%n\ \ \ %*            "buffer number
-set statusline +=%2*\ %<%F%*       "full path
-"set statusline +=%2*\ %<%t%*       "file name
-set statusline +=%4*%m\ \%*             "modified flag
-set statusline +=%3*%r\ \ \%*             "readonly flag
-set statusline +=%3*%w\ \ \%*             "flag
-set statusline +=%3*%H\ \ \%*             "flag
-set statusline +=%1*\ {\ ff:%{&ff}%*          "FileFormat (dos/unix..)
-set statusline +=%1*\ ty:%Y\ %*          "file type
-set statusline+=%1*enc:%{''.(&fenc!=''?&fenc:&enc).''}       "Encoding
-set statusline+=%1*\ %{(&bomb?\",BOM\":\"\")}}\             "Encoding2
-"set statusline +=%1*\ cwd:\ %r%{getcwd()}
-set statusline +=%1*%=                  "left/right separator
-"set statusline +=%1*\ 0x%02B\ %*        "character under cursor
-set statusline +=%2*%=\ %l%*      "current line
-set statusline +=%2*,%v%*          "virtual column number
-set statusline +=%2*/%L\ \ %*          "total lines
-set statusline +=%1*\ [%03b][0x%02B]\ %*    " ASCII and byte code under cursor
-set statusline+=%1*\ %{&spelllang}\ \                      "Spellanguage
-"set statusline +=%5*%=\ row:%4l%*      "current line
-"set statusline +=%5*/%L\ \ %*          "total lines
-"set statusline +=%5*col:%3v\ %*          "virtual column number
-"set statusline+=%8*\ %=\ row:%l/%L\ (%03p%%)\             "Rownumber/total (%)
-"set statusline+=%9*\ col:%03c\                            "Colnr
+Plugin 'VundleVim/Vundle.vim'          " let Vundle manage Vundle, required
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
+Plugin 'edkolev/tmuxline.vim'
+Plugin 'chriskempson/tomorrow-theme'
+Plugin 'chriskempson/base16-vim'
 
-" display a warning if file encoding isnt utf-8
-"set statusline+=%#warningmsg#
-"set statusline+=%{(&fenc!='utf-8'&&&fenc!='')?'['.&fenc.']':''}
-"set statusline+=%*
+" All of your Plugins must be added before the following line
+call vundle#end()                      " required
+filetype plugin indent on              " required
+"
+" Brief help
+" :PluginList       - lists configured plugins
+" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
+" :PluginSearch foo - searches for foo; append `!` to refresh local cache
+" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
+"
+" see :h vundle for more details or wiki for FAQ
+" Put your non-Plugin stuff after this line
 
-set statusline+=%5*\ \ %P\ \                               "Top/bot
+let g:tmuxline_preset = {
+      \'a'    : '#S',
+      \'c'    : ['#(whoami)', '#(uptime | cut -d " " -f 1,2,3)'],
+      \'win'  : ['#I', '#W'],
+      \'cwin' : ['#I', '#W', '#F'],
+      \'x'    : '#(date)',
+      \'y'    : ['%R', '%a', '%Y'],
+      \'z'    : '#H'}
 
-
-"------ Filetypes ------"
-
-" Vimscript
-autocmd FileType vim setlocal expandtab shiftwidth=4 tabstop=8 softtabstop=4
-
-" Shell
-autocmd FileType sh setlocal expandtab shiftwidth=4 tabstop=8 softtabstop=4
-
-" Lisp
-autocmd Filetype lisp,scheme setlocal equalprg=~/.vim/bin/lispindent.lisp expandtab shiftwidth=2 tabstop=8 softtabstop=2
-
-" Ruby
-autocmd FileType ruby setlocal expandtab shiftwidth=2 tabstop=2 softtabstop=2
-
-" PHP
-autocmd FileType php setlocal expandtab shiftwidth=4 tabstop=4 softtabstop=4
-
-" X?HTML & XML
-autocmd FileType html,xhtml,xml setlocal expandtab shiftwidth=2 tabstop=2 softtabstop=2
-
-" CSS
-autocmd FileType css setlocal expandtab shiftwidth=4 tabstop=4 softtabstop=4
-
-" JavaScript
-" autocmd BufRead,BufNewFile *.json setfiletype javascript
-autocmd FileType javascript setlocal expandtab shiftwidth=2 tabstop=2 softtabstop=2
-let javascript_enable_domhtmlcss=1
+let g:airline_powerline_fonts = 1
