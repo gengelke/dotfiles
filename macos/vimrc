@@ -6,7 +6,10 @@
 autocmd!
 set autoread                           " Watch for file changes
 " Uncomment the following to have Vim jump to the last position when reopening a file
-"au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe normal! g'\"" | endif
+if has("autocmd")
+  au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+endif
+
 set noautowrite                        " Don't automagically write on :next
 set nocompatible                       " vim, not vi
 set history=200
@@ -60,14 +63,22 @@ set undodir^=~/.vim/undo//
 "------ Colors ------
 "
 syntax enable                          " Enable syntax highlighting
+"set cursorline
+"set cursorcolumn
 set background=dark                    " Set syntax highlighting to a more eye friendly mode
-colorscheme codedark                   " Use specific color scheme
-colorscheme molokai                   " Use specific color scheme
+"colorscheme codedark                  " Use specific color scheme
+colorscheme molokai                    " Use specific color scheme
+let g:airline_theme = 'codedark'
 " Change the color used for the line numbers:
 hi LineNr term=bold cterm=NONE ctermfg=DarkGrey ctermbg=NONE gui=NONE guifg=DarkGrey guibg=NONE
 hi Folded term=bold ctermbg=240 ctermfg=254 guibg=#585858 guifg=#e4e4e4
 " Set cursorline to a less dark grey
-hi CursorLine term=none cterm=none ctermfg=none ctermbg=238
+hi CursorLine term=none cterm=none ctermfg=none ctermbg=235
+" underline the word under the cursor
+"let HlUnderCursor=1
+"autocmd CursorMoved * exe exists("HlUnderCursor")?HlUnderCursor?printf('match IncSearch /\V\<%s\>/', escape(expand('<cword>'), '/')):'match none':""
+" highlight current column
+"hi CursorColumn cterm=NONE ctermbg=DarkGrey ctermfg=NONE guibg=NONE guifg=NONE
 
 
 "----- Spaces, Tabs and Indents -----
@@ -119,7 +130,6 @@ set cursorline                         " Highlight current line
 set scrolloff=10                       " Keep at least 10 lines above/below the cursor
 set sidescrolloff=10                   " Keep at least 10 lines left/right the cursor
 set linebreak
-set cmdheight=1                        " Command line two lines high
 set noerrorbells                       " No error bells please...
 set visualbell t_vb=                   " ...and don't make faces
 set nostartofline                      " leave my cursor position alone!
@@ -169,9 +179,15 @@ call vundle#begin()                    " alternatively, pass a path where Vundle
 Plugin 'VundleVim/Vundle.vim'          " let Vundle manage Vundle, required
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
-Plugin 'edkolev/tmuxline.vim'
+"Plugin 'edkolev/tmuxline.vim'
 Plugin 'chriskempson/tomorrow-theme'
 Plugin 'chriskempson/base16-vim'
+Plugin 'sickill/vim-monokai'
+Plugin 'nanotech/jellybeans.vim'
+Plugin 'jam1garner/vim-code-monokai'
+Plugin 'flazz/vim-colorschemes'
+Plugin 'patstockwell/vim-monokai-tasty'
+Plugin 'stephpy/vim-yaml'
 
 " All of your Plugins must be added before the following line
 call vundle#end()                      " required
@@ -186,13 +202,13 @@ filetype plugin indent on              " required
 " see :h vundle for more details or wiki for FAQ
 " Put your non-Plugin stuff after this line
 
-let g:tmuxline_preset = {
-      \'a'    : '#S',
-      \'c'    : ['#(whoami)', '#(uptime | cut -d " " -f 1,2,3)'],
-      \'win'  : ['#I', '#W'],
-      \'cwin' : ['#I', '#W', '#F'],
-      \'x'    : '#(date)',
-      \'y'    : ['%R', '%a', '%Y'],
-      \'z'    : '#H'}
-
-let g:airline_powerline_fonts = 1
+"let g:tmuxline_preset = {
+"      \'a'    : '#S',
+"      \'c'    : ['#(whoami)', '#(uptime | cut -d " " -f 1,2,3)'],
+"      \'win'  : ['#I', '#W'],
+"      \'cwin' : ['#I', '#W', '#F'],
+"      \'x'    : '#(date)',
+"      \'y'    : ['%R', '%a', '%Y'],
+"      \'z'    : '#H'}
+"
+"let g:airline_powerline_fonts = 1
