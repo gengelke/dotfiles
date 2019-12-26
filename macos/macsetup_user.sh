@@ -234,12 +234,12 @@ defaults write NSGlobalDomain com.apple.sound.uiaudio.enabled -bool false
 echo "Setting ambient light sensor preferences"
 
 # Display -> Do not automatically adjust brightness
-defaults write /Library/Preferences/com.apple.iokit.AmbientLightSensor "Automatic Display Enabled" -bool false
+sudo defaults write /Library/Preferences/com.apple.iokit.AmbientLightSensor "Automatic Display Enabled" -bool false
 
 # Keyboard -> Adjust keyboard brightness in low light
-defaults write /Library/Preferences/com.apple.iokit.AmbientLightSensor "Automatic Keyboard Enabled" -bool true
-defaults write /Library/Preferences/com.apple.iokit.AmbientLightSensor "Keyboard Dim Time" -int 300
-
+sudo defaults write /Library/Preferences/com.apple.iokit.AmbientLightSensor "Automatic Keyboard Enabled" -bool true
+sudo defaults write /Library/Preferences/com.apple.iokit.AmbientLightSensor "Keyboard Dim Time" -int 300
+	
 
 ###############################################################################
 # Login screen                                                                #
