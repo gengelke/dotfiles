@@ -345,7 +345,7 @@ defaults write com.apple.menuextra.battery ShowPercent -string "YES"
 defaults write com.apple.menuextra.battery ShowTime -string "YES"
 
 # Setup the menu bar date format
-defaults write com.apple.menuextra.clock DateFormat -string "EEE MMM d h:mm a"
+defaults write com.apple.menuextra.clock DateFormat -string "MMM d HH:mm"
 
 # Flash the : in the menu bar
 defaults write com.apple.menuextra.clock FlashDateSeparators -bool false
