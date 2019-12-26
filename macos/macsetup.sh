@@ -161,6 +161,60 @@ fi
 
 pip install nose tornado msrest msrestazure azure ansible[azure] openshift --upgrade
 
+
+###############################################################################
+# Security                                                                    #
+###############################################################################
+
+echo "Setting security preferences"
+
+# Turn off the “Application Downloaded from Internet” quarantine warning:
+defaults write com.apple.LaunchServices LSQuarantine -bool NO
+
+# Set Lock Message to show on login screen
+sudo defaults write /Library/Preferences/com.apple.loginwindow LoginwindowText -string "Owner: reject@web.de"
+
+# Disable auto-login
+# sudo defaults delete /Library/Preferences/com.apple.loginwindow autoLoginUser
+
+# Require password immediately after sleep or screen saver begins
+defaults write com.apple.screensaver askForPassword -int 1
+defaults write com.apple.screensaver askForPasswordDelay -int 0
+
+# Disable guest user
+defaults write com.apple.AppleFileServer guestAccess -bool false
+defaults write SystemConfiguration/com.apple.smb.server AllowGuestAccess -bool false
+
+
+###############################################################################
+# Software updates                                                            #
+###############################################################################
+
+echo "Setting software updates preferences"
+
+sudo softwareupdate --schedule OFF
+
+# Automatically check for updates (required for any downloads):
+sudo defaults write /Library/Preferences/com.apple.SoftwareUpdate.plist AutomaticCheckEnabled -bool YES
+
+# Download updates automatically in the background
+sudo defaults write /Library/Preferences/com.apple.SoftwareUpdate AutomaticDownload -bool YES
+
+# Install app updates automatically:
+sudo defaults write /Library/Preferences/com.apple.commerce AutoUpdate -bool YES
+
+# Don't Install macos updates automatically
+sudo defaults write /Library/Preferences/com.apple.commerce AutoUpdateRestartRequired -bool false
+
+# Install system data file updates automatically:
+sudo defaults write /Library/Preferences/com.apple.SoftwareUpdate.plist ConfigDataInstall -bool YES
+
+# Install critical security updates automatically:
+sudo defaults write /Library/Preferences/com.apple.SoftwareUpdate.plist CriticalUpdateInstall -bool YES
+
+sudo softwareupdate --schedule ON
+
+
 ###############################################################################
 # Files and folders                                                           #
 ###############################################################################
@@ -201,11 +255,14 @@ echo "Setting energy preferences"
 # From <https://github.com/rtrouton/rtrouton_scripts/>
 IS_LAPTOP=`/usr/sbin/system_profiler SPHardwareDataType | grep "Model Identifier" | grep "Book"`
 if [[ "$IS_LAPTOP" != "" ]]; then
-    sudo pmset -b sleep 15 disksleep 10 displaysleep 5 halfdim 1
+    sudo pmset -b sleep 30 disksleep 10 displaysleep 5 halfdim 1
     sudo pmset -c sleep 0 disksleep 0 displaysleep 30 halfdim 1
 else
     sudo pmset sleep 0 disksleep 0 displaysleep 30 halfdim 1
 fi
+
+# Set standby delay to 24 hours (default is 1 hour)
+sudo pmset -a standbydelay 86400
 
 
 ###############################################################################
@@ -268,6 +325,44 @@ sudo defaults write /Library/Preferences/com.apple.loginwindow Hide500Users -boo
 
 
 ###############################################################################
+# Menu bar                                                                    #
+###############################################################################
+
+echo "Setting Menu bar preferencers"
+
+defaults write com.apple.systemuiserver menuExtras -array \
+    "/System/Library/CoreServices/Menu Extras/Volume.menu" \
+    "/System/Library/CoreServices/Menu Extras/Bluetooth.menu" \
+    "/System/Library/CoreServices/Menu Extras/TextInput.menu" \
+    "/System/Library/CoreServices/Menu Extras/Battery.menu" \
+    "/System/Library/CoreServices/Menu Extras/Displays.menu" \
+    "/System/Library/CoreServices/Menu Extras/VPN.menu" \
+    "/System/Library/CoreServices/Menu Extras/AirPort.menu" \
+    "/System/Library/CoreServices/Menu Extras/Clock.menu"
+
+# Show percentage value of remaining battery
+defaults write com.apple.menuextra.battery ShowPercent -string "YES"
+defaults write com.apple.menuextra.battery ShowTime -string "YES"
+
+# Setup the menu bar date format
+defaults write com.apple.menuextra.clock DateFormat -string "EEE MMM d h:mm a"
+
+# Flash the : in the menu bar
+defaults write com.apple.menuextra.clock FlashDateSeparators -bool false
+
+# 24 hour time
+defaults write NSGlobalDomain AppleICUForce24HourTime -bool false
+defaults write NSGlobalDomain AppleICUTimeFormatStrings -dict \
+  1 -string "H:mm" \
+  2 -string "H:mm:ss" \
+  3 -string "H:mm:ss z" \
+  4 -string "H:mm:ss zzzz"
+
+# Show language menu in the top right corner of the boot screen
+sudo defaults write /Library/Preferences/com.apple.loginwindow showInputMenu -bool true
+
+
+###############################################################################
 # General UI/UX                                                               #
 ###############################################################################
 
@@ -282,6 +377,20 @@ defaults write -g NSRequiresAquaSystemAppearance -bool Yes
 # Set background color to "Solid Gray Pro Dark"
 osascript -e 'tell application "Finder" to set desktop picture to POSIX file "/Library/Desktop Pictures/Solid Colors/Solid Gray Pro Dark.png"'
 
+# Expand 'Save As…' dialog boxes by default:
+defaults write -g NSNavPanelExpandedStateForSaveMode -boolean true
+defaults write -g NSNavPanelExpandedStateForSaveMode2 -bool true
+
+# Expand print panel dialog boxes by default:
+defaults write -g PMPrintingExpandedStateForPrint -boolean true
+defaults write -g PMPrintingExpandedStateForPrint2 -bool true
+
+# Quit Printer App after Print Jobs complete:
+defaults write com.apple.print.PrintingPrefs "Quit When Finished" -bool true
+
+# Change login screen background:
+# sudo defaults write /Library/Preferences/com.apple.loginwindow DesktopPicture "/Library/Desktop Pictures/Aqua Blue.jpg"
+
 # Set computer name (as done via System Preferences -> Sharing)
 sudo scutil --set ComputerName $systemname
 sudo scutil --set HostName $systemname
@@ -289,11 +398,11 @@ sudo scutil --set LocalHostName $systemname
 sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string $systemname
 
 # Disable the sound effects on boot
-nvram SystemAudioVolume=" "
+sudo nvram SystemAudioVolume=" "
 
 # Enable transparency in the menu bar and elsewhere
-defaults write com.apple.universalaccess reduceTransparency -bool false
-defaults write NSGlobalDomain AppleEnableMenuBarTransparency -bool true
+defaults write com.apple.universalaccess reduceTransparency -bool true
+defaults write NSGlobalDomain AppleEnableMenuBarTransparency -bool false
 
 # Set sidebar icon size to medium
 defaults write NSGlobalDomain NSTableViewDefaultSizeMode -int 2
@@ -325,10 +434,6 @@ defaults write NSGlobalDomain NSAutomaticQuoteSubstitutionEnabled -bool false
 
 # Disable auto-correct
 defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
-
-# Show percentage value of remaining battery
-defaults write com.apple.menuextra.battery ShowPercent -string "YES"
-defaults write com.apple.menuextra.battery ShowTime -string "YES"
 
 # Set a custom wallpaper image. `DefaultDesktop.jpg` is already a symlink, and
 # all wallpapers are in `/Library/Desktop Pictures/`. The default is `Wave.jpg`.
@@ -388,18 +493,8 @@ echo "Setting screen preferences"
 
 defaults write -g NSWindowShouldDragOnGesture -bool true
 
-# 24-Hour Time
-defaults write NSGlobalDomain AppleICUForce12HourTime -bool false
-
-# Show language menu in the top right corner of the boot screen
-sudo defaults write /Library/Preferences/com.apple.loginwindow showInputMenu -bool true
-
 # Screen Saver: Flurry
 defaults -currentHost write com.apple.screensaver moduleDict -dict moduleName -string "Flurry" path -string "/System/Library/Screen Savers/Flurry.saver" type -int 0
-
-# Require password immediately after sleep or screen saver begins
-defaults write com.apple.screensaver askForPassword -int 1
-defaults write com.apple.screensaver askForPasswordDelay -int 0
 
 # Save screenshots to the desktop
 #defaults write com.apple.screencapture location -string "${HOME}/Desktop"
@@ -432,6 +527,10 @@ defaults write NSGlobalDomain AppleMiniaturizeOnDoubleClick -bool false
 ###############################################################################
 
 echo "Setting Finder preferences"
+
+# Disable the macOS Crash reporter (quit dialog after an application crash)
+defaults write com.apple.CrashReporter DialogType none
+#To enable the crash reporter (default) change none to prompt
 
 # Expand the "Open with" and "Sharing & Permissions" panes
 defaults write com.apple.finder FXInfoPanesExpanded -dict OpenWith -bool true Privileges -bool true
@@ -799,10 +898,10 @@ defaults write com.apple.Safari WebKitJavaScriptCanOpenWindowsAutomatically -boo
 defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2JavaScriptCanOpenWindowsAutomatically -bool false
 
 # Disable auto-playing video
-#defaults write com.apple.Safari WebKitMediaPlaybackAllowsInline -bool false
-#defaults write com.apple.SafariTechnologyPreview WebKitMediaPlaybackAllowsInline -bool false
-#defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2AllowsInlineMediaPlayback -bool false
-#defaults write com.apple.SafariTechnologyPreview com.apple.Safari.ContentPageGroupIdentifier.WebKit2AllowsInlineMediaPlayback -bool false
+defaults write com.apple.Safari WebKitMediaPlaybackAllowsInline -bool false
+defaults write com.apple.SafariTechnologyPreview WebKitMediaPlaybackAllowsInline -bool false
+defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2AllowsInlineMediaPlayback -bool false
+defaults write com.apple.SafariTechnologyPreview com.apple.Safari.ContentPageGroupIdentifier.WebKit2AllowsInlineMediaPlayback -bool false
 
 # Enable â€œDo Not Trackâ€
 defaults write com.apple.Safari SendDoNotTrackHTTPHeader -bool true
@@ -896,38 +995,38 @@ cp ./Library/Preferences/com.googlecode.iterm2.plist ~/Library/Preferences/com.g
 # Only use UTF-8 in Terminal.app
 defaults write com.apple.terminal StringEncodings -array 4
 # Use a modified version of the Solarized Dark theme by default in Terminal.app
-osascript <<EOD
-tell application "Terminal"
-	local allOpenedWindows
-	local initialOpenedWindows
-	local windowID
-	(* Store the IDs of all the open terminal windows. *)
-	set initialOpenedWindows to id of every window
-	set themeName to "genmac_grey.itermcolors"
-	(* Open the custom theme so that it gets added to the list
-	   of available terminal themes (note: this will open two
-	   additional terminal windows). *)
-	do shell script "open '$HOME/init/" & themeName & ".terminal'"
-	(* Wait a little bit to ensure that the custom theme is added. *)
-	delay 1
-	(* Set the custom theme as the default terminal theme. *)
-	set default settings to settings set themeName
-	(* Get the IDs of all the currently opened terminal windows. *)
-	set allOpenedWindows to id of every window
-	repeat with windowID in allOpenedWindows
-		(* Close the additional windows that were opened in order
-		   to add the custom theme to the list of terminal themes. *)
-		if initialOpenedWindows does not contain windowID then
-			close (every window whose id is windowID)
-		(* Change the theme for the initial opened terminal windows
-		   to remove the need to close them in order for the custom
-		   theme to be applied. *)
-		else
-			set current settings of tabs of (every window whose id is windowID) to settings set themeName
-		end if
-	end repeat
-end tell
-EOD
+#osascript <<EOD
+#tell application "Terminal"
+#	local allOpenedWindows
+#	local initialOpenedWindows
+#	local windowID
+#	(* Store the IDs of all the open terminal windows. *)
+#	set initialOpenedWindows to id of every window
+#	set themeName to "genmac_grey.itermcolors"
+#	(* Open the custom theme so that it gets added to the list
+#	   of available terminal themes (note: this will open two
+#	   additional terminal windows). *)
+#	do shell script "open '$HOME/init/" & themeName & ".terminal'"
+#	(* Wait a little bit to ensure that the custom theme is added. *)
+#	delay 1
+#	(* Set the custom theme as the default terminal theme. *)
+#	set default settings to settings set themeName
+#	(* Get the IDs of all the currently opened terminal windows. *)
+#	set allOpenedWindows to id of every window
+#	repeat with windowID in allOpenedWindows
+#		(* Close the additional windows that were opened in order
+#		   to add the custom theme to the list of terminal themes. *)
+#		if initialOpenedWindows does not contain windowID then
+#			close (every window whose id is windowID)
+#		(* Change the theme for the initial opened terminal windows
+#		   to remove the need to close them in order for the custom
+#		   theme to be applied. *)
+#		else
+#			set current settings of tabs of (every window whose id is windowID) to settings set themeName
+#		end if
+#	end repeat
+#end tell
+#EOD
 
 # Enable â€œfocus follows mouseâ€ for Terminal.app and all X11 apps
 # i.e. hover over a window and start typing in it without clicking first
@@ -1057,6 +1156,12 @@ echo "Setting XQuartz preferences"
 
 # Prevent XQuartz from opening an xterm when it starts
 defaults write org.macosforge.xquartz.X11 app_to_run /usr/bin/true
+
+# Auto-quit on close last window (XQuartz)
+defaults write org.macosforge.xquartz.X11 wm_auto_quit -boolean true
+
+# Focus follows mouse (10.5.5 and up) (XQuartz)
+defaults write org.macosforge.xquartz.X11 wm_ffm -boolean true
 
 
 ###############################################################################

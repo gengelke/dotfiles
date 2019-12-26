@@ -251,4 +251,6 @@ shopt -s histappend                      # append to history, don't overwrite it
 export PROMPT_COMMAND="history -a;history -n;$PROMPT_COMMAND"
 #export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
 
+export LC_ALL=en_US.UTF-8
+
 clear
