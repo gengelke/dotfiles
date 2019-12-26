@@ -26,11 +26,13 @@ echo "Installing Homebrew package manager"
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
 # Install required/desired software through Homebrew
-echo "Installing Homebrew packages"
+echo "Installing desired/required Homebrew packages"
 brew install \
      ack \
      ansible \
      bash \
+     bash-completion \
+     freerdp \
      gdb \
      git \
      graphviz \
@@ -46,25 +48,12 @@ brew install \
      python3 \
      socat \
      telnet \
+     terraform \
      tmux \
      tree \
      wget
 
-#brew install --with-default-names \
-#     coreutils \
-#     findutils \
-#     gnupg \
-#     gnutls \
-#     gnu-indent \
-#     gnu-sed \
-#     gnu-tar \
-#     grep
-
-#brew install sox --with-lame --with-flac --with-libvorbis
-#brew install vim --with-python --with-ruby --with-perl
-
-
-echo "Installing Homebrew Cask packages"
+echo "Installing desired/required Homebrew Cask packages"
 brew cask install \
      1password \
      alfred \
@@ -72,11 +61,10 @@ brew cask install \
      bartender \
      caffeine \
      cakebrew \
-     calibre \
      carbon-copy-cloner \
      clementine \
      cyberduck \
-     dia \
+     drawio \
      evernote \
      firefox \
      fluor \
@@ -99,19 +87,17 @@ brew cask install \
      pdf-expert \
      powershell \
      pycharm-ce \
-     spectacle \
      slack \
      snagit \
      spectacle \
      spotify \
      telegram \
      textual \
-     thunderbird \
      tigervnc-viewer \
      tripmode \
      tunnelblick \
      vagrant \
-     veracrypt
+     veracrypt \
      virtualbox \
      virtualbox-extension-pack \
      visual-studio-code \
@@ -133,19 +119,35 @@ brew cask install \
      RansomWhere \
      taskexplorer
 
+echo "Installing Homebrew font packages"
+brew tap homebrew/cask-fonts
+brew cask install font-terminus \
+                font-terminus-nerd-font \
+                font-terminus-nerd-font-mono \
+                font-menlo-for-powerline \
+                font-meslo-for-powerline \
+                font-powerline-symbols
 
-brew cask install caskroom/fonts/font-terminus-nerd-font \
-                  caskroom/fonts/font-terminus-nerd-font-mono
-
-brew install bash-completion
-brew tap homebrew/completions
+echo "Installing Homebrew Cloud packages"
+brew install awscli \
+             azure-cli \
+             kubectl \
+             kubernetes-helm
 
 #brew cask install mactex
 #brew tap miktex/miktex
 #brew install miktex
 
+#brew cask install microsoft-azure-storage-explorer \
+#                  android-platform-tools \
+
+#brew tap cloudfoundry/tap
+#brew install cf-cli
+
+echo "Installing PIP"
 sudo easy_install pip
 
+echo "Installing Docker for Mac"
 if [ ! -d /Applications/Docker.app ]; then
   echo "Installing Docker for Mac"
   wget https://download.docker.com/mac/stable/Docker.dmg -O ~/Downloads/Docker-Install.dmg
@@ -157,17 +159,6 @@ else
   echo "Docker for Mac is already installed."
 fi
 
-brew install awscli \
-             azure-cli \
-             freerdp \
-             kubectl \
-             kubernetes-helm
-
-brew cask install microsoft-azure-storage-explorer \
-                  android-platform-tools \
-
-brew tap cloudfoundry/tap
-brew install cf-cli
 pip install nose tornado msrest msrestazure azure ansible[azure] openshift --upgrade
 
 ###############################################################################
