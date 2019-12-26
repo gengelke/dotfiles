@@ -201,10 +201,10 @@ echo "Setting energy preferences"
 # From <https://github.com/rtrouton/rtrouton_scripts/>
 IS_LAPTOP=`/usr/sbin/system_profiler SPHardwareDataType | grep "Model Identifier" | grep "Book"`
 if [[ "$IS_LAPTOP" != "" ]]; then
-    pmset -b sleep 15 disksleep 10 displaysleep 5 halfdim 1
-    pmset -c sleep 0 disksleep 0 displaysleep 30 halfdim 1
+    sudo pmset -b sleep 15 disksleep 10 displaysleep 5 halfdim 1
+    sudo pmset -c sleep 0 disksleep 0 displaysleep 30 halfdim 1
 else
-    pmset sleep 0 disksleep 0 displaysleep 30 halfdim 1
+    sudo pmset sleep 0 disksleep 0 displaysleep 30 halfdim 1
 fi
 
 
@@ -234,11 +234,11 @@ defaults write NSGlobalDomain com.apple.sound.uiaudio.enabled -bool false
 echo "Setting ambient light sensor preferences"
 
 # Display -> Do not automatically adjust brightness
-defaults write /Library/Preferences/com.apple.iokit.AmbientLightSensor "Automatic Display Enabled" -bool false
+sudo defaults write /Library/Preferences/com.apple.iokit.AmbientLightSensor "Automatic Display Enabled" -bool false
 
 # Keyboard -> Adjust keyboard brightness in low light
-defaults write /Library/Preferences/com.apple.iokit.AmbientLightSensor "Automatic Keyboard Enabled" -bool true
-defaults write /Library/Preferences/com.apple.iokit.AmbientLightSensor "Keyboard Dim Time" -int 300
+sudo defaults write /Library/Preferences/com.apple.iokit.AmbientLightSensor "Automatic Keyboard Enabled" -bool true
+sudo defaults write /Library/Preferences/com.apple.iokit.AmbientLightSensor "Keyboard Dim Time" -int 300
 
 
 ###############################################################################
@@ -248,19 +248,19 @@ defaults write /Library/Preferences/com.apple.iokit.AmbientLightSensor "Keyboard
 echo "Setting login screen preferences"
 
 # Display login window as: Name and password
-defaults write /Library/Preferences/com.apple.loginwindow SHOWFULLNAME -bool true
+sudo defaults write /Library/Preferences/com.apple.loginwindow SHOWFULLNAME -bool true
 
 # Show shut down etc. buttons
-defaults write /Library/Preferences/com.apple.loginwindow PowerOffDisabled -bool false
+sudo defaults write /Library/Preferences/com.apple.loginwindow PowerOffDisabled -bool false
 
 # Don't show any password hints
-defaults write /Library/Preferences/com.apple.loginwindow RetriesUntilHint -int 0
+sudo defaults write /Library/Preferences/com.apple.loginwindow RetriesUntilHint -int 0
 
 # Allow fast user switching
 defaults write /Library/Preferences/.GlobalPreferences MultipleSessionEnabled -bool true
 
 # Hide users with UID under 500
-defaults write /Library/Preferences/com.apple.loginwindow Hide500Users -bool YES
+sudo defaults write /Library/Preferences/com.apple.loginwindow Hide500Users -bool YES
 # Reveal IP address, hostname, OS version, etc. when clicking the clock
 
 # in the login window
@@ -274,7 +274,7 @@ defaults write /Library/Preferences/com.apple.loginwindow Hide500Users -bool YES
 echo "Setting general UI/UX preferences"
 
 # Set UI interface theme to dark
-defaults write /Library/Preferences/.GlobalPreferences AppleInterfaceTheme Dark
+sudo defaults write /Library/Preferences/.GlobalPreferences AppleInterfaceTheme Dark
 
 # Make MacOS Mojave Dark Mode less dark
 defaults write -g NSRequiresAquaSystemAppearance -bool Yes
@@ -286,7 +286,7 @@ osascript -e 'tell application "Finder" to set desktop picture to POSIX file "/L
 scutil --set ComputerName $systemname
 scutil --set HostName $systemname
 scutil --set LocalHostName $systemname
-defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string $systemname
+sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string $systemname
 
 # Disable the sound effects on boot
 nvram SystemAudioVolume=" "
@@ -350,7 +350,7 @@ defaults write NSGlobalDomain com.apple.swipescrolldirection -bool false
 defaults write NSGlobalDomain AppleEnableSwipeNavigateWithScrolls -bool true
 
 # Set scroll direction
-defaults write /Library/Preferences/.GlobalPreferences com.apple.swipescrolldirection -bool false
+sudo defaults write /Library/Preferences/.GlobalPreferences com.apple.swipescrolldirection -bool false
 
 # Enable key repeat
 defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool FALSE
@@ -359,12 +359,12 @@ defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool FALSE
 defaults write -g InitialKeyRepeat -int 10
 defaults write -g KeyRepeat -int 2
 
-#for USER_TEMPLATE in "/System/Library/User Template"/*
-#  do
-#    defaults write "${USER_TEMPLATE}"/Library/Preferences/.GlobalPreferences com.apple.swipescrolldirection -bool FALSE
-#    defaults write "${USER_TEMPLATE}"/Library/Preferences/.GlobalPreferences ApplePressAndHoldEnabled -bool FALSE
-#    defaults write "${USER_TEMPLATE}"/Library/Preferences/.GlobalPreferences KeyRepeat -int 2
-#  done
+for USER_TEMPLATE in "/System/Library/User Template"/*
+  do
+    sudo defaults write "${USER_TEMPLATE}"/Library/Preferences/.GlobalPreferences com.apple.swipescrolldirection -bool FALSE
+    sudo defaults write "${USER_TEMPLATE}"/Library/Preferences/.GlobalPreferences ApplePressAndHoldEnabled -bool FALSE
+    sudo defaults write "${USER_TEMPLATE}"/Library/Preferences/.GlobalPreferences KeyRepeat -int 2
+  done
 
 # Set language and text formats
 # Note: if youâ€™re in the US, replace `EUR` with `USD`, `Centimeters` with
@@ -392,7 +392,7 @@ defaults write -g NSWindowShouldDragOnGesture -bool true
 defaults write NSGlobalDomain AppleICUForce12HourTime -bool false
 
 # Show language menu in the top right corner of the boot screen
-defaults write /Library/Preferences/com.apple.loginwindow showInputMenu -bool true
+sudo defaults write /Library/Preferences/com.apple.loginwindow showInputMenu -bool true
 
 # Screen Saver: Flurry
 defaults -currentHost write com.apple.screensaver moduleDict -dict moduleName -string "Flurry" path -string "/System/Library/Screen Savers/Flurry.saver" type -int 0
