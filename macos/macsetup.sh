@@ -150,7 +150,7 @@ sudo easy_install pip
 echo "Installing Docker for Mac"
 if [ ! -d /Applications/Docker.app ]; then
   echo "Installing Docker for Mac"
-  wget https://download.docker.com/mac/stable/Docker.dmg -O ~/Downloads/Docker-Install.dmg
+  wget --quiet https://download.docker.com/mac/stable/Docker.dmg -O ~/Downloads/Docker-Install.dmg
   sudo hdiutil attach ~/Downloads/Docker-Install.dmg
   /bin/cp -rf /Volumes/Docker/Docker.app /Applications/
   sudo hdiutil detach /Volumes/Docker
@@ -1060,9 +1060,49 @@ defaults write org.macosforge.xquartz.X11 app_to_run /usr/bin/true
 
 
 ###############################################################################
-# Final tasks                                                                 #
+# Setup ViM                                                                   #
 ###############################################################################
 
+echo "Setting ViM preferences"
+# Install Vundle plugin manager (https://github.com/VundleVim/Vundle.vim)
+if test -f "~/.vim/bundle/Vundle.vim"; then
+    git -C ~/.vim/bundle/Vundle.vim pull
+else
+    git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+fi
+wget --quiet https://raw.githubusercontent.com/gengelke/dotfiles/master/macos/vimrc -P /tmp
+mv ~/.vimrc ~/.vimrc_old
+cp /tmp/vimrc ~/.vimrc
+rm /tmp/vimrc
+
+
+###############################################################################
+# Setup Bash                                                                  #
+###############################################################################
+
+echo "Setting Bash preferences"
+wget --quiet https://raw.githubusercontent.com/gengelke/dotfiles/master/macos/bashrc -P /tmp
+mv ~/.bashrc ~/.bashrc_old
+cp /tmp/bashrc ~/.bashrc
+rm /tmp/bashrc
+
+
+###############################################################################
+# Setup Tmux                                                                  #
+###############################################################################
+
+echo "Setting Tmux preferences"
+wget --quiet https://raw.githubusercontent.com/gengelke/dotfiles/master/macos/tmux.conf -P /tmp
+mv ~/.tmux.conf ~/.tmux.conf_old
+cp /tmp/tmux.conf ~/.tmux.conf
+rm /tmp/tmux.conf
+
+
+###############################################################################
+# Final cleanup tasks                                                         #
+###############################################################################
+
+echo "Doing some final cleanup"
 # Restart UI services in order to enable previously made changes
 killall Dock
 killall SystemUIServer
