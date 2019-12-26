@@ -257,7 +257,7 @@ sudo defaults write /Library/Preferences/com.apple.loginwindow PowerOffDisabled 
 sudo defaults write /Library/Preferences/com.apple.loginwindow RetriesUntilHint -int 0
 
 # Allow fast user switching
-defaults write /Library/Preferences/.GlobalPreferences MultipleSessionEnabled -bool true
+sudo defaults write /Library/Preferences/.GlobalPreferences MultipleSessionEnabled -bool true
 
 # Hide users with UID under 500
 sudo defaults write /Library/Preferences/com.apple.loginwindow Hide500Users -bool YES
@@ -283,9 +283,9 @@ defaults write -g NSRequiresAquaSystemAppearance -bool Yes
 osascript -e 'tell application "Finder" to set desktop picture to POSIX file "/Library/Desktop Pictures/Solid Colors/Solid Gray Pro Dark.png"'
 
 # Set computer name (as done via System Preferences -> Sharing)
-scutil --set ComputerName $systemname
-scutil --set HostName $systemname
-scutil --set LocalHostName $systemname
+sudo scutil --set ComputerName $systemname
+sudo scutil --set HostName $systemname
+sudo scutil --set LocalHostName $systemname
 sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string $systemname
 
 # Disable the sound effects on boot
@@ -359,12 +359,12 @@ defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool FALSE
 defaults write -g InitialKeyRepeat -int 10
 defaults write -g KeyRepeat -int 2
 
-for USER_TEMPLATE in "/System/Library/User Template"/*
-  do
-    sudo defaults write "${USER_TEMPLATE}"/Library/Preferences/.GlobalPreferences com.apple.swipescrolldirection -bool FALSE
-    sudo defaults write "${USER_TEMPLATE}"/Library/Preferences/.GlobalPreferences ApplePressAndHoldEnabled -bool FALSE
-    sudo defaults write "${USER_TEMPLATE}"/Library/Preferences/.GlobalPreferences KeyRepeat -int 2
-  done
+#for USER_TEMPLATE in "/System/Library/User Template"/*
+#  do
+#    sudo defaults write "${USER_TEMPLATE}"/Library/Preferences/.GlobalPreferences com.apple.swipescrolldirection -bool FALSE
+#    sudo defaults write "${USER_TEMPLATE}"/Library/Preferences/.GlobalPreferences ApplePressAndHoldEnabled -bool FALSE
+#    sudo defaults write "${USER_TEMPLATE}"/Library/Preferences/.GlobalPreferences KeyRepeat -int 2
+#  done
 
 # Set language and text formats
 # Note: if youâ€™re in the US, replace `EUR` with `USD`, `Centimeters` with
