@@ -305,7 +305,7 @@ sudo defaults write /Library/Preferences/com.apple.iokit.AmbientLightSensor "Key
 echo "Setting login screen preferences"
 
 # Display login window as: Name and password
-sudo defaults write /Library/Preferences/com.apple.loginwindow SHOWFULLNAME -bool true
+sudo defaults write /Library/Preferences/com.apple.loginwindow SHOWFULLNAME -bool false
 
 # Show shut down etc. buttons
 sudo defaults write /Library/Preferences/com.apple.loginwindow PowerOffDisabled -bool false
@@ -351,12 +351,12 @@ defaults write com.apple.menuextra.clock DateFormat -string "MMM d HH:mm"
 defaults write com.apple.menuextra.clock FlashDateSeparators -bool false
 
 # 24 hour time
-defaults write NSGlobalDomain AppleICUForce24HourTime -bool false
-defaults write NSGlobalDomain AppleICUTimeFormatStrings -dict \
-  1 -string "H:mm" \
-  2 -string "H:mm:ss" \
-  3 -string "H:mm:ss z" \
-  4 -string "H:mm:ss zzzz"
+#defaults write NSGlobalDomain AppleICUForce24HourTime -bool false
+#defaults write NSGlobalDomain AppleICUTimeFormatStrings -dict \
+#  1 -string "H:mm" \
+#  2 -string "H:mm:ss" \
+#  3 -string "H:mm:ss z" \
+#  4 -string "H:mm:ss zzzz"
 
 # Show language menu in the top right corner of the boot screen
 sudo defaults write /Library/Preferences/com.apple.loginwindow showInputMenu -bool true
