@@ -59,6 +59,7 @@ brew cask install \
      alfred \
      balenaetcher \
      bartender \
+     brave-browser \
      caffeine \
      cakebrew \
      carbon-copy-cloner \
@@ -529,8 +530,10 @@ defaults write NSGlobalDomain AppleMiniaturizeOnDoubleClick -bool false
 echo "Setting Finder preferences"
 
 # Disable the macOS Crash reporter (quit dialog after an application crash)
-defaults write com.apple.CrashReporter DialogType none
-#To enable the crash reporter (default) change none to prompt
+defaults write com.apple.CrashReporter DialogType prompt
+# To enable the crash reporter (default) change none to prompt
+# Get a crash notification in the Notification Center instead of a window
+defaults write com.apple.CrashReporter UseUNC 1
 
 # Expand the "Open with" and "Sharing & Permissions" panes
 defaults write com.apple.finder FXInfoPanesExpanded -dict OpenWith -bool true Privileges -bool true
@@ -845,7 +848,7 @@ defaults write com.apple.Safari SendDoNotTrackHTTPHeader -bool true
 # Notifications
 
 # Don't even ask about the push notifications
-defaults write com.apple.Safari CanPromptForPushNotifications -bool false
+defaults write com.apple.Safari CanPromptForPushNotifications -bool true
 
 
 # Extensions settings
