@@ -56,6 +56,7 @@ brew install \
 echo "Installing desired/required Homebrew Cask packages"
 brew cask install \
      1password \
+     1password-cli \
      alfred \
      balenaetcher \
      bartender \
