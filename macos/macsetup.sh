@@ -2,7 +2,7 @@
 
 # (C) 2017 Gordon Engelke <reject@email.de>
 
-systemname="genmac"
+systemname="genmacpro"
 
 # Close any open System Preferences panes, to prevent them from overriding settings weâ€™re about to change
 osascript -e 'tell application "System Preferences" to quit'
@@ -20,38 +20,11 @@ xcode-select --install
 #cp bashrc ~/.bashrc
 #cp vimrc ~/.vimrc
 #cp tmux.conf ~/.tmux.conf
+cp logouthook ~/.logouthook
 
 # Install Homebrew
 echo "Installing Homebrew package manager"
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-
-# Install required/desired software through Homebrew
-echo "Installing desired/required Homebrew packages"
-brew install \
-     ack \
-     ansible \
-     bash \
-     bash-completion \
-     freerdp \
-     gdb \
-     git \
-     graphviz \
-     mono \
-     netcat \
-     nmap \
-     node \
-     openssl \
-     packer \
-     pulseaudio \
-     pygments \
-     python2 \
-     python3 \
-     socat \
-     telnet \
-     terraform \
-     tmux \
-     tree \
-     wget
 
 echo "Installing desired/required Homebrew Cask packages"
 brew cask install \
@@ -100,8 +73,6 @@ brew cask install \
      tunnelblick \
      vagrant \
      veracrypt \
-     virtualbox \
-     virtualbox-extension-pack \
      visual-studio-code \
      vlc \
      vmware-fusion \
@@ -109,6 +80,38 @@ brew cask install \
      wireshark \
      xnviewmp \
      xquartz
+
+brew cask install \
+     virtualbox \
+     virtualbox-extension-pack
+
+# Install required/desired software through Homebrew
+echo "Installing desired/required Homebrew packages"
+brew install \
+     ack \
+     ansible \
+     bash \
+     bash-completion \
+     freerdp \
+     gdb \
+     git \
+     graphviz \
+     mono \
+     netcat \
+     nmap \
+     node \
+     openssl \
+     packer \
+     pulseaudio \
+     pygments \
+     python2 \
+     python3 \
+     socat \
+     telnet \
+     terraform \
+     tmux \
+     tree \
+     wget
 
 echo "Installing security applications through Homebrew"
 brew cask install \
@@ -1179,10 +1182,10 @@ if test -f "~/.vim/bundle/Vundle.vim"; then
 else
     git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 fi
-wget --quiet https://raw.githubusercontent.com/gengelke/dotfiles/master/macos/vimrc -P /tmp
+#wget --quiet https://raw.githubusercontent.com/gengelke/dotfiles/master/macos/vimrc -P /tmp
 mv ~/.vimrc ~/.vimrc_old
-cp /tmp/vimrc ~/.vimrc
-rm /tmp/vimrc
+cp vimrc ~/.vimrc
+#rm /tmp/vimrc
 
 
 ###############################################################################
@@ -1190,10 +1193,10 @@ rm /tmp/vimrc
 ###############################################################################
 
 echo "Setting Bash preferences"
-wget --quiet https://raw.githubusercontent.com/gengelke/dotfiles/master/macos/bashrc -P /tmp
+#wget --quiet https://raw.githubusercontent.com/gengelke/dotfiles/master/macos/bashrc -P /tmp
 mv ~/.bashrc ~/.bashrc_old
-cp /tmp/bashrc ~/.bashrc
-rm /tmp/bashrc
+cp bashrc ~/.bashrc
+#rm /tmp/bashrc
 
 
 ###############################################################################
@@ -1201,10 +1204,10 @@ rm /tmp/bashrc
 ###############################################################################
 
 echo "Setting Tmux preferences"
-wget --quiet https://raw.githubusercontent.com/gengelke/dotfiles/master/macos/tmux.conf -P /tmp
+#wget --quiet https://raw.githubusercontent.com/gengelke/dotfiles/master/macos/tmux.conf -P /tmp
 mv ~/.tmux.conf ~/.tmux.conf_old
-cp /tmp/tmux.conf ~/.tmux.conf
-rm /tmp/tmux.conf
+cp tmux.conf ~/.tmux.conf
+#rm /tmp/tmux.conf
 
 
 ###############################################################################
