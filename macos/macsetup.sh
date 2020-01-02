@@ -31,6 +31,7 @@ brew cask install \
      1password \
      1password-cli \
      alfred \
+     amazon-music \
      balenaetcher \
      bartender \
      brave-browser \
@@ -1197,6 +1198,7 @@ echo "Setting Bash preferences"
 mv ~/.bashrc ~/.bashrc_old
 cp bashrc ~/.bashrc
 #rm /tmp/bashrc
+chsh -s /bin/bash
 
 
 ###############################################################################
