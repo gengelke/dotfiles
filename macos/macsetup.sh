@@ -2,7 +2,11 @@
 
 # (C) 2017 Gordon Engelke <reject@email.de>
 
-systemname="genmacpro"
+hostname="genmac"
+username="Gordon Engelke"
+useraccount="gengelke"
+userid="502"
+usergroupid="20"
 
 # Close any open System Preferences panes, to prevent them from overriding settings weâ€™re about to change
 osascript -e 'tell application "System Preferences" to quit'
@@ -30,31 +34,23 @@ echo "Installing desired/required Homebrew Cask packages"
 brew cask install \
      1password \
      1password-cli \
-     alfred \
      amazon-music \
      balenaetcher \
      bartender \
      brave-browser \
      caffeine \
-     cakebrew \
      carbon-copy-cloner \
      clementine \
      cyberduck \
      drawio \
-     evernote \
-     firefox \
      fluor \
      gimp \
-     google-chrome \
-     hex-fiend \
      istat-menus \
      iterm2 \
      java \
      jumpcut \
      karabiner-elements \
-     keepassx \
      keycastr \
-     libreoffice \
      little-snitch \
      micro-snitch \
      microsoft-office \
@@ -62,18 +58,10 @@ brew cask install \
      nordvpn \
      pdf-expert \
      powershell \
-     pycharm-ce \
-     slack \
-     snagit \
      spectacle \
-     spotify \
-     telegram \
-     textual \
      tigervnc-viewer \
      tripmode \
-     tunnelblick \
      vagrant \
-     veracrypt \
      visual-studio-code \
      vlc \
      vmware-fusion \
@@ -81,6 +69,23 @@ brew cask install \
      wireshark \
      xnviewmp \
      xquartz
+
+#     alfred \
+#     cakebrew \
+#     evernote \
+#     firefox \
+#     google-chrome \
+#     hex-fiend \
+#     keepassx \
+#     libreoffice \
+#     pycharm-ce \
+#     slack \
+#     snagit \
+#     spotify \
+#     telegram \
+#     textual \
+#     tunnelblick \
+#     veracrypt \
 
 brew cask install \
      virtualbox \
@@ -96,8 +101,6 @@ brew install \
      freerdp \
      gdb \
      git \
-     graphviz \
-     mono \
      netcat \
      nmap \
      node \
@@ -113,6 +116,9 @@ brew install \
      tmux \
      tree \
      wget
+
+#     graphviz \
+#     mono \
 
 echo "Installing security applications through Homebrew"
 brew cask install \
@@ -381,8 +387,10 @@ sudo defaults write /Library/Preferences/.GlobalPreferences AppleInterfaceTheme 
 defaults write -g NSRequiresAquaSystemAppearance -bool Yes
 
 # Set background color to "Solid Gray Pro Dark"
-osascript -e 'tell application "Finder" to set desktop picture to POSIX file "/Library/Desktop Pictures/Solid Colors/Solid Gray Pro Dark.png"'
+#osascript -e 'tell application "Finder" to set desktop picture to POSIX file "/Library/Desktop Pictures/Solid Colors/Solid Gray Pro Dark.png"'
 
+# Set background picture
+sudo osascript -e 'tell application "Finder" to set desktop picture to POSIX file "/Users/$username/Documents/dotfiles/macos/wallpaper_grey_curves.jpg"'
 # Expand 'Save As…' dialog boxes by default:
 defaults write -g NSNavPanelExpandedStateForSaveMode -boolean true
 defaults write -g NSNavPanelExpandedStateForSaveMode2 -bool true
@@ -398,10 +406,10 @@ defaults write com.apple.print.PrintingPrefs "Quit When Finished" -bool true
 # sudo defaults write /Library/Preferences/com.apple.loginwindow DesktopPicture "/Library/Desktop Pictures/Aqua Blue.jpg"
 
 # Set computer name (as done via System Preferences -> Sharing)
-sudo scutil --set ComputerName $systemname
-sudo scutil --set HostName $systemname
-sudo scutil --set LocalHostName $systemname
-sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string $systemname
+sudo scutil --set ComputerName $hostname
+sudo scutil --set HostName $hostname
+sudo scutil --set LocalHostName $hostname
+sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string $hostname
 
 # Disable the sound effects on boot
 sudo nvram SystemAudioVolume=" "
@@ -1198,7 +1206,7 @@ echo "Setting Bash preferences"
 mv ~/.bashrc ~/.bashrc_old
 cp bashrc ~/.bashrc
 #rm /tmp/bashrc
-chsh -s /bin/bash
+sudo chsh -s /bin/bash
 
 
 ###############################################################################
@@ -1210,6 +1218,21 @@ echo "Setting Tmux preferences"
 mv ~/.tmux.conf ~/.tmux.conf_old
 cp tmux.conf ~/.tmux.conf
 #rm /tmp/tmux.conf
+
+
+###############################################################################
+# Setup user accounts                                                         #
+###############################################################################
+
+echo "Setting up user account $useraccount"
+sudo dscl . -create /Users/$useraccount
+sudo dscl . -create /Users/$useraccount UserShell /bin/bash
+sudo dscl . -create /Users/$useraccount RealName "$username"
+sudo dscl . -create /Users/$useraccount UniqueID "$userid"
+sudo dscl . -create /Users/$useraccount PrimaryGroupID $usergroupid
+sudo dscl . -create /Users/$useraccount NFSHomeDirectory /Users/$useraccount
+sudo dscl . -create /Users/$useraccount Picture "/Users/$useraccount/Documents/dotfiles/avatar_big.jpg"
+sudo dscl . -passwd /Users/$useraccount $useraccount$userid
 
 
 ###############################################################################
