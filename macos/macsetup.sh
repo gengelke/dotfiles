@@ -2,7 +2,7 @@
 
 # (C) 2017 Gordon Engelke <reject@email.de>
 
-hostname="genmac"
+hostname="genmac12"
 username="Gordon Engelke"
 useraccount="gengelke"
 userid="502"
@@ -184,7 +184,7 @@ echo "Setting security preferences"
 defaults write com.apple.LaunchServices LSQuarantine -bool NO
 
 # Set Lock Message to show on login screen
-sudo defaults write /Library/Preferences/com.apple.loginwindow LoginwindowText -string "Owner: reject@web.de"
+sudo defaults write /Library/Preferences/com.apple.loginwindow LoginwindowText -string "Device Owner: reject@web.de"
 
 # Disable auto-login
 # sudo defaults delete /Library/Preferences/com.apple.loginwindow autoLoginUser
@@ -196,6 +196,9 @@ defaults write com.apple.screensaver askForPasswordDelay -int 0
 # Disable guest user
 defaults write com.apple.AppleFileServer guestAccess -bool false
 defaults write SystemConfiguration/com.apple.smb.server AllowGuestAccess -bool false
+
+# Hide administrator account from login screen
+sudo dscl . create /Users/admin IsHidden 1
 
 
 ###############################################################################
