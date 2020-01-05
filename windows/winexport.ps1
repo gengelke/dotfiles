@@ -19,7 +19,7 @@ REG EXPORT HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Taskband "$CO
 #=================================#
 
 Write-Host "`n=> Exporting Start menu layout data..."
-Export-StartLayout -path "$CONFIGDIR\StartMenuLayout_Modification.xml"
+Export-StartLayout -UseDesktopApplicationID -path "$CONFIGDIR\StartMenuLayout_Modification.xml"
 
 
 Write-Host "`nDone."
