@@ -84,9 +84,12 @@ If((Test-Path "HKLM:\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Explo
 	Remove-Item "HKLM:\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{0DB7E03F-FC29-4DC6-9020-FF41B59E513A}"
 }
 
-Write-Output "`n=> Setting Dark theme for system UI colors but Light theme for application UI colors..."
-New-ItemProperty -Path HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize -Name AppsUseLightTheme
-# Deactivate Dark Theme: Remove-ItemProperty -Path HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize -Name AppsUseLightTheme
+Write-Output "`n=> Enabling Dark theme for system UI..."
+set-itemproperty -path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize" -name SystemUsesLightTheme -value 0
+Write-Output "`n=> Enabling Light theme for application UI colors..."
+set-itemproperty -path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize" -name AppsUseLightTheme -value 1
+Write-Output "`n=> Disabling transparency for system UI..."
+set-itemproperty -path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize" -name EnableTransparency -value 0
 
 #Write-Output "`n=> Resetting Start menu layout to factory default..."
 #Remove-Item 'HKCU:\Software\Microsoft\Windows\CurrentVersion\CloudStore\Store\Cache\DefaultAccount\*$start.tilegrid$windows.data.curatedtilecollection.tilecollection'  -Force -Recurse
@@ -117,7 +120,7 @@ Get-Process Explorer | Stop-Process
 Write-Host "`n=> Install Chocolatey package manager..."
 iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
 
-Exit
+#Exit
 
 # Auto approve all chocolatey package installations
 choco feature enable -n=allowGlobalConfirmation
