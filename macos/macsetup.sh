@@ -57,6 +57,7 @@ brew cask install \
      pdf-expert \
      powershell \
      spectacle \
+     spotify \
      tigervnc-viewer \
      tripmode \
      vagrant \
