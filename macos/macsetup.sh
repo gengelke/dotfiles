@@ -2,7 +2,7 @@
 
 # (C) 2017 Gordon Engelke <reject@email.de>
 
-hostname="genmac12"
+hostname="genmac13"
 username="Gordon Engelke"
 useraccount="gengelke"
 userid="502"
@@ -34,13 +34,11 @@ echo "Installing desired/required Homebrew Cask packages"
 brew cask install \
      1password \
      1password-cli \
-     amazon-music \
      balenaetcher \
      bartender \
      brave-browser \
      caffeine \
      carbon-copy-cloner \
-     clementine \
      cyberduck \
      drawio \
      fluor \
@@ -66,12 +64,15 @@ brew cask install \
      vlc \
      vmware-fusion \
      vnc-viewer \
+     vox \
      wireshark \
      xnviewmp \
      xquartz
 
 #     alfred \
+#     amazon-music \
 #     cakebrew \
+#     clementine \
 #     evernote \
 #     firefox \
 #     google-chrome \
@@ -708,9 +709,9 @@ defaults write com.apple.dock persistent-apps -array-add '<dict><key>tile-data</
 
 defaults write com.apple.dock persistent-apps -array-add '<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>/Applications/Cyberduck.app</string><key>_CFURLStringType</key><integer>0</integer></dict></dict></dict>'
 
-defaults write com.apple.dock persistent-apps -array-add '<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>/Applications/clementine.app</string><key>_CFURLStringType</key><integer>0</integer></dict></dict></dict>'
+defaults write com.apple.dock persistent-apps -array-add '<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>/Applications/VOX.app</string><key>_CFURLStringType</key><integer>0</integer></dict></dict></dict>'
 
-defaults write com.apple.dock persistent-apps -array-add '<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>/Applications/Music.app</string><key>_CFURLStringType</key><integer>0</integer></dict></dict></dict>'
+defaults write com.apple.dock persistent-apps -array-add '<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>/Applications/Spotify.app</string><key>_CFURLStringType</key><integer>0</integer></dict></dict></dict>'
 
 defaults write com.apple.dock persistent-apps -array-add '<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>/Applications/XnViewMP.app</string><key>_CFURLStringType</key><integer>0</integer></dict></dict></dict>'
 
