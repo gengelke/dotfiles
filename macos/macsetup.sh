@@ -175,6 +175,14 @@ fi
 
 pip install nose tornado msrest msrestazure azure ansible[azure] openshift --upgrade
 
+#wget https://downloads.citrix.com/16912/CitrixWorkspaceApp.dmg?__gda__=1579290614_6317390b25198a7100d1fcf713569f20
+#https://www.citrix.com/de-de/downloads/workspace-app/mac/
+
+#wget https://downloads.citrix.com/11449/HDX_RealTime_Media_Engine_2.8_for_OSX.dmg?__gda__=1579291671_6bf57a91a5c7ada0186b509fb2ceb621
+#https://www.citrix.com/de-de/downloads/citrix-receiver/additional-client-software/hdx-realtime-media-engine.html
+
+#https://support.citrix.com/article/CTX136578
+
 
 ###############################################################################
 # Security                                                                    #
