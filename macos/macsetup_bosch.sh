@@ -38,6 +38,7 @@ brew cask install \
      caffeine \
      cyberduck \
      drawio \
+     firefox \
      gimp \
      iterm2 \
      java \
@@ -60,7 +61,6 @@ brew cask install \
 #     cakebrew \
 #     clementine \
 #     evernote \
-#     firefox \
 #     google-chrome \
 #     hex-fiend \
 #     keepassx \
