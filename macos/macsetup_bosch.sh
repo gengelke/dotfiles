@@ -36,6 +36,7 @@ brew cask install \
      1password-cli \
      brave-browser \
      caffeine \
+     carbon-copy-cloner \
      cyberduck \
      drawio \
      firefox \
