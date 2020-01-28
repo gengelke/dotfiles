@@ -195,6 +195,18 @@ choco install `
 # Disable auto approve all chocolatey package installations
 choco feature disable -n=allowGlobalConfirmation
 
+Write-Host "`n=> Enable Windows Subsystem for Linux 2"
+dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
+dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
+
+wsl --set-default-version 2
+
+Write-Host "`n=> Download Ubuntu 18.04 WSL Distro"
+Invoke-WebRequest -Uri https://aka.ms/wsl-ubuntu-1804 -OutFile C:\Users\admin\Downloads\Ubuntu1804.appx -UseBasicParsing
+
+Write-Host "`n=> Install Ubuntu 18.04 WSL Distro"
+Add-AppxPackage C:\Users\admin\Downloads\Ubuntu1804.appx
+
 Write-Host "`nDone."
 Write-Host "Please consider to restart Windows now in order to make all changes effective."
 Write-Host "Have fun!`n`n`n"
