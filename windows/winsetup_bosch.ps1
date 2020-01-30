@@ -74,22 +74,19 @@ $PROXY_PROFILE = @"
 "@
 
 if (!(Test-Path $profile)) {
-  Write-Warning "$profile does not exist."
+  Write-Warning "$profile does not exist. Will create the file and proxy settings."
   New-Item "$profile"
   Add-Content $profile '$PROXY_PROFILE'
 }
 else {
   $SEL = Select-String -Path $profile -Pattern "new-object system.net.webproxy"
   if ($SEL -eq $null) {
-    Write-Warning "$profile already exists but does not contain the proxy settings."
+    Write-Warning "$profile already exists but does not contain the proxy settings. Will create the proxy settings."
     Add-Content $profile '$PROXY_PROFILE'
   } else {
     Write-Warning "$profile already exists and already contains the proxy settings."
   }
 }
-
-#notepad $PROFILE
-Write-Host $PROXY_PROFILE
 
 
 #=================================#
@@ -129,17 +126,27 @@ choco install `
 # Disable auto approve all chocolatey package installations
 choco feature disable -n=allowGlobalConfirmation
 
+
+#=================================#
+# Enable WSL2 Ubuntu              #
+#=================================#
+
 Write-Host "`n=> Enable Windows Subsystem for Linux 2"
 dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
 dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
 
 #wsl --set-default-version 2
 
-#Write-Host "`n=> Download Ubuntu 18.04 WSL Distro"
-Invoke-WebRequest -Uri https://aka.ms/wsl-ubuntu-1804 -OutFile C:\temp\Ubuntu1804.appx -UseBasicParsing
+$APPX = C:\temp\Ubuntu1804.appx
+if (!(Test-Path $APPX)) {
+  Write-Host "`n=> Download Ubuntu 18.04 WSL Distro"
+  Invoke-WebRequest -Uri https://aka.ms/wsl-ubuntu-1804 -OutFile $APPX -UseBasicParsing
+} else {
+  Write-Host "`n=> $APPX already existing."
+}
 
-#Write-Host "`n=> Install Ubuntu 18.04 WSL Distro"
-Add-AppxPackage C:\temp\Ubuntu1804.appx
+Write-Host "`n=> Install Ubuntu 18.04 WSL Distro"
+Add-AppxPackage $APPX
 
 # Set www proxy configuration
 # sudo echo vi /etc/apt/apt.conf
