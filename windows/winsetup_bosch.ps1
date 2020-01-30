@@ -67,19 +67,28 @@ Get-Process Explorer | Stop-Process
 # Configure Proxy for Powershell  #
 #=================================#
 
-if (!(Test-Path $PROFILE) -or !(Test-Path $userfile)) {
-  Write-Warning "$PROFILE not existing or does not contain the proxy settings."
-}
-else {
-  Write-Warning "$PROFILE already exists or contains the proxy settings."
-}
-
-#notepad $PROFILE
 $PROXY_PROFILE = @" 
 [system.net.webrequest]::defaultwebproxy = new-object system.net.webproxy('http://rb-proxy-de.bosch.com:8080')
 [system.net.webrequest]::defaultwebproxy.credentials = [System.Net.CredentialCache]::DefaultNetworkCredentials
 [system.net.webrequest]::defaultwebproxy.BypassProxyOnLocal = $true 
 "@
+
+if (!(Test-Path $profile) {
+  Write-Warning "$profile does not exist."
+  New-Item "$profile"
+  Add-Content $profile '$PROXY_PROFILE'
+}
+else {
+  $SEL = Select-String -Path $profile -Pattern "new-object system.net.webproxy"
+  if ($SEL -eq $null)) {
+    Write-Warning "$profile already exists but does not contain the proxy settings."
+    Add-Content $profile '$PROXY_PROFILE'
+  } else {
+    Write-Warning "$profile already exists and already contains the proxy settings."
+  }
+}
+
+#notepad $PROFILE
 Write-Host $PROXY_PROFILE
 
 
