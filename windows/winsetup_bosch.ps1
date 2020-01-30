@@ -64,6 +64,26 @@ Get-Process Explorer | Stop-Process
 
 
 #=================================#
+# Configure Proxy for Powershell  #
+#=================================#
+
+if (!(Test-Path $PROFILE) -or !(Test-Path $userfile)) {
+  Write-Warning "$PROFILE not existing or does not contain the proxy settings."
+}
+else {
+  Write-Warning "$PROFILE already exists or contains the proxy settings."
+}
+
+#notepad $PROFILE
+$PROXY_PROFILE = @" 
+[system.net.webrequest]::defaultwebproxy = new-object system.net.webproxy('http://rb-proxy-de.bosch.com:8080')
+[system.net.webrequest]::defaultwebproxy.credentials = [System.Net.CredentialCache]::DefaultNetworkCredentials
+[system.net.webrequest]::defaultwebproxy.BypassProxyOnLocal = $true 
+"@
+Write-Host $PROXY_PROFILE
+
+
+#=================================#
 # Chocolatey stuff                #
 #=================================#
 
@@ -84,6 +104,7 @@ choco install `
 	cyberduck `
 	docker-desktop `
 	kubernetes-cli `
+	kubernetes-helm `
 	meld `
 	packer `
 	terraform `
@@ -103,19 +124,13 @@ Write-Host "`n=> Enable Windows Subsystem for Linux 2"
 dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
 dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
 
-wsl --set-default-version 2
+#wsl --set-default-version 2
 
 #Write-Host "`n=> Download Ubuntu 18.04 WSL Distro"
-#Invoke-WebRequest -Uri https://aka.ms/wsl-ubuntu-1804 -OutFile C:\Users\admin\Downloads\Ubuntu1804.appx -UseBasicParsing
+Invoke-WebRequest -Uri https://aka.ms/wsl-ubuntu-1804 -OutFile C:\temp\Ubuntu1804.appx -UseBasicParsing
 
 #Write-Host "`n=> Install Ubuntu 18.04 WSL Distro"
-#Add-AppxPackage C:\Users\admin\Downloads\Ubuntu1804.appx
-
-# Configure Proxy for Powershell
-#notepad $PROFILE
-#[system.net.webrequest]::defaultwebproxy = new-object system.net.webproxy('http://rb-proxy-de.bosch.com:8080')
-#[system.net.webrequest]::defaultwebproxy.credentials = [System.Net.CredentialCache]::DefaultNetworkCredentials
-#[system.net.webrequest]::defaultwebproxy.BypassProxyOnLocal = $true
+Add-AppxPackage C:\temp\Ubuntu1804.appx
 
 # Set www proxy configuration
 # sudo echo vi /etc/apt/apt.conf
