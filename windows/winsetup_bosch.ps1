@@ -51,10 +51,10 @@ If((Test-Path $CONFIGDIR\StartMenuLayout_Modification.xml) -eq $True) {
 	Remove-Item 'HKCU:\Software\Microsoft\Windows\CurrentVersion\CloudStore\Store\Cache\DefaultAccount\*$start.tilegrid$windows.data.curatedtilecollection.tilecollection'  -Force -Recurse
 }
 
-Write-Host "`n=> Restoring taskbar layout..."
-REG IMPORT "$CONFIGDIR\taskbar.reg"
-Write-Host "`n=> Restoring taskband layout..."
-REG IMPORT "$CONFIGDIR\taskband.reg"
+#Write-Host "`n=> Restoring taskbar layout..."
+#REG IMPORT "$CONFIGDIR\taskbar.reg"
+#Write-Host "`n=> Restoring taskband layout..."
+#REG IMPORT "$CONFIGDIR\taskband.reg"
 
 Write-Host "`n=> Setting 'Use small taskbar buttons' to true..."
 # 0 = Large taskbar buttons
@@ -77,45 +77,24 @@ choco feature enable -n=allowGlobalConfirmation
 
 Write-Host "`n=> Install reqiured/desired software packages through Chocolatey..."
 choco install `
-	autohotkey `
 	awscli `
 	azure-cli `
-	beyondcompare `
-	brave `
 	cloudfoundry-cli `
 	ConEmu `
-	curl `
 	cyberduck `
 	docker-desktop `
-	dotnetcore `
-	dotnetfx `
-	gimp `
-	git `
-	javaruntime `
 	kubernetes-cli `
 	meld `
-	notepadplusplus `
-	openssh `
 	packer `
-	pdfsam `
-	putty `
-	python2 `
-	python3 `
-	screenpresso `
 	terraform `
-	tigervnc-viewer `
 	trafficlight-chrome `
 	vagrant `
-	veracrypt `
 	vim `
 	vlc `
 	vscode `
-	windirstat `
 	winmerge `
-	winscp `
 	wox `
-	Xming `
-	XnView
+	Xming
 
 # Disable auto approve all chocolatey package installations
 choco feature disable -n=allowGlobalConfirmation
@@ -126,11 +105,11 @@ dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /nores
 
 wsl --set-default-version 2
 
-Write-Host "`n=> Download Ubuntu 18.04 WSL Distro"
-Invoke-WebRequest -Uri https://aka.ms/wsl-ubuntu-1804 -OutFile C:\Users\admin\Downloads\Ubuntu1804.appx -UseBasicParsing
+#Write-Host "`n=> Download Ubuntu 18.04 WSL Distro"
+#Invoke-WebRequest -Uri https://aka.ms/wsl-ubuntu-1804 -OutFile C:\Users\admin\Downloads\Ubuntu1804.appx -UseBasicParsing
 
-Write-Host "`n=> Install Ubuntu 18.04 WSL Distro"
-Add-AppxPackage C:\Users\admin\Downloads\Ubuntu1804.appx
+#Write-Host "`n=> Install Ubuntu 18.04 WSL Distro"
+#Add-AppxPackage C:\Users\admin\Downloads\Ubuntu1804.appx
 
 Write-Host "`nDone."
 Write-Host "Please consider to restart Windows now in order to make all changes effective."
