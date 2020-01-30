@@ -73,14 +73,14 @@ $PROXY_PROFILE = @"
 [system.net.webrequest]::defaultwebproxy.BypassProxyOnLocal = $true 
 "@
 
-if (!(Test-Path $profile) {
+if (!(Test-Path $profile)) {
   Write-Warning "$profile does not exist."
   New-Item "$profile"
   Add-Content $profile '$PROXY_PROFILE'
 }
 else {
   $SEL = Select-String -Path $profile -Pattern "new-object system.net.webproxy"
-  if ($SEL -eq $null)) {
+  if ($SEL -eq $null) {
     Write-Warning "$profile already exists but does not contain the proxy settings."
     Add-Content $profile '$PROXY_PROFILE'
   } else {
