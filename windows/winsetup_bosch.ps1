@@ -111,6 +111,20 @@ wsl --set-default-version 2
 #Write-Host "`n=> Install Ubuntu 18.04 WSL Distro"
 #Add-AppxPackage C:\Users\admin\Downloads\Ubuntu1804.appx
 
+# Configure Proxy for Powershell
+#notepad $PROFILE
+#[system.net.webrequest]::defaultwebproxy = new-object system.net.webproxy('http://rb-proxy-de.bosch.com:8080')
+#[system.net.webrequest]::defaultwebproxy.credentials = [System.Net.CredentialCache]::DefaultNetworkCredentials
+#[system.net.webrequest]::defaultwebproxy.BypassProxyOnLocal = $true
+
+# Set www proxy configuration
+# sudo echo vi /etc/apt/apt.conf
+# add this text, change the proxy to your local one and save the file.
+# Acquire::http::Proxy "http://rb-proxy-de.bosch.com:8080";
+# Update the Distro
+# sudo apt update
+# sudo apt upgrade –y
+
 Write-Host "`nDone."
 Write-Host "Please consider to restart Windows now in order to make all changes effective."
 Write-Host "Have fun!`n`n`n"
