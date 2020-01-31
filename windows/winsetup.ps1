@@ -86,8 +86,8 @@ If((Test-Path "HKLM:\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Explo
 
 Write-Output "`n=> Enabling Dark theme for system UI..."
 set-itemproperty -path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize" -name SystemUsesLightTheme -value 0
-Write-Output "`n=> Enabling Light theme for application UI colors..."
-set-itemproperty -path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize" -name AppsUseLightTheme -value 1
+Write-Output "`n=> Enabling Dark theme for application UI colors..."
+set-itemproperty -path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize" -name AppsUseLightTheme -value 0
 Write-Output "`n=> Disabling transparency for system UI..."
 set-itemproperty -path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize" -name EnableTransparency -value 0
 
