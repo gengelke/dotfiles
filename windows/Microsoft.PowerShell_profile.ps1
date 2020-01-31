@@ -3,8 +3,31 @@
 write-host "Loading powershell profile...";
 
 # [System.Enum]::GetValues('ConsoleColor') | ForEach-Object { Write-Host $_ -ForegroundColor $_ }
-$host.UI.RawUI.ForegroundColor = "Gray"
-$host.UI.RawUI.BackgroundColor = "Black"
+$host.UI.RawUI.ForegroundColor 	 = "Gray"
+$host.UI.RawUI.BackgroundColor 	 = "Black"
+
+function Set-ConsoleWindow
+{
+    param(
+        [int]$Width,
+        [int]$Height
+    )
+
+    $WindowSize = $Host.UI.RawUI.WindowSize
+    $WindowSize.Width  = [Math]::Min($Width, $Host.UI.RawUI.BufferSize.Width)
+    $WindowSize.Height = $Height
+
+    try{
+        $Host.UI.RawUI.WindowSize = $WindowSize
+    }
+    catch [System.Management.Automation.SetValueInvocationException] {
+        $Maxvalue = ($_.Exception.Message |Select-String "\d+").Matches[0].Value
+        $WindowSize.Height = $Maxvalue
+        $Host.UI.RawUI.WindowSize = $WindowSize
+    }
+}
+
+Set-ConsoleWindow 160 40
 
 $os = Get-WmiObject Win32_OperatingSystem
 Write-Host "Operating system: $($os.OSArchitecture) $($os.Caption) version $($os.Version)"
