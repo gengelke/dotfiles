@@ -210,3 +210,4 @@ Add-AppxPackage C:\Users\admin\Downloads\Ubuntu1804.appx
 Write-Host "`nDone."
 Write-Host "Please consider to restart Windows now in order to make all changes effective."
 Write-Host "Have fun!`n`n`n"
+
