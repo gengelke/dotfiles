@@ -206,16 +206,16 @@ dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /nores
 
 #wsl --set-default-version 2
 
-$APPX = C:\temp\Ubuntu1804.appx
+$APPX = "$env:TEMP\Ubuntu1804.appx"
 if (!(Test-Path $APPX)) {
   Write-Host "`n=> Download Ubuntu 18.04 WSL Distro"
-  Invoke-WebRequest -Uri https://aka.ms/wsl-ubuntu-1804 -OutFile $APPX -UseBasicParsing
+  Invoke-WebRequest -Uri https://aka.ms/wsl-ubuntu-1804 -OutFile "$APPX" -UseBasicParsing
 } else {
   Write-Host "`n=> $APPX already existing."
 }
 
 Write-Host "`n=> Install Ubuntu 18.04 WSL Distro"
-Add-AppxPackage $APPX
+Add-AppxPackage "$APPX"
 
 # Set www proxy configuration
 # sudo echo vi /etc/apt/apt.conf
