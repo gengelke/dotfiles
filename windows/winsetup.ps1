@@ -195,19 +195,36 @@ choco install `
 # Disable auto approve all chocolatey package installations
 choco feature disable -n=allowGlobalConfirmation
 
+
+#=================================#
+# Enable WSL2 Ubuntu              #
+#=================================#
+
 Write-Host "`n=> Enable Windows Subsystem for Linux 2"
 dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
 dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
 
-wsl --set-default-version 2
+#wsl --set-default-version 2
 
-Write-Host "`n=> Download Ubuntu 18.04 WSL Distro"
-Invoke-WebRequest -Uri https://aka.ms/wsl-ubuntu-1804 -OutFile C:\Users\admin\Downloads\Ubuntu1804.appx -UseBasicParsing
+$APPX = C:\temp\Ubuntu1804.appx
+if (!(Test-Path $APPX)) {
+  Write-Host "`n=> Download Ubuntu 18.04 WSL Distro"
+  Invoke-WebRequest -Uri https://aka.ms/wsl-ubuntu-1804 -OutFile $APPX -UseBasicParsing
+} else {
+  Write-Host "`n=> $APPX already existing."
+}
 
 Write-Host "`n=> Install Ubuntu 18.04 WSL Distro"
-Add-AppxPackage C:\Users\admin\Downloads\Ubuntu1804.appx
+Add-AppxPackage $APPX
+
+# Set www proxy configuration
+# sudo echo vi /etc/apt/apt.conf
+# add this text, change the proxy to your local one and save the file.
+# Acquire::http::Proxy "http://rb-proxy-de.bosch.com:8080";
+# Update the Distro
+# sudo apt update
+# sudo apt upgrade –y
 
 Write-Host "`nDone."
 Write-Host "Please consider to restart Windows now in order to make all changes effective."
 Write-Host "Have fun!`n`n`n"
-
