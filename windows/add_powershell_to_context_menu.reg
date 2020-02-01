@@ -1,0 +1,11 @@
+Windows Registry Editor Version 5.00
+
+; created by Walter Glenn
+; for How-To Geek
+; article: http://www.howtogeek.com/284500/how-to-add-open-powershell-window-here-to-the-right-click-menu-for-a-folder-in-windows/
+
+[HKEY_CLASSES_ROOT\Directory\shell\powershellmenu]
+@="Open PowerShell Here"
+
+[HKEY_CLASSES_ROOT\Directory\shell\powershellmenu\command]
+@="C:\\\\Windows\\\\system32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe -NoExit -Command Set-Location -LiteralPath '%L'"
