@@ -232,6 +232,7 @@ choco install `
 choco feature disable -n=allowGlobalConfirmation
 
 
+#https://download.bitdefender.com/windows/installer/en-us/bitdefender_tsecurity.exe
 #https://gdata-a.akamaihd.net/Q/Tools/2014/INT/INT_GD_USB_KEYBOARD_GUARD.exe
 #https://www.netlimiter.com/files/download/nl4/netlimiter-4.0.59.0.exe
 #https://shieldapps.com/external/webcam-blocker-setup.php
