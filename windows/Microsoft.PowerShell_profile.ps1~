@@ -35,7 +35,7 @@ Write-Host "PowerShell version: $($PSVersionTable.PSVersion)"
 
 Import-Module PSReadLine
 
-#set-executionpolicy RemoteSigned process
+set-executionpolicy RemoteSigned process
 
 Set-Alias vim "C:\tools\vim\vim82\vim.exe"
 Set-Alias vi vim
