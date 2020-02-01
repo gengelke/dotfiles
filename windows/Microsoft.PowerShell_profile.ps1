@@ -167,7 +167,7 @@ function prompt {
     if ($git_branch -ne $NULL) {
         $prompt = "$"
     }
-    Write-Host($prompt) -nonewline -foregroundcolor DarkGray
+    Write-Host($prompt) -nonewline -foregroundcolor Gray
 
     return " "
  }
