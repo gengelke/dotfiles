@@ -175,26 +175,40 @@ choco install `
 	docker-desktop `
 	dotnetcore `
 	dotnetfx `
+#	dropbox `
+	expandrive `
+#	fiddler `	
 	gimp `
 	git `
+	github-desktop `
+	gitkraken `
 	glasswire `
-	greenshot `
+#	greenshot `
 	javaruntime `
 	kubernetes-cli `
 	meld `
-	microsoft-windows-terminal `
+	microsoft-windows-terminal `	
+	mountain-duck `
+#	musicbee `	
 	nmap `
+	nordvpn `
 	notepadplusplus `
-	openssh `
+#	openssh `
 	packer `
+#	pdfsam `
+#	putty `	
 	python2 `
 	python3 `
 	recuve `
+#	screenpresso `	
 	shutup10 `
+#	skype `	
+	sourcetree `
 	sumatrapdf `
 	terraform `
 	tigervnc-viewer `
 	trafficlight-chrome `
+#	treesizefree `	
 	vagrant `
 	veracrypt `
 	vim `
@@ -205,28 +219,25 @@ choco install `
 	vmwareplayer `
 	vscode `
 	winamp `
+#	windirstat `	
 	winmerge `
 	winscp `
 	wireshark `
+	wnetwatcher `
+#	wox `	
 	Xming `
 	XnView
 	
-#	dropbox `
-#	fiddler `
-#	iCloud `
-#	iTunes `
-#	musicbee `
-#	pdfsam `
-#	putty `
-#	screenpresso `
-#	skype `
-#	treesizefree `
-#	windirstat `
-#	wox `
-
-	
 # Disable auto approve all chocolatey package installations
 choco feature disable -n=allowGlobalConfirmation
+
+
+#https://gdata-a.akamaihd.net/Q/Tools/2014/INT/INT_GD_USB_KEYBOARD_GUARD.exe
+#https://www.netlimiter.com/files/download/nl4/netlimiter-4.0.59.0.exe
+#https://shieldapps.com/external/webcam-blocker-setup.php
+#https://www.tripmode.ch/appwin/TripMode-win64.msi
+#https://www.expandrive.com/download-expandrive/#
+#https://www.git-tower.com/download/windows
 
 
 #=================================#
