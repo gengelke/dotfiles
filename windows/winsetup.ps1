@@ -147,36 +147,26 @@ choco install `
 	docker-desktop `
 	dotnetcore `
 	dotnetfx `
-	dropbox `
-	fiddler `
 	gimp `
 	git `
 	glasswire `
 	greenshot `
-	iCloud `
-	iTunes `
 	javaruntime `
 	kubernetes-cli `
 	meld `
 	microsoft-windows-terminal `
-	musicbee `
 	nmap `
 	notepadplusplus `
 	openssh `
 	packer `
-	pdfsam `
-	putty `
 	python2 `
 	python3 `
 	recuve `
-	screenpresso `
 	shutup10 `
-	skype `
 	sumatrapdf `
 	terraform `
 	tigervnc-viewer `
 	trafficlight-chrome `
-	treesizefree `
 	vagrant `
 	veracrypt `
 	vim `
@@ -187,14 +177,26 @@ choco install `
 	vmwareplayer `
 	vscode `
 	winamp `
-	windirstat `
 	winmerge `
 	winscp `
 	wireshark `
-	wox `
 	Xming `
 	XnView
+	
+#	dropbox `
+#	fiddler `
+#	iCloud `
+#	iTunes `
+#	musicbee `
+#	pdfsam `
+#	putty `
+#	screenpresso `
+#	skype `
+#	treesizefree `
+#	windirstat `
+#	wox `
 
+	
 # Disable auto approve all chocolatey package installations
 choco feature disable -n=allowGlobalConfirmation
 
