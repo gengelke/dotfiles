@@ -124,15 +124,16 @@ function prompt {
     }
 
     Write-Host ($env:UserName) -nonewline -foregroundcolor DarkGreen
-    Write-Host (" @ ") -nonewline -foregroundcolor Gray
-    Write-Host ($env:COMPUTERNAME) -nonewline -foregroundcolor DarkCyan
-    Write-Host (" in ") -nonewline -foregroundcolor Gray
-    Write-Host ($cwd) -nonewline -foregroundcolor DarkGreen
+    Write-Host ("@") -nonewline -foregroundcolor DarkGreen
+    Write-Host ($env:COMPUTERNAME) -nonewline -foregroundcolor DarkGreen
+    Write-Host (" ") -nonewline -foregroundcolor Gray
+    Write-Host ($cwd) -nonewline -foregroundcolor Yellow
 
     if ($git_branch -ne $NULL) {
-        Write-Host (" on ") -nonewline -foregroundcolor Gray
+        Write-Host (" (") -nonewline -foregroundcolor Cyan
         Write-Host ($git_branch) -nonewline -foregroundcolor  Cyan
-        Write-Host(" [") -nonewline -foregroundcolor Gray
+        Write-Host (") ") -nonewline -foregroundcolor Cyan
+        Write-Host("[") -nonewline -foregroundcolor Gray
         if ($git_status_verbose -eq $true) {
         if ($has_changes -eq $true) {
                 Write-Host("a") -nonewline -foregroundcolor Yellow
