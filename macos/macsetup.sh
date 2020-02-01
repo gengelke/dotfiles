@@ -1138,6 +1138,9 @@ defaults write com.vmware.fusion showStartMenu3 -int 1
 # Show the toolbar items
 defaults write com.vmware.fusion fusionDevicesToolbarItemIsExpanded -bool true
 
+echo "Removing Quarantine from VMware Fusion Helpers"
+sudo xattr -rd com.apple.quarantine /Applications/VMware\ Fusion.app/Contents/Library/LaunchServices/
+
 
 ###############################################################################
 # Mac App Store                                                               #
