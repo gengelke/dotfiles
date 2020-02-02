@@ -176,6 +176,7 @@ choco install `
 	dotnetcore `
 	dotnetfx `
 #	dropbox `
+	etcher `
 	expandrive `
 #	fiddler `	
 	gimp `
