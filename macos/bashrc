@@ -119,6 +119,7 @@ if [ -x /usr/bin/pygmentize ] || [ -x /usr/local/bin/pygmentize ]; then
     alias cat='pygmentize -O style=monokai -f console256 -g'
 fi
 
+alias gacp='git add . && git commit --message \"$@\" && git push'
 alias rm='rm -i'
 alias cp='cp -i'
 alias mv='mv -i'
