@@ -2,6 +2,10 @@
 
 write-host "Loading powershell profile...";
 
+[system.net.webrequest]::defaultwebproxy = new-object system.net.webproxy('http://rb-proxy-de.bosch.com:8080')
+[system.net.webrequest]::defaultwebproxy.credentials = [System.Net.CredentialCache]::DefaultNetworkCredentials
+[system.net.webrequest]::defaultwebproxy.BypassProxyOnLocal = $True
+
 # [System.Enum]::GetValues('ConsoleColor') | ForEach-Object { Write-Host $_ -ForegroundColor $_ }
 $host.UI.RawUI.ForegroundColor 	 = "Gray"
 $host.UI.RawUI.BackgroundColor 	 = "Black"
