@@ -20,7 +20,7 @@ function Set-ConsoleWindow
     $WindowSize = $Host.UI.RawUI.WindowSize
     $WindowSize.Width  = [Math]::Min($Width, $Host.UI.RawUI.BufferSize.Width)
     $WindowSize.Height = $Height
-    if (getMachineType() -eq "Windows") {
+    if (getMachineType -eq "Windows") {
         try{
             $Host.UI.RawUI.WindowSize = $WindowSize
         }
@@ -94,7 +94,7 @@ Set-PSReadlineKeyHandler -Key UpArrow -Function HistorySearchBackward
 Set-PSReadlineKeyHandler -Key DownArrow -Function HistorySearchForward
 Set-PSReadlineKeyHandler -Key Tab -Function Complete
 
-if (getMachineType() -eq "Windows") {
+if (getMachineType -eq "Windows") {
     $Global:CurrentUser = [System.Security.Principal.WindowsIdentity]::GetCurrent()
 
     $UserType = "User"
