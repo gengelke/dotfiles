@@ -20,20 +20,21 @@ function Set-ConsoleWindow
     $WindowSize = $Host.UI.RawUI.WindowSize
     $WindowSize.Width  = [Math]::Min($Width, $Host.UI.RawUI.BufferSize.Width)
     $WindowSize.Height = $Height
-
-    try{
-        $Host.UI.RawUI.WindowSize = $WindowSize
-    }
-    catch [System.Management.Automation.SetValueInvocationException] {
-        $Maxvalue = ($_.Exception.Message |Select-String "\d+").Matches[0].Value
-        $WindowSize.Height = $Maxvalue
-        $Host.UI.RawUI.WindowSize = $WindowSize
+    if (getMachineType() -eq "Windows") {
+        try{
+            $Host.UI.RawUI.WindowSize = $WindowSize
+        }
+        catch [System.Management.Automation.SetValueInvocationException] {
+            $Maxvalue = ($_.Exception.Message |Select-String "\d+").Matches[0].Value
+            $WindowSize.Height = $Maxvalue
+            $Host.UI.RawUI.WindowSize = $WindowSize
+        }
     }
 }
 
 Set-ConsoleWindow 160 40
 
-$os = Get-WmiObject Win32_OperatingSystem
+#$os = Get-WmiObject Win32_OperatingSystem
 Write-Host "Operating system: $($os.OSArchitecture) $($os.Caption) version $($os.Version)"
 Write-Host "PowerShell version: $($PSVersionTable.PSVersion)"
 
@@ -93,12 +94,15 @@ Set-PSReadlineKeyHandler -Key UpArrow -Function HistorySearchBackward
 Set-PSReadlineKeyHandler -Key DownArrow -Function HistorySearchForward
 Set-PSReadlineKeyHandler -Key Tab -Function Complete
 
-$Global:CurrentUser = [System.Security.Principal.WindowsIdentity]::GetCurrent()
-$UserType = "User"
-$CurrentUser.Groups | foreach { 
-    if ($_.value -eq "S-1-5-32-544") {
-        $UserType = "Admin"
-    } 
+if (getMachineType() -eq "Windows") {
+    $Global:CurrentUser = [System.Security.Principal.WindowsIdentity]::GetCurrent()
+
+    $UserType = "User"
+    $CurrentUser.Groups | foreach { 
+        if ($_.value -eq "S-1-5-32-544") {
+            $UserType = "Admin"
+        } 
+    }
 }
 
 function prompt {
