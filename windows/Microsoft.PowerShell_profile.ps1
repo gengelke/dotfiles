@@ -20,7 +20,7 @@ function getMachineType() {
     }
 
     return "Windows";
-}
+} 
 
 function Set-ConsoleWindow
 {
