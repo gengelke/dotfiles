@@ -10,6 +10,18 @@ write-host "Loading powershell profile...";
 $host.UI.RawUI.ForegroundColor 	 = "Gray"
 $host.UI.RawUI.BackgroundColor 	 = "Black"
 
+function getMachineType() {
+    if ($IsLinux) {
+        return "Linux";
+    };
+
+    if ($IsOSX) {
+        return "macOS";
+    }
+
+    return "Windows";
+}
+
 function Set-ConsoleWindow
 {
     param(
@@ -63,18 +75,6 @@ function get() { git pull }
 function which($app)
 {
     (Get-Command $app).Definition
-}
-
-function getMachineType() {
-    if ($IsLinux) {
-        return "Linux";
-    };
-
-    if ($IsOSX) {
-        return "macOS";
-    }
-
-    return "Windows";
 }
 
 # Shortcuts for quick navigation
