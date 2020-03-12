@@ -242,6 +242,9 @@ function _colorman() {
 function man() { _colorman man "$@"; }
 function perldoc() { command perldoc -n less "$@" |man -l -; }
 
+export http_proxy=localhost:3128
+export https_proxy=localhost:3128
+
 export PATH=/opt/local/bin:/opt/local/sbin:/usr/local/bin:$PATH
 #export HISTCONTROL=ignoredups:erasedups # no duplicate entries
 export HISTSIZE=10000000                 # big big history
