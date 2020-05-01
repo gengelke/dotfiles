@@ -34,15 +34,21 @@ echo "Installing desired/required Homebrew Cask packages"
 brew cask install \
      1password \
      1password-cli \
+     angry-ip-scanner \
      balenaetcher \
      bartender \
      brave-browser \
      caffeine \
      carbon-copy-cloner \
+     cryptomator \
      cyberduck \
+     duet \
      drawio \
+     fantastical \
+     firefox \
      fluor \
      gimp \
+     google-chrome \
      istat-menus \
      iterm2 \
      java \
@@ -54,6 +60,7 @@ brew cask install \
      microsoft-office \
      mountain-duck \
      nordvpn \
+     onedrive \
      pdf-expert \
      powershell \
      spectacle \
@@ -100,9 +107,11 @@ brew install \
      ansible \
      bash \
      bash-completion \
+     ext4fuse \
      freerdp \
      gdb \
      git \
+     gnu-sed \
      netcat \
      nmap \
      node \
