@@ -35,6 +35,7 @@ brew cask install \
      1password \
      1password-cli \
      angry-ip-scanner \
+     audio-hijack \
      balenaetcher \
      bartender \
      brave-browser \
@@ -42,6 +43,7 @@ brew cask install \
      carbon-copy-cloner \
      cryptomator \
      cyberduck \
+     dash \ 
      duet \
      drawio \
      fantastical \
@@ -58,11 +60,14 @@ brew cask install \
      little-snitch \
      micro-snitch \
      microsoft-office \
+     microsoft-teams \
      mountain-duck \
      nordvpn \
      onedrive \
      pdf-expert \
      powershell \
+     skype \
+     soundsource \
      spectacle \
      spotify \
      tigervnc-viewer \
@@ -76,7 +81,7 @@ brew cask install \
      wireshark \
      xnviewmp \
      xquartz
-
+  
 #     alfred \
 #     amazon-music \
 #     cakebrew \
