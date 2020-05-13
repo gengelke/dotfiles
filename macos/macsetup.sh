@@ -117,6 +117,7 @@ brew install \
      gdb \
      git \
      gnu-sed \
+     jq \
      netcat \
      nmap \
      node \
