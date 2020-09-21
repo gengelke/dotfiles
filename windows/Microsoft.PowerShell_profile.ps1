@@ -2,66 +2,41 @@
 
 write-host "Loading powershell profile...";
 
-[system.net.webrequest]::defaultwebproxy = new-object system.net.webproxy('http://rb-proxy-de.bosch.com:8080')
-[system.net.webrequest]::defaultwebproxy.credentials = [System.Net.CredentialCache]::DefaultNetworkCredentials
-[system.net.webrequest]::defaultwebproxy.BypassProxyOnLocal = $True
-
-# [System.Enum]::GetValues('ConsoleColor') | ForEach-Object { Write-Host $_ -ForegroundColor $_ }
-$host.UI.RawUI.ForegroundColor 	 = "Gray"
-$host.UI.RawUI.BackgroundColor 	 = "Black"
-
-function getMachineType() {
-    if ($IsLinux) {
-        return "Linux";
-    };
-
-    if ($IsOSX) {
-        return "macOS";
-    }
-
-    return "Windows";
-} 
-
-$machineType = getMachineType
-
-function Set-ConsoleWindow
-{
-    param(
-        [int]$Width,
-        [int]$Height
-    )
-
-    $WindowSize = $Host.UI.RawUI.WindowSize
-    $WindowSize.Width  = [Math]::Min($Width, $Host.UI.RawUI.BufferSize.Width)
-    $WindowSize.Height = $Height
-    if ("$machineType" -eq "Windows") {
-        try{
-            $Host.UI.RawUI.WindowSize = $WindowSize
-        }
-        catch [System.Management.Automation.SetValueInvocationException] {
-            $Maxvalue = ($_.Exception.Message |Select-String "\d+").Matches[0].Value
-            $WindowSize.Height = $Maxvalue
-            $Host.UI.RawUI.WindowSize = $WindowSize
-        }
-    }
-}
-
-Set-ConsoleWindow 160 40
-
-#$os = Get-WmiObject Win32_OperatingSystem
-Write-Host "Operating system: $($os.OSArchitecture) $($os.Caption) version $($os.Version)"
-Write-Host "PowerShell version: $($PSVersionTable.PSVersion)"
-
-Import-Module PSReadLine
+$host.UI.RawUI.ForegroundColor = "Gray"
+$host.UI.RawUI.BackgroundColor = "Black"
 
 #set-executionpolicy RemoteSigned process
 
-Set-Alias vim "C:\tools\vim\vim82\vim.exe"
-Set-Alias vi vim
-function edit ($file) { & "{C:\ProgramData\chocolatey\bin\notepad++.exe" $file }
+function Get-OsType() {
+    if ($IsLinux) {
+        return "Linux"
+    }
+
+    if ($IsOSX) {
+        return "MacOS"
+    }
+    return "Windows"
+}
+
+$osType = Get-OsType
+
+Write-Host "Running on $osType platform."
+
+#if ( ($host.Name -eq 'ConsoleHost') -And ($IsWindows) )
+if ($osType -eq "Windows") {
+    function ls_git { & 'C:\Program Files\Git\usr\bin\ls' --color=auto -hF $args }
+    Set-Alias -Name ls -Value ls_git -Option AllScope
+}
+
+if ($osType -eq "Windows") {
+    Set-Alias vim "C:\tools\vim\vim82\vim.exe"
+    Set-Alias vi vim
+}
+
+if ($osType -eq "Windows") { function edit ($file) { & "{C:\Program Files\Notepad++\notepad++.exe" $file } }
 function wipe { $Host.UI.RawUI.ForegroundColor = "white"; $Host.UI.RawUI.BackgroundColor = "black"; clear; }
 function touch ($file) { echo "" >> $file; }
-function explore { "explorer.exe $(pwd)" | iex }
+if ($osType -eq "Windows") { function explore { "explorer.exe $(pwd)" | iex } }
 function cl($loc) {cd $loc; ls;} 
 function up() {cd ..;}
 function x { exit }
@@ -71,6 +46,8 @@ function ga() { git add -A }
 function gs() { git status }
 function gas() { git add -A; git status }
 function gcp($msg) { git commit -m "$msg"; git push }
+function gacp($msg) { git add; git commit -m "$msg"; git push }
+
 function get() { git pull }
 
 # which <app>: Get path for an executable
@@ -96,25 +73,23 @@ Set-PSReadlineKeyHandler -Key UpArrow -Function HistorySearchBackward
 Set-PSReadlineKeyHandler -Key DownArrow -Function HistorySearchForward
 Set-PSReadlineKeyHandler -Key Tab -Function Complete
 
-if ("$machineType" -eq "Windows") {
-    $Global:CurrentUser = [System.Security.Principal.WindowsIdentity]::GetCurrent()
-
-    $UserType = "User"
-    $CurrentUser.Groups | foreach { 
-        if ($_.value -eq "S-1-5-32-544") {
-            $UserType = "Admin"
-        } 
-    }
+$Global:CurrentUser = [System.Security.Principal.WindowsIdentity]::GetCurrent()
+$UserType = "User"
+$CurrentUser.Groups | foreach { 
+    if ($_.value -eq "S-1-5-32-544") {
+        $UserType = "Admin"
+    } 
 }
 
 function prompt {
     $cwd = $(get-location)
+    $cwd_short = Get-ShortPath $cwd
     if($UserType -eq "Admin") {
-         $host.UI.RawUI.WindowTitle = "" + $cwd + " : *Administrator*"
+         $host.UI.RawUI.WindowTitle = "" + $cwd_short + " : *Administrator*"
          $host.UI.RawUI.ForegroundColor = "white"
      }
      else {
-         $host.ui.rawui.WindowTitle = $cwd
+         $host.ui.rawui.WindowTitle = $cwd_short
      }
 
     Write-Host("")
@@ -134,10 +109,10 @@ function prompt {
     }
 
     Write-Host ($env:UserName) -nonewline -foregroundcolor DarkGreen
-    Write-Host ("@") -nonewline -foregroundcolor DarkGreen
-    Write-Host ($env:COMPUTERNAME) -nonewline -foregroundcolor DarkGreen
-    Write-Host (" ") -nonewline -foregroundcolor Gray
-    Write-Host ($cwd) -nonewline -foregroundcolor Yellow
+    Write-Host (" at ") -nonewline -foregroundcolor Gray
+    Write-Host ($env:COMPUTERNAME) -nonewline -foregroundcolor Blue
+    Write-Host (" in ") -nonewline -foregroundcolor Gray
+    Write-Host ($cwd_short) -nonewline -foregroundcolor Yellow
 
     if ($git_branch -ne $NULL) {
         Write-Host (" (") -nonewline -foregroundcolor Cyan
@@ -191,16 +166,14 @@ function Test-Administrator {
     (New-Object Security.Principal.WindowsPrincipal $user).IsInRole([Security.Principal.WindowsBuiltinRole]::Administrator)
 }
 
-function Get-Uptime {
-    param([String] $ComputerName = $env:COMPUTERNAME)
-    $os = Get-WmiObject -ComputerName $ComputerName -Class Win32_OperatingSystem -ErrorAction SilentlyContinue
-    $uptime = (Get-Date) - $os.ConvertToDateTime($os.LastBootUpTime)
+# Install and setup Powerline stuff
+#Install-Module -Name PSReadLine -Scope CurrentUser -Force -SkipPublisherCheck
+#Install-Module posh-git -Scope CurrentUser
+#Install-Module oh-my-posh -Scope CurrentUser
 
-    Write-Host ""
-    Write-Host ("Booted:") -NoNewLine -Foreground $warn_fg -Background $accent_1
-    Write-Host (" " + $os.ConvertToDateTime($os.LastBootUpTime)) -Foreground $accent_3
+Import-Module PSReadLine
+Import-Module posh-git
+Import-Module oh-my-posh
 
-    Write-Host ("Uptime:") -NoNewLine -Foreground $warn_fg -Background $accent_1
-    Write-Host (" " + $uptime.Days + "d " + $uptime.Hours + "h " + $uptime.Minutes + "m") -Foreground $accent_3
-    Write-Host ""
-}
+#Set-Theme Paradox
+#Set-Theme Honukai
