@@ -170,9 +170,9 @@ function Test-Administrator {
 }
 
 # Install and setup Powerline stuff
-#Install-Module -Name PSReadLine -Scope CurrentUser -Force -SkipPublisherCheck
-#Install-Module posh-git -Scope CurrentUser
-#Install-Module oh-my-posh -Scope CurrentUser
+#Install-Module -Name PSReadLine -Scope CurrentUser -Force -SkipPublisherCheck -Confirm:$False -Force
+#Install-Module posh-git -Scope CurrentUser -Confirm:$False -Force
+#Install-Module oh-my-posh -Scope CurrentUser -Confirm:$False -Force
 
 Import-Module PSReadLine
 Import-Module posh-git
