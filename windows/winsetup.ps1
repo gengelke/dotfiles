@@ -213,6 +213,7 @@ choco install `
 	trafficlight-chrome `
 #	treesizefree `	
 	vagrant `
+	vcxsrv `
 	veracrypt `
 	vim `
 	virtualbox `
@@ -229,7 +230,7 @@ choco install `
 	wireshark `
 	wnetwatcher `
 	wox `	
-	Xming `
+#	Xming `
 	XnView
 	
 # Disable auto approve all chocolatey package installations
