@@ -28,8 +28,7 @@ function Get-OsType() {
 }
 
 $osType = Get-OsType
-
-Write-Host "Running on $osType platform."
+#Write-Host "Running on $osType platform."
 
 #if ( ($host.Name -eq 'ConsoleHost') -And ($IsWindows) )
 if ($osType -eq "Windows") {
@@ -60,19 +59,16 @@ function gacp($msg) { git add .; git commit -m "$msg"; git push }
 function get() { git pull }
 
 # which <app>: Get path for an executable
-function which($app)
-{
+function which($app) {
     (Get-Command $app).Definition
 }
 
 # Shortcuts for quick navigation
-$tools 		= "c:\tools"
-$documents 	= $home + "\Documents"
-$desktop 	= $home + "\Desktop"
-$downloads 	= $home + "\Downloads"
-$modules 	= $home + "\Documents\WindowsPowerShell\Modules"
-
-$UserInfo    	= $Env:USERNAME + '@' + $Env:COMPUTERNAME  
+$tools 	   = "c:\tools"
+$documents = $home + "\Documents"
+$desktop   = $home + "\Desktop"
+$downloads = $home + "\Downloads"
+$modules   = $home + "\Documents\WindowsPowerShell\Modules"
 
 # Output verbose git status?
 $git_status_verbose = $true
@@ -170,23 +166,28 @@ function prompt {
     return " "
  }
 
-function Test-Administrator {
-    <#
-    .Synopsis
-    Return True if you are currently running PowerShell as an administrator, False otherwise.
-    #>
-    $user = [Security.Principal.WindowsIdentity]::GetCurrent()
-    (New-Object Security.Principal.WindowsPrincipal $user).IsInRole([Security.Principal.WindowsBuiltinRole]::Administrator)
-}
+#function Test-Administrator {
+#    <#
+#    .Synopsis
+#    Return True if you are currently running PowerShell as an administrator, False otherwise.
+#    #>
+#    $user = [Security.Principal.WindowsIdentity]::GetCurrent()
+#    (New-Object Security.Principal.WindowsPrincipal $user).IsInRole([Security.Principal.WindowsBuiltinRole]::Administrator)
+#}
 
 # Install and setup Powerline stuff
-#Install-Module -Name PSReadLine -Scope CurrentUser -SkipPublisherCheck -Confirm:$False -Force
-#Install-Module posh-git -Scope CurrentUser -Confirm:$False -Force
-#Install-Module oh-my-posh -Scope CurrentUser -Confirm:$False -Force
-
-Import-Module PSReadLine
-Import-Module posh-git
-Import-Module oh-my-posh
+if (-Not (Get-Module -ListAvailable -Name PSReadLine)) {
+    Install-Module -Name PSReadLine -Scope CurrentUser -SkipPublisherCheck -Confirm:$False -Force
+    Import-Module PSReadLine
+}
+if (-Not (Get-Module -ListAvailable -Name posh-git)) {
+    Install-Module -Name posh-git -Scope CurrentUser -Confirm:$False -Force
+    Import-Module posh-git
+}
+if (-Not (Get-Module -ListAvailable -Name oh-my-posh)) {
+    Install-Module -Name oh-my-posh -Scope CurrentUser -Confirm:$False -Force
+    Import-Module oh-my-posh
+}
 
 #Set-Theme Paradox
 #Set-Theme Honukai
