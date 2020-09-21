@@ -202,11 +202,12 @@ choco install `
 	python2 `
 	python3 `
 	recuve `
-#	screenpresso `	
+	screenpresso `	
 	shutup10 `
 #	skype `	
 	sourcetree `
 	sumatrapdf `
+	sysinternals `
 	terraform `
 	tigervnc-viewer `
 	trafficlight-chrome `
@@ -227,7 +228,7 @@ choco install `
 	winscp `
 	wireshark `
 	wnetwatcher `
-#	wox `	
+	wox `	
 	Xming `
 	XnView
 	
