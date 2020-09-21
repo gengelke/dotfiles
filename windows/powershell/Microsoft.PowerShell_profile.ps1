@@ -23,6 +23,7 @@ function Get-OsType() {
     } 
     else {
         return "unknown"
+        exit -1
     }
 }
 
