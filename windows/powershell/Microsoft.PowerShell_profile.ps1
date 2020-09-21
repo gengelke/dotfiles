@@ -111,9 +111,9 @@ function prompt {
         }
     }
 
-    Write-Host ($env:UserName) -nonewline -foregroundcolor DarkGreen
+    Write-Host ([Environment]::UserName) -nonewline -foregroundcolor DarkGreen
     Write-Host (" at ") -nonewline -foregroundcolor Gray
-    Write-Host ($env:COMPUTERNAME) -nonewline -foregroundcolor Blue
+    Write-Host ([Environment]::MachineName) -nonewline -foregroundcolor Blue
     Write-Host (" in ") -nonewline -foregroundcolor Gray
     Write-Host ($cwd_short) -nonewline -foregroundcolor Yellow
 
