@@ -76,13 +76,13 @@ Set-PSReadlineKeyHandler -Key UpArrow -Function HistorySearchBackward
 Set-PSReadlineKeyHandler -Key DownArrow -Function HistorySearchForward
 Set-PSReadlineKeyHandler -Key Tab -Function Complete
 
-$Global:CurrentUser = [System.Security.Principal.WindowsIdentity]::GetCurrent()
-$UserType = "User"
-$CurrentUser.Groups | foreach { 
-    if ($_.value -eq "S-1-5-32-544") {
-        $UserType = "Admin"
-    } 
-}
+#$Global:CurrentUser = [System.Security.Principal.WindowsIdentity]::GetCurrent()
+#$UserType = "User"
+#$CurrentUser.Groups | foreach { 
+#    if ($_.value -eq "S-1-5-32-544") {
+#        $UserType = "Admin"
+#    } 
+#}
 
 function prompt {
     $cwd = $(get-location)
@@ -170,9 +170,9 @@ function Test-Administrator {
 }
 
 # Install and setup Powerline stuff
-#Install-Module -Name PSReadLine -Scope CurrentUser -Force -SkipPublisherCheck
-#Install-Module posh-git -Scope CurrentUser
-#Install-Module oh-my-posh -Scope CurrentUser
+#Install-Module -Name PSReadLine -Scope CurrentUser -Force -SkipPublisherCheck -Confirm:$False -Force
+#Install-Module posh-git -Scope CurrentUser -Confirm:$False -Force
+#Install-Module oh-my-posh -Scope CurrentUser -Confirm:$False -Force
 
 Import-Module PSReadLine
 Import-Module posh-git
