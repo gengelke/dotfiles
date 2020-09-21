@@ -14,17 +14,21 @@ $host.UI.RawUI.BackgroundColor = "Black"
 function Get-OsType() {
     if ($IsLinux) {
         return "Linux"
-    }
-
-    if ($IsOSX) {
+    } 
+    elseif ($IsMacOS) {
         return "MacOS"
     }
-    return "Windows"
+    elseif ($IsWindows) {
+        return "Windows"
+    } 
+    else {
+        return "unknown"
+    }
 }
 
 $osType = Get-OsType
 
-#Write-Host "Running on $osType platform."
+Write-Host "Running on $osType platform."
 
 #if ( ($host.Name -eq 'ConsoleHost') -And ($IsWindows) )
 if ($osType -eq "Windows") {
@@ -175,7 +179,7 @@ function Test-Administrator {
 }
 
 # Install and setup Powerline stuff
-#Install-Module -Name PSReadLine -Scope CurrentUser -Force -SkipPublisherCheck -Confirm:$False -Force
+#Install-Module -Name PSReadLine -Scope CurrentUser -SkipPublisherCheck -Confirm:$False -Force
 #Install-Module posh-git -Scope CurrentUser -Confirm:$False -Force
 #Install-Module oh-my-posh -Scope CurrentUser -Confirm:$False -Force
 
