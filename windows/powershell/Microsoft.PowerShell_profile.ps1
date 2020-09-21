@@ -38,9 +38,9 @@ if ($osType -eq "Windows") {
 }
 
 if ($osType -eq "Windows") { function edit ($file) { & "{C:\Program Files\Notepad++\notepad++.exe" $file } }
-function wipe { $Host.UI.RawUI.ForegroundColor = "white"; $Host.UI.RawUI.BackgroundColor = "black"; clear; }
-function touch ($file) { echo "" >> $file; }
-if ($osType -eq "Windows") { function explore { "explorer.exe $(pwd)" | iex } }
+function wipe { $Host.UI.RawUI.ForegroundColor = "white"; $Host.UI.RawUI.BackgroundColor = "black"; Clear-Host; }
+function touch ($file) { Write-Output "" >> $file; }
+if ($osType -eq "Windows") { function explore { "explorer.exe $(Get-Location)" | Invoke-Expression } }
 function cl($loc) {cd $loc; ls;} 
 function up() {cd ..;}
 function x { exit }
