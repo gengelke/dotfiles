@@ -24,7 +24,7 @@ function Get-OsType() {
 
 $osType = Get-OsType
 
-Write-Host "Running on $osType platform."
+#Write-Host "Running on $osType platform."
 
 #if ( ($host.Name -eq 'ConsoleHost') -And ($IsWindows) )
 if ($osType -eq "Windows") {
