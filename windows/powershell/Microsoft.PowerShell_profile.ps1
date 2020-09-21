@@ -100,7 +100,7 @@ function prompt {
          $host.UI.RawUI.ForegroundColor = "white"
      }
      else {
-         $host.ui.rawui.WindowTitle = $cwd_short
+#         $host.ui.rawui.WindowTitle = $cwd_short
      }
 
     Write-Host("")
