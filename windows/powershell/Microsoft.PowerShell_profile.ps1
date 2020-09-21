@@ -30,15 +30,19 @@ function Get-OsType() {
 $osType = Get-OsType
 #Write-Host "Running on $osType platform."
 
-#if ( ($host.Name -eq 'ConsoleHost') -And ($IsWindows) )
-if ($osType -eq "Windows") {
-    function ls_git { & 'C:\Program Files\Git\usr\bin\ls' --color=auto -hF $args }
-    Set-Alias -Name ls -Value ls_git -Option AllScope
+if ($osType -eq "Linux") {
+    function ls_color { & '/bin/ls' --color $args }
+    Set-Alias -Name ls -Value ls_color -Option AllScope
 }
 
 if ($osType -eq "MacOS") {
     $env:CLICOLOR = 'true'
     function ls_color { & '/bin/ls' -G $args }
+    Set-Alias -Name ls -Value ls_color -Option AllScope
+}
+
+if ($osType -eq "Windows") {
+    function ls_color { & 'C:\Program Files\Git\usr\bin\ls' --color=auto -hF $args }
     Set-Alias -Name ls -Value ls_color -Option AllScope
 }
 
