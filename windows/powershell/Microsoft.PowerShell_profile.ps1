@@ -1,7 +1,8 @@
 # (C) 2020 Gordon Engelke <reject@email.de>
 
-# Powershell Core: ~\Documents\PowerShell\Microsoft.PowerShell_profile.ps1
-# Powershell:      ~\Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1
+# Powershell Core:   ~\Documents\PowerShell\Microsoft.PowerShell_profile.ps1
+# Powershell:        ~\Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1
+# Azure Cloud Shell: ~/.config/PowerShell/Microsoft.PowerShell_profile.ps1
 
 write-host "Loading powershell profile...";
 
@@ -113,7 +114,11 @@ function prompt {
 
     Write-Host ([Environment]::UserName) -nonewline -foregroundcolor DarkGreen
     Write-Host (" at ") -nonewline -foregroundcolor Gray
-    Write-Host ([Environment]::MachineName) -nonewline -foregroundcolor Blue
+    if (Test-Path env:AZURE_HTTP_USER_AGENT) { 
+        Write-Host ("Azure") -nonewline -foregroundcolor Blue
+    } else {
+        Write-Host ([Environment]::MachineName) -nonewline -foregroundcolor Blue
+    }
     Write-Host (" in ") -nonewline -foregroundcolor Gray
     Write-Host ($cwd_short) -nonewline -foregroundcolor Yellow
 
@@ -153,7 +158,7 @@ function prompt {
 
     $prompt = "PS>"
     if ($git_branch -ne $NULL) {
-        $prompt = "$"
+        $prompt = "PS>"
     }
     Write-Host($prompt) -nonewline -foregroundcolor Gray
 
