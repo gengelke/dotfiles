@@ -36,6 +36,12 @@ if ($osType -eq "Windows") {
     Set-Alias -Name ls -Value ls_git -Option AllScope
 }
 
+if ($osType -eq "MacOS") {
+    $env:CLICOLOR = 'true'
+    function ls_color { & '/bin/ls' -G $args }
+    Set-Alias -Name ls -Value ls_color -Option AllScope
+}
+
 if ($osType -eq "Windows") {
     Set-Alias vim "C:\tools\vim\vim82\vim.exe"
     Set-Alias vi vim
