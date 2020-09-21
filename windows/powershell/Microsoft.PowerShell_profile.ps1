@@ -49,7 +49,7 @@ function ga() { git add -A }
 function gs() { git status }
 function gas() { git add -A; git status }
 function gcp($msg) { git commit -m "$msg"; git push }
-function gacp($msg) { git add; git commit -m "$msg"; git push }
+function gacp($msg) { git add .; git commit -m "$msg"; git push }
 
 function get() { git pull }
 
