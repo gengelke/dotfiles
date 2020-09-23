@@ -201,3 +201,17 @@ if (-Not (Get-Module -ListAvailable -Name oh-my-posh)) {
 
 #Set-Theme Paradox
 #Set-Theme Honukai
+
+function Get-Uptime {
+    param([String] $ComputerName = $env:COMPUTERNAME)
+    $os = Get-WmiObject -ComputerName $ComputerName -Class Win32_OperatingSystem -ErrorAction SilentlyContinue
+    $uptime = (Get-Date) - $os.ConvertToDateTime($os.LastBootUpTime)
+
+    Write-Host ""
+    Write-Host ("Booted:") -NoNewLine -Foreground $warn_fg -Background $accent_1
+    Write-Host (" " + $os.ConvertToDateTime($os.LastBootUpTime)) -Foreground $accent_3
+
+    Write-Host ("Uptime:") -NoNewLine -Foreground $warn_fg -Background $accent_1
+    Write-Host (" " + $uptime.Days + "d " + $uptime.Hours + "h " + $uptime.Minutes + "m") -Foreground $accent_3
+    Write-Host ""
+}
