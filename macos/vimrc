@@ -166,6 +166,11 @@ set pastetoggle=<F2>
 nore ; :
 nore , ;
 
+" Disable arrow keys - just for educational purposes (learn to use hjkl instead) :-)
+noremap <Up> <nop>
+noremap <Down> <nop>
+noremap <Left> <nop>
+noremap <Right> <nop>
 
 "----- Install Vundle and all desired VIM plugins -----
 "
