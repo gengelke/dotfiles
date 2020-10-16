@@ -1,5 +1,6 @@
 " (C) 2017 Gordon Engelke <reject@web.de>
 
+
 "------ Meta ------
 "
 " clear all autocommands!
@@ -67,7 +68,7 @@ syntax enable                          " Enable syntax highlighting
 "set cursorcolumn
 set background=dark                    " Set syntax highlighting to a more eye friendly mode
 "colorscheme codedark                  " Use specific color scheme
-colorscheme molokai                    " Use specific color scheme
+"colorscheme molokai                    " Use specific color scheme
 let g:airline_theme = 'codedark'
 " Change the color used for the line numbers:
 hi LineNr term=bold cterm=NONE ctermfg=DarkGrey ctermbg=NONE gui=NONE guifg=DarkGrey guibg=NONE
@@ -106,7 +107,6 @@ set foldnestmax=10                     " 10 nested fold max
 set foldmethod=indent                  " fold based on indent level
 " space open/closes folds
 nnoremap <space> za
-
 
 "----- UI Configuration -----
 "
@@ -171,6 +171,15 @@ noremap <Up> <nop>
 noremap <Down> <nop>
 noremap <Left> <nop>
 noremap <Right> <nop>
+
+" Automatically closing brackets
+inoremap " ""<left>
+inoremap ' ''<left>
+inoremap ( ()<left>
+inoremap [ []<left>
+inoremap { {}<left>
+inoremap {<CR> {<CR>}<ESC>O
+inoremap {;<CR> {<CR>};<ESC>O
 
 "----- Install Vundle and all desired VIM plugins -----
 "
