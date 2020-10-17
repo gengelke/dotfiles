@@ -1,0 +1,421 @@
+{
+  "title": "GE: US International for German users",
+  "rules": [
+    {
+      "description": "Swap z with y",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "z"
+          },
+          "to": {
+            "key_code": "y"
+          }
+        }
+      ]
+    },
+    {
+      "description": "Swap y with z",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "y"
+          },
+          "to": {
+            "key_code": "z"
+          }
+        }
+      ]
+    },
+    {
+      "description": "CapsLock to Hyper/Escape",
+      "manipulators": [
+        {
+          "from": {
+            "key_code": "caps_lock",
+            "modifiers": {
+              "optional": [
+                "any"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "right_shift",
+              "modifiers": [
+                "right_command",
+                "right_option"
+              ]
+            }
+          ],
+          "to_if_alone": [
+            {
+              "key_code": "escape"
+            }
+          ],
+          "type": "basic"
+        }
+      ]
+    },
+    {
+      "description": "ae",
+      "manipulators": [
+        {
+          "from": {
+            "key_code": "quote",
+            "modifiers": {
+              "mandatory": [
+                "right_shift",
+                "right_command",
+                "right_option"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "u",
+              "modifiers": [
+                "left_option"
+              ]
+            },
+            {
+               "key_code": "a"
+            },
+            {
+              "key_code": "vk_none"
+            }
+          ],
+          "type": "basic"
+        }
+      ]
+    },
+    {
+      "description": "AE",
+      "manipulators": [
+        {
+          "from": {
+            "key_code": "quote",
+            "modifiers": {
+              "mandatory": [
+                "left_shift",
+                "right_shift",
+                "right_command",
+                "right_option"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "u",
+              "modifiers": [
+                "left_option"
+              ]
+            },
+            {
+              "key_code": "a",
+              "modifiers": [
+                "left_shift"
+              ]
+            },
+            {
+              "key_code": "vk_none"
+            }
+          ],
+          "type": "basic"
+        }
+      ]
+    },
+    {
+      "description": "oe",
+      "manipulators": [
+        {
+          "from": {
+            "key_code": "semicolon",
+            "modifiers": {
+              "mandatory": [
+                "right_shift",
+                "right_command",
+                "right_option"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "u",
+              "modifiers": [
+                "left_option"
+              ]
+            },
+            {
+               "key_code": "o"
+            },
+            {
+              "key_code": "vk_none"
+            }
+          ],
+          "type": "basic"
+        }
+      ]
+    },
+    {
+      "description": "OE",
+      "manipulators": [
+        {
+          "from": {
+            "key_code": "semicolon",
+            "modifiers": {
+              "mandatory": [
+                "left_shift",
+                "right_shift",
+                "right_command",
+                "right_option"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "u",
+              "modifiers": [
+                "left_option"
+              ]
+            },
+            {
+              "key_code": "o",
+              "modifiers": [
+                "left_shift"
+              ]
+            },
+            {
+              "key_code": "vk_none"
+            }
+          ],
+          "type": "basic"
+        }
+      ]
+    },
+    {
+      "description": "ue",
+      "manipulators": [
+        {
+          "from": {
+            "key_code": "open_bracket",
+            "modifiers": {
+              "mandatory": [
+                "right_shift",
+                "right_command",
+                "right_option"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "u",
+              "modifiers": [
+                "left_option"
+              ]
+            },
+            {
+               "key_code": "u"
+            },
+            {
+              "key_code": "vk_none"
+            }
+          ],
+          "type": "basic"
+        }
+      ]
+    },
+    {
+      "description": "UE",
+      "manipulators": [
+        {
+          "from": {
+            "key_code": "open_bracket",
+            "modifiers": {
+              "mandatory": [
+                "left_shift",
+                "right_shift",
+                "right_command",
+                "right_option"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "u",
+              "modifiers": [
+                "left_option"
+              ]
+            },
+            {
+              "key_code": "u",
+              "modifiers": [
+                "left_shift"
+              ]
+            },
+            {
+              "key_code": "vk_none"
+            }
+          ],
+          "type": "basic"
+        }
+      ]
+    },
+    {
+      "description": "ss",
+      "manipulators": [
+        {
+          "from": {
+            "key_code": "hyphen",
+            "modifiers": {
+              "mandatory": [
+                "right_shift",
+                "right_command",
+                "right_option"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "s",
+              "modifiers": [
+                "left_option"
+              ]
+            },
+            {
+              "key_code": "vk_none"
+            }
+          ],
+          "type": "basic"
+        }
+      ]
+    },
+    {
+      "description": "Euro",
+      "manipulators": [
+        {
+          "from": {
+            "key_code": "e",
+            "modifiers": {
+              "mandatory": [
+                "right_shift",
+                "right_command",
+                "right_option"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "2",
+              "modifiers": [
+                "left_option",
+                "left_shift"
+              ]
+            },
+            {
+              "key_code": "vk_none"
+            }
+          ],
+          "type": "basic"
+        }
+      ]
+    },
+    {
+      "description": "Tilde",
+      "manipulators": [
+        {
+          "from": {
+            "key_code": "close_bracket",
+            "modifiers": {
+              "mandatory": [
+                "right_shift",
+                "right_command",
+                "right_option"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "grave_accent_and_tilde",
+              "modifiers": [
+                "left_shift"
+              ]
+            },
+            {
+              "key_code": "spacebar"
+            },
+            {
+              "key_code": "vk_none"
+            }
+          ],
+          "type": "basic"
+        }
+      ]
+    },
+    {
+      "description": "Backtick",
+      "manipulators": [
+        {
+          "from": {
+            "key_code": "equal_sign",
+            "modifiers": {
+              "mandatory": [
+                "right_shift",
+                "right_command",
+                "right_option"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "grave_accent_and_tilde",
+              "modifiers": [
+              ]
+            },
+            {
+              "key_code": "spacebar"
+            },
+            {
+              "key_code": "vk_none"
+            }
+          ],
+          "type": "basic"
+        }
+      ]
+    },
+    {
+      "description": "Dach",
+      "manipulators": [
+        {
+          "from": {
+            "key_code": "non_us_backslash",
+            "modifiers": {
+              "mandatory": [
+                "right_shift",
+                "right_command",
+                "right_option"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "6",
+              "modifiers": [
+                "left_shift"
+              ]
+            },
+            {
+              "key_code": "spacebar"
+            },
+            {
+              "key_code": "vk_none"
+            }
+          ],
+          "type": "basic"
+        }
+      ]
+    }
+  ]
+}
