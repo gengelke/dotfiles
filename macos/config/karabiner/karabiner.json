@@ -181,7 +181,8 @@
                                         "key_code": "right_shift",
                                         "modifiers": [
                                             "right_command",
-                                            "right_option"
+                                            "right_option",
+                                            "right_control"
                                         ]
                                     }
                                 ],
@@ -204,7 +205,8 @@
                                         "mandatory": [
                                             "right_shift",
                                             "right_command",
-                                            "right_option"
+                                            "right_option",
+                                            "right_control"
                                         ]
                                     }
                                 },
@@ -217,9 +219,6 @@
                                     },
                                     {
                                         "key_code": "a"
-                                    },
-                                    {
-                                        "key_code": "vk_none"
                                     }
                                 ],
                                 "type": "basic"
@@ -237,7 +236,8 @@
                                             "left_shift",
                                             "right_shift",
                                             "right_command",
-                                            "right_option"
+                                            "right_option",
+                                            "right_control"
                                         ]
                                     }
                                 },
@@ -253,9 +253,6 @@
                                         "modifiers": [
                                             "left_shift"
                                         ]
-                                    },
-                                    {
-                                        "key_code": "vk_none"
                                     }
                                 ],
                                 "type": "basic"
@@ -272,7 +269,8 @@
                                         "mandatory": [
                                             "right_shift",
                                             "right_command",
-                                            "right_option"
+                                            "right_option",
+                                            "right_control"
                                         ]
                                     }
                                 },
@@ -285,9 +283,6 @@
                                     },
                                     {
                                         "key_code": "o"
-                                    },
-                                    {
-                                        "key_code": "vk_none"
                                     }
                                 ],
                                 "type": "basic"
@@ -305,7 +300,8 @@
                                             "left_shift",
                                             "right_shift",
                                             "right_command",
-                                            "right_option"
+                                            "right_option",
+                                            "right_control"
                                         ]
                                     }
                                 },
@@ -321,9 +317,6 @@
                                         "modifiers": [
                                             "left_shift"
                                         ]
-                                    },
-                                    {
-                                        "key_code": "vk_none"
                                     }
                                 ],
                                 "type": "basic"
@@ -340,7 +333,8 @@
                                         "mandatory": [
                                             "right_shift",
                                             "right_command",
-                                            "right_option"
+                                            "right_option",
+                                            "right_control"
                                         ]
                                     }
                                 },
@@ -353,9 +347,6 @@
                                     },
                                     {
                                         "key_code": "u"
-                                    },
-                                    {
-                                        "key_code": "vk_none"
                                     }
                                 ],
                                 "type": "basic"
@@ -373,7 +364,8 @@
                                             "left_shift",
                                             "right_shift",
                                             "right_command",
-                                            "right_option"
+                                            "right_option",
+                                            "right_control"
                                         ]
                                     }
                                 },
@@ -389,9 +381,6 @@
                                         "modifiers": [
                                             "left_shift"
                                         ]
-                                    },
-                                    {
-                                        "key_code": "vk_none"
                                     }
                                 ],
                                 "type": "basic"
@@ -406,9 +395,11 @@
                                     "key_code": "hyphen",
                                     "modifiers": {
                                         "mandatory": [
+                                            "left_shift",
                                             "right_shift",
                                             "right_command",
-                                            "right_option"
+                                            "right_option",
+                                            "right_control"
                                         ]
                                     }
                                 },
@@ -418,9 +409,6 @@
                                         "modifiers": [
                                             "left_option"
                                         ]
-                                    },
-                                    {
-                                        "key_code": "vk_none"
                                     }
                                 ],
                                 "type": "basic"
@@ -437,7 +425,8 @@
                                         "mandatory": [
                                             "right_shift",
                                             "right_command",
-                                            "right_option"
+                                            "right_option",
+                                            "right_control"
                                         ]
                                     }
                                 },
@@ -448,9 +437,6 @@
                                             "left_option",
                                             "left_shift"
                                         ]
-                                    },
-                                    {
-                                        "key_code": "vk_none"
                                     }
                                 ],
                                 "type": "basic"
@@ -467,7 +453,8 @@
                                         "mandatory": [
                                             "right_shift",
                                             "right_command",
-                                            "right_option"
+                                            "right_option",
+                                            "right_control"
                                         ]
                                     }
                                 },
@@ -480,9 +467,6 @@
                                     },
                                     {
                                         "key_code": "spacebar"
-                                    },
-                                    {
-                                        "key_code": "vk_none"
                                     }
                                 ],
                                 "type": "basic"
@@ -510,9 +494,6 @@
                                     },
                                     {
                                         "key_code": "spacebar"
-                                    },
-                                    {
-                                        "key_code": "vk_none"
                                     }
                                 ],
                                 "type": "basic"
@@ -529,7 +510,8 @@
                                         "mandatory": [
                                             "right_shift",
                                             "right_command",
-                                            "right_option"
+                                            "right_option",
+                                            "right_control"
                                         ]
                                     }
                                 },
@@ -539,9 +521,37 @@
                                     },
                                     {
                                         "key_code": "spacebar"
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "Backtick",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "key_code": "equal_sign",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "left_shift",
+                                            "right_shift",
+                                            "right_command",
+                                            "right_option",
+                                            "right_control"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "e",
+                                        "modifiers": [
+                                            "left_option"
+                                        ]
                                     },
                                     {
-                                        "key_code": "vk_none"
+                                        "key_code": "spacebar"
                                     }
                                 ],
                                 "type": "basic"
@@ -565,71 +575,6 @@
                                     },
                                     {
                                         "key_code": "spacebar"
-                                    },
-                                    {
-                                        "key_code": "vk_none"
-                                    }
-                                ],
-                                "type": "basic"
-                            }
-                        ]
-                    },
-                    {
-                        "description": "Dach",
-                        "manipulators": [
-                            {
-                                "from": {
-                                    "key_code": "6",
-                                    "modifiers": {
-                                        "mandatory": [
-                                            "left_shift"
-                                        ]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "key_code": "6",
-                                        "modifiers": [
-                                            "left_shift"
-                                        ]
-                                    },
-                                    {
-                                        "key_code": "spacebar"
-                                    },
-                                    {
-                                        "key_code": "vk_none"
-                                    }
-                                ],
-                                "type": "basic"
-                            }
-                        ]
-                    },
-                    {
-                        "description": "Dach",
-                        "manipulators": [
-                            {
-                                "from": {
-                                    "key_code": "non_us_backslash",
-                                    "modifiers": {
-                                        "mandatory": [
-                                            "right_shift",
-                                            "right_command",
-                                            "right_option"
-                                        ]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "key_code": "6",
-                                        "modifiers": [
-                                            "left_shift"
-                                        ]
-                                    },
-                                    {
-                                        "key_code": "spacebar"
-                                    },
-                                    {
-                                        "key_code": "vk_none"
                                     }
                                 ],
                                 "type": "basic"
@@ -650,9 +595,6 @@
                                     {
                                         "key_code": "backslash",
                                         "modifiers": []
-                                    },
-                                    {
-                                        "key_code": "vk_none"
                                     }
                                 ],
                                 "type": "basic"
@@ -677,9 +619,6 @@
                                         "modifiers": [
                                             "left_shift"
                                         ]
-                                    },
-                                    {
-                                        "key_code": "vk_none"
                                     }
                                 ],
                                 "type": "basic"
@@ -707,9 +646,6 @@
                                     },
                                     {
                                         "key_code": "spacebar"
-                                    },
-                                    {
-                                        "key_code": "vk_none"
                                     }
                                 ],
                                 "type": "basic"
@@ -733,9 +669,461 @@
                                     },
                                     {
                                         "key_code": "spacebar"
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "Ausrufezeichen",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "key_code": "1",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "right_shift",
+                                            "right_command",
+                                            "right_option",
+                                            "right_control"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "1",
+                                        "modifiers": [
+                                            "left_shift"
+                                        ]
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "Paragraph",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "key_code": "3",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "right_shift",
+                                            "right_command",
+                                            "right_option",
+                                            "right_control"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "grave_accent_and_tilde",
+                                        "modifiers": []
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "Dollar",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "key_code": "4",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "right_shift",
+                                            "right_command",
+                                            "right_option",
+                                            "right_control"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "4",
+                                        "modifiers": [
+                                            "left_shift"
+                                        ]
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "Percent",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "key_code": "5",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "right_shift",
+                                            "right_command",
+                                            "right_option",
+                                            "right_control"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "5",
+                                        "modifiers": [
+                                            "left_shift"
+                                        ]
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "Und",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "key_code": "6",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "right_shift",
+                                            "right_command",
+                                            "right_option",
+                                            "right_control"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "7",
+                                        "modifiers": [
+                                            "left_shift"
+                                        ]
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "Slash",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "key_code": "7",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "right_shift",
+                                            "right_command",
+                                            "right_option",
+                                            "right_control"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "slash",
+                                        "modifiers": []
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "Asterisk",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "key_code": "close_bracket",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "right_shift",
+                                            "right_command",
+                                            "right_option",
+                                            "right_control"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "8",
+                                        "modifiers": [
+                                            "left_shift"
+                                        ]
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "Open Parentheses",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "key_code": "8",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "right_shift",
+                                            "right_command",
+                                            "right_option",
+                                            "right_control"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "9",
+                                        "modifiers": [
+                                            "left_shift"
+                                        ]
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "Close Parentheses",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "key_code": "9",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "right_shift",
+                                            "right_command",
+                                            "right_option",
+                                            "right_control"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "0",
+                                        "modifiers": [
+                                            "left_shift"
+                                        ]
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "Equals",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "key_code": "0",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "right_shift",
+                                            "right_command",
+                                            "right_option",
+                                            "right_control"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "equal_sign",
+                                        "modifiers": []
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "Gatter",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "key_code": "backslash",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "right_shift",
+                                            "right_command",
+                                            "right_option",
+                                            "right_control"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "3",
+                                        "modifiers": [
+                                            "left_shift"
+                                        ]
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "Double Quotes",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "key_code": "2",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "right_shift",
+                                            "right_command",
+                                            "right_option",
+                                            "right_control"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "quote",
+                                        "modifiers": [
+                                            "left_shift"
+                                        ]
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "Questionmark",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "key_code": "hyphen",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "right_shift",
+                                            "right_command",
+                                            "right_option",
+                                            "right_control"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "slash",
+                                        "modifiers": [
+                                            "left_shift"
+                                        ]
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "Dach",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "key_code": "6",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "left_shift"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "6",
+                                        "modifiers": [
+                                            "left_shift"
+                                        ]
                                     },
                                     {
-                                        "key_code": "vk_none"
+                                        "key_code": "spacebar"
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "Dach",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "key_code": "non_us_backslash",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "right_shift",
+                                            "right_command",
+                                            "right_option",
+                                            "right_control"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "6",
+                                        "modifiers": [
+                                            "left_shift"
+                                        ]
+                                    },
+                                    {
+                                        "key_code": "spacebar"
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "Spitze Klammern auf",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "key_code": "backslash",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "right_shift",
+                                            "right_command",
+                                            "right_option",
+                                            "right_control"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "comma",
+                                        "modifiers": []
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "Spitze Klammern zu",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "key_code": "backslash",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "left_shift",
+                                            "right_shift",
+                                            "right_command",
+                                            "right_option",
+                                            "right_control"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "comma",
+                                        "modifiers": [
+                                            "left_shift"
+                                        ]
                                     }
                                 ],
                                 "type": "basic"
