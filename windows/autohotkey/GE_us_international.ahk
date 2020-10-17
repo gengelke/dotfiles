@@ -15,20 +15,23 @@ y::z
 
 ; Map special keys for German keyboard compatibility
 #If, GetKeyState("CapsLock", "P")
-a::SendInput {ASC 0228}         ;Capslock + u = ä
-o::SendInput {ASC 0246}         ;Capslock + u = ö
-u::SendInput {ASC 0252}         ;Capslock + u = ü
-s::Send, {ASC 0223}             ;CapsLock + s = ß
+; a::SendInput {ASC 0228}         ;Capslock + u = ä
+; o::SendInput {ASC 0246}         ;Capslock + u = ö
+; u::SendInput {ASC 0252}         ;Capslock + u = ü
+; s::Send, {ASC 0223}             ;CapsLock + s = ß
 e::Send, {ASC 0128}		;CapsLock + e = €
 ]::Send, {ASC 0126}             ;Capslock + ] = ~
 ~::Send, {ASC 0126}             ;Capslock + ~ = ~
 `::Send, {ASC 0096}             ;Capslock + ` = `
-=::Send, {ASC 0061}             ;Capslock + = `
-"::Send, {ASC 0032}             ;Capslock + = "
-'::Send, {ASC 0039}             ;Capslock + = '
-+a::Send, {ASC 0196}            ;Capslock + Shift + u = Ä
-+o::Send, {ASC 0214}            ;Capslock + Shift + u = Ö
-+u::Send, {ASC 0220}            ;Capslock + Shift + u = Ü
+=::Send, {ASC 0061}             ;Capslock + = = `
+"::Send, {ASC 0032}             ;Capslock + " = "
+'::Send, {ASC 0228}             ;Capslock + ' = ä
+`;::Send, {ASC 0246}            ;Capslock + ; = ö
+[::Send, {ASC 0252}             ;Capslock + [ = ü
+s::Send, {ASC 0223}             ;CapsLock + s = ß
++'::Send, {ASC 0196}            ;Capslock + Shift + ' = Ä
++`;::Send, {ASC 0214}           ;Capslock + Shift + ; = Ö
++[::Send, {ASC 0220}            ;Capslock + Shift + [ = Ü
 +s::Send, {ASC 0223}            ;Capslock + Shift + s = ß
 +=::Send, {ASC 0061}            ;Capslock + Shift + = = 
 #If
@@ -37,6 +40,7 @@ e::Send, {ASC 0128}		;CapsLock + e = €
 LWin & a::Send, ^a
 LWin & c::Send, ^c
 LWin & v::Send, ^v
+LWin & x::Send, ^x
 LWin & f::Send, ^f
 LWin & s::Send, ^s
 
