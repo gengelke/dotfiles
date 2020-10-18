@@ -1,8 +1,8 @@
 {
-  "title": "GE: US International for German users",
+  "title": "GE: US International keyboard layout for German users",
   "rules": [
     {
-      "description": "Swap z with y",
+      "description": "Swap z with y for better compatibility to German layout",
       "manipulators": [
         {
           "type": "basic",
@@ -16,7 +16,31 @@
       ]
     },
     {
-      "description": "Swap y with z",
+      "description": "Swap Z with Y for better compatibility to German layout (Shift)",
+      "manipulators": [
+        {
+          "from": {
+            "key_code": "z",
+            "modifiers": {
+              "mandatory": [
+                "left_shift"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "y",
+              "modifiers": [
+                "left_shift"
+              ]
+            }
+          ],
+          "type": "basic"
+        }
+      ]
+    },
+    {
+      "description": "Swap y with z for better compatibility to German layout",
       "manipulators": [
         {
           "type": "basic",
@@ -30,7 +54,31 @@
       ]
     },
     {
-      "description": "CapsLock to Hyper/Escape",
+      "description": "Swap Y with  for better compatibility to German layout (Shift)",
+      "manipulators": [
+        {
+          "from": {
+            "key_code": "y",
+            "modifiers": {
+              "mandatory": [
+                "left_shift"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "z",
+              "modifiers": [
+                "left_shift"
+              ]
+            }
+          ],
+          "type": "basic"
+        }
+      ]
+    },
+    {
+      "description": "Change CapsLock to Hyper (if combined) or Escape (if alone)",
       "manipulators": [
         {
           "from": {
@@ -43,11 +91,11 @@
           },
           "to": [
             {
-              "key_code": "right_shift",
+              "key_code": "left_option",
               "modifiers": [
+                "left_command",
                 "right_command",
-                "right_option",
-                "right_control"
+                "right_option"
               ]
             }
           ],
@@ -61,17 +109,17 @@
       ]
     },
     {
-      "description": "ae",
+      "description": "Hyper: Put German Umlaut ae to Quote",
       "manipulators": [
         {
           "from": {
             "key_code": "quote",
             "modifiers": {
               "mandatory": [
-                "right_shift",
+                "left_option",
+                "left_command",
                 "right_command",
-                "right_option",
-                "right_control"
+                "right_option"
               ]
             }
           },
@@ -91,7 +139,7 @@
       ]
     },
     {
-      "description": "AE",
+      "description": "Hyper: Put German Umlaut AE to Quote (Shift)",
       "manipulators": [
         {
           "from": {
@@ -99,10 +147,10 @@
             "modifiers": {
               "mandatory": [
                 "left_shift",
-                "right_shift",
+                "left_option",
+                "left_command",
                 "right_command",
-                "right_option",
-                "right_control"
+                "right_option"
               ]
             }
           },
@@ -125,17 +173,17 @@
       ]
     },
     {
-      "description": "oe",
+      "description": "Hyper: Put German Umlaut oe to Semicolon",
       "manipulators": [
         {
           "from": {
             "key_code": "semicolon",
             "modifiers": {
               "mandatory": [
-                "right_shift",
+                "left_option",
+                "left_command",
                 "right_command",
-                "right_option",
-                "right_control"
+                "right_option"
               ]
             }
           },
@@ -155,7 +203,7 @@
       ]
     },
     {
-      "description": "OE",
+      "description": "Hyper: Put German Umlaut OE to Semicolon (Shift)",
       "manipulators": [
         {
           "from": {
@@ -163,10 +211,10 @@
             "modifiers": {
               "mandatory": [
                 "left_shift",
-                "right_shift",
+                "left_option",
+                "left_command",
                 "right_command",
-                "right_option",
-                "right_control"
+                "right_option"
               ]
             }
           },
@@ -189,17 +237,17 @@
       ]
     },
     {
-      "description": "ue",
+      "description": "Hyper: put German Umlaut ue to opening square bracket",
       "manipulators": [
         {
           "from": {
             "key_code": "open_bracket",
             "modifiers": {
               "mandatory": [
-                "right_shift",
+                "left_option",
+                "left_command",
                 "right_command",
-                "right_option",
-                "right_control"
+                "right_option"
               ]
             }
           },
@@ -219,7 +267,7 @@
       ]
     },
     {
-      "description": "UE",
+      "description": "Hyper: put German Umlaut UE to opening square bracket (Shift)",
       "manipulators": [
         {
           "from": {
@@ -227,10 +275,10 @@
             "modifiers": {
               "mandatory": [
                 "left_shift",
-                "right_shift",
+                "left_option",
+                "left_command",
                 "right_command",
-                "right_option",
-                "right_control"
+                "right_option"
               ]
             }
           },
@@ -253,45 +301,17 @@
       ]
     },
     {
-      "description": "ss",
-      "manipulators": [
-        {
-          "from": {
-            "key_code": "hyphen",
-            "modifiers": {
-              "mandatory": [
-                "left_shift",
-                "right_shift",
-                "right_command",
-                "right_option",
-                "right_control"
-              ]
-            }
-          },
-          "to": [
-            {
-              "key_code": "s",
-              "modifiers": [
-                "left_option"
-              ]
-            }
-          ],
-          "type": "basic"
-        }
-      ]
-    },
-    {
-      "description": "Euro",
+      "description": "Hyper: Put Euro sign to e",
       "manipulators": [
         {
           "from": {
             "key_code": "e",
             "modifiers": {
               "mandatory": [
-                "right_shift",
+                "left_option",
+                "left_command",
                 "right_command",
-                "right_option",
-                "right_control"
+                "right_option"
               ]
             }
           },
@@ -309,17 +329,17 @@
       ]
     },
     {
-      "description": "Tilde",
+      "description": "Hyper: Put Tilde to Closing Bracket and remove necessity to press Space afterwards",
       "manipulators": [
         {
           "from": {
             "key_code": "close_bracket",
             "modifiers": {
               "mandatory": [
-                "right_shift",
+                "left_option",
+                "left_command",
                 "right_command",
-                "right_option",
-                "right_control"
+                "right_option"
               ]
             }
           },
@@ -328,91 +348,6 @@
               "key_code": "grave_accent_and_tilde",
               "modifiers": [
                 "left_shift"
-              ]
-            },
-            {
-              "key_code": "spacebar"
-            }
-          ],
-          "type": "basic"
-        }
-      ]
-    },
-    {
-      "description": "Tilde",
-      "manipulators": [
-        {
-          "from": {
-            "key_code": "non_us_backslash",
-            "modifiers": {
-              "mandatory": [
-                "left_shift"
-              ]
-            }
-          },
-          "to": [
-            {
-              "key_code": "grave_accent_and_tilde",
-              "modifiers": [
-                "left_shift"
-              ]
-            },
-            {
-              "key_code": "spacebar"
-            }
-          ],
-          "type": "basic"
-        }
-      ]
-    },
-    {
-      "description": "Backtick",
-      "manipulators": [
-        {
-          "from": {
-            "key_code": "equal_sign",
-            "modifiers": {
-              "mandatory": [
-                "right_shift",
-                "right_command",
-                "right_option",
-                "right_control"
-              ]
-            }
-          },
-          "to": [
-            {
-              "key_code": "grave_accent_and_tilde"
-            },
-            {
-              "key_code": "spacebar"
-            }
-          ],
-          "type": "basic"
-        }
-      ]
-    },
-    {
-      "description": "Backtick",
-      "manipulators": [
-        {
-          "from": {
-            "key_code": "equal_sign",
-            "modifiers": {
-              "mandatory": [
-                "left_shift",
-                "right_shift",
-                "right_command",
-                "right_option",
-                "right_control"
-              ]
-            }
-          },
-          "to": [
-            {
-              "key_code": "e",
-              "modifiers": [
-                "left_option"
               ]
             },
             {
@@ -495,7 +430,7 @@
       ]
     },
     {
-      "description": "Double Quote",
+      "description": "Remove necessity to press Space after Double Quote",
       "manipulators": [
         {
           "from": {
@@ -522,7 +457,7 @@
       ]
     },
     {
-      "description": "Quote",
+      "description": "Remove necessity to press Space after Quote",
       "manipulators": [
         {
           "from": {
@@ -547,17 +482,74 @@
       ]
     },
     {
-      "description": "Ausrufezeichen",
+      "description": "Put Tilde to Caret key and remove necessity to press Space afterwards",
+      "manipulators": [
+        {
+          "from": {
+            "key_code": "non_us_backslash",
+            "modifiers": {
+              "mandatory": [
+                "left_shift"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "grave_accent_and_tilde",
+              "modifiers": [
+                "left_shift"
+              ]
+            },
+            {
+              "key_code": "spacebar"
+            }
+          ],
+          "type": "basic"
+        }
+      ]
+    },
+    {
+      "description": "Hyper: Put caret to accent/tilde and remove necessity to press Space afterwards",
+      "manipulators": [
+        {
+          "from": {
+            "key_code": "non_us_backslash",
+            "modifiers": {
+              "mandatory": [
+                "left_option",
+                "left_command",
+                "right_command",
+                "right_option"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "6",
+              "modifiers": [
+                "left_shift"
+              ]
+            },
+            {
+              "key_code": "spacebar"
+            }
+          ],
+          "type": "basic"
+        }
+      ]
+    },
+    {
+      "description": "Hyper: Put exclamation mark to 1",
       "manipulators": [
         {
           "from": {
             "key_code": "1",
             "modifiers": {
               "mandatory": [
-                "right_shift",
+                "left_option",
+                "left_command",
                 "right_command",
-                "right_option",
-                "right_control"
+                "right_option"
               ]
             }
           },
@@ -574,23 +566,53 @@
       ]
     },
     {
-      "description": "Paragraph",
+      "description": "Hyper: Put double quotes to 2 and remove necessity to press Space afterwards",
+      "manipulators": [
+        {
+          "from": {
+            "key_code": "2",
+            "modifiers": {
+              "mandatory": [
+                "left_option",
+                "left_command",
+                "right_command",
+                "right_option"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "quote",
+              "modifiers": [
+                "left_shift"
+              ]
+            },
+            {
+              "key_code": "spacebar"
+            }
+          ],
+          "type": "basic"
+        }
+      ]
+    },
+    {
+      "description": "Hyper: Put Section Sign to 3",
       "manipulators": [
         {
           "from": {
             "key_code": "3",
             "modifiers": {
               "mandatory": [
-                "right_shift",
+                "left_option",
+                "left_command",
                 "right_command",
-                "right_option",
-                "right_control"
+                "right_option"
               ]
             }
           },
           "to": [
             {
-              "key_code": "grave_accent_and_tilde",
+              "key_code": "non_us_backslash",
               "modifiers": [
               ]
             }
@@ -600,17 +622,17 @@
       ]
     },
     {
-      "description": "Dollar",
+      "description": "Hyper: Put Dollar to 4",
       "manipulators": [
         {
           "from": {
             "key_code": "4",
             "modifiers": {
               "mandatory": [
-                "right_shift",
+                "left_option",
+                "left_command",
                 "right_command",
-                "right_option",
-                "right_control"
+                "right_option"
               ]
             }
           },
@@ -627,17 +649,17 @@
       ]
     },
     {
-      "description": "Percent",
+      "description": "Hyper: Put percent to 5",
       "manipulators": [
         {
           "from": {
             "key_code": "5",
             "modifiers": {
               "mandatory": [
-                "right_shift",
+                "left_option",
+                "left_command",
                 "right_command",
-                "right_option",
-                "right_control"
+                "right_option"
               ]
             }
           },
@@ -654,17 +676,17 @@
       ]
     },
     {
-      "description": "Und",
+      "description": "Hyper: Put Ampersand to 6",
       "manipulators": [
         {
           "from": {
             "key_code": "6",
             "modifiers": {
               "mandatory": [
-                "right_shift",
+                "left_option",
+                "left_command",
                 "right_command",
-                "right_option",
-                "right_control"
+                "right_option"
               ]
             }
           },
@@ -681,17 +703,17 @@
       ]
     },
     {
-      "description": "Slash",
+      "description": "Hyper: Put Slash to 7",
       "manipulators": [
         {
           "from": {
             "key_code": "7",
             "modifiers": {
               "mandatory": [
-                "right_shift",
+                "left_option",
+                "left_command",
                 "right_command",
-                "right_option",
-                "right_control"
+                "right_option"
               ]
             }
           },
@@ -707,44 +729,17 @@
       ]
     },
     {
-      "description": "Asterisk",
-      "manipulators": [
-        {
-          "from": {
-            "key_code": "close_bracket",
-            "modifiers": {
-              "mandatory": [
-                "right_shift",
-                "right_command",
-                "right_option",
-                "right_control"
-              ]
-            }
-          },
-          "to": [
-            {
-              "key_code": "8",
-              "modifiers": [
-                "left_shift"
-              ]
-            }
-          ],
-          "type": "basic"
-        }
-      ]
-    },
-    {
-      "description": "Open Parentheses",
+      "description": "Hyper: Put opening parentheses to 8",
       "manipulators": [
         {
           "from": {
             "key_code": "8",
             "modifiers": {
               "mandatory": [
-                "right_shift",
+                "left_option",
+                "left_command",
                 "right_command",
-                "right_option",
-                "right_control"
+                "right_option"
               ]
             }
           },
@@ -761,17 +756,17 @@
       ]
     },
     {
-      "description": "Close Parentheses",
+      "description": "Hyper: Put closing parentheses to 9",
       "manipulators": [
         {
           "from": {
             "key_code": "9",
             "modifiers": {
               "mandatory": [
-                "right_shift",
+                "left_option",
+                "left_command",
                 "right_command",
-                "right_option",
-                "right_control"
+                "right_option"
               ]
             }
           },
@@ -788,17 +783,17 @@
       ]
     },
     {
-      "description": "Equals",
+      "description": "Hyper: Put equal sign to 0",
       "manipulators": [
         {
           "from": {
             "key_code": "0",
             "modifiers": {
               "mandatory": [
-                "right_shift",
+                "left_option",
+                "left_command",
                 "right_command",
-                "right_option",
-                "right_control"
+                "right_option"
               ]
             }
           },
@@ -814,71 +809,17 @@
       ]
     },
     {
-      "description": "Gatter",
-      "manipulators": [
-        {
-          "from": {
-            "key_code": "backslash",
-            "modifiers": {
-              "mandatory": [
-                "right_shift",
-                "right_command",
-                "right_option",
-                "right_control"
-              ]
-            }
-          },
-          "to": [
-            {
-              "key_code": "3",
-              "modifiers": [
-                "left_shift"
-              ]
-            }
-          ],
-          "type": "basic"
-        }
-      ]
-    },
-    {
-      "description": "Double Quotes",
-      "manipulators": [
-        {
-          "from": {
-            "key_code": "2",
-            "modifiers": {
-              "mandatory": [
-                "right_shift",
-                "right_command",
-                "right_option",
-                "right_control"
-              ]
-            }
-          },
-          "to": [
-            {
-              "key_code": "quote",
-              "modifiers": [
-                "left_shift"
-              ]
-            }
-          ],
-          "type": "basic"
-        }
-      ]
-    },
-    {
-      "description": "Questionmark",
+      "description": "Hyper: Put Question mark to Hyphen",
       "manipulators": [
         {
           "from": {
             "key_code": "hyphen",
             "modifiers": {
               "mandatory": [
-                "right_shift",
+                "left_option",
+                "left_command",
                 "right_command",
-                "right_option",
-                "right_control"
+                "right_option"
               ]
             }
           },
@@ -895,7 +836,147 @@
       ]
     },
     {
-      "description": "Dach",
+      "description": "Hyper: Put German Umlaut Eszett to Hyphen (Shift)",
+      "manipulators": [
+        {
+          "from": {
+            "key_code": "hyphen",
+            "modifiers": {
+              "mandatory": [
+                "left_shift",
+                "left_option",
+                "left_command",
+                "right_command",
+                "right_option"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "s",
+              "modifiers": [
+                "left_option"
+              ]
+            }
+          ],
+          "type": "basic"
+        }
+      ]
+    },
+    {
+      "description": "Hyper: Put backtick to equal sign and remove necessity to press Space afterwards",
+      "manipulators": [
+        {
+          "from": {
+            "key_code": "equal_sign",
+            "modifiers": {
+              "mandatory": [
+                "left_option",
+                "left_command",
+                "right_command",
+                "right_option"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "grave_accent_and_tilde"
+            },
+            {
+              "key_code": "spacebar"
+            }
+          ],
+          "type": "basic"
+        }
+      ]
+    },
+    {
+      "description": "Hyper: Put 'reverse backtick' (Acute accent) to equal sign (Shift) and remove necessity to press Space afterwards",
+      "manipulators": [
+        {
+          "from": {
+            "key_code": "equal_sign",
+            "modifiers": {
+              "mandatory": [
+                "left_shift",
+                "left_option",
+                "left_command",
+                "right_command",
+                "right_option"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "e",
+              "modifiers": [
+                "left_option"
+              ]
+            },
+            {
+              "key_code": "spacebar"
+            }
+          ],
+          "type": "basic"
+        }
+      ]
+    },
+    {
+      "description": "Hyper: Put Asterisk to closing square bracket",
+      "manipulators": [
+        {
+          "from": {
+            "key_code": "close_bracket",
+            "modifiers": {
+              "mandatory": [
+                "left_option",
+                "left_command",
+                "right_command",
+                "right_option"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "8",
+              "modifiers": [
+                "left_shift"
+              ]
+            }
+          ],
+          "type": "basic"
+        }
+      ]
+    },
+    {
+      "description": "Hyper: Put Hash to Backslash",
+      "manipulators": [
+        {
+          "from": {
+            "key_code": "backslash",
+            "modifiers": {
+              "mandatory": [
+                "left_option",
+                "left_command",
+                "right_command",
+                "right_option"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "3",
+              "modifiers": [
+                "left_shift"
+              ]
+            }
+          ],
+          "type": "basic"
+        }
+      ]
+    },
+    {
+      "description": "Remove necessity to press Space after Caret",
       "manipulators": [
         {
           "from": {
@@ -922,47 +1003,17 @@
       ]
     },
     {
-      "description": "Dach",
+      "description": "Hyper: Put opening Angel Brackets to Backslash",
       "manipulators": [
         {
           "from": {
-            "key_code": "non_us_backslash",
+            "key_code": "grave_accent_and_tilde",
             "modifiers": {
               "mandatory": [
-                "right_shift",
+                "left_option",
+                "left_command",
                 "right_command",
-                "right_option",
-                "right_control"
-              ]
-            }
-          },
-          "to": [
-            {
-              "key_code": "6",
-              "modifiers": [
-                "left_shift"
-              ]
-            },
-            {
-              "key_code": "spacebar"
-            }
-          ],
-          "type": "basic"
-        }
-      ]
-    },
-    {
-      "description": "Spitze Klammern auf",
-      "manipulators": [
-        {
-          "from": {
-            "key_code": "backslash",
-            "modifiers": {
-              "mandatory": [
-                "right_shift",
-                "right_command",
-                "right_option",
-                "right_control"
+                "right_option"
               ]
             }
           },
@@ -970,6 +1021,7 @@
             {
               "key_code": "comma",
               "modifiers": [
+                "left_shift"
               ]
             }
           ],
@@ -978,24 +1030,182 @@
       ]
     },
     {
-      "description": "Spitze Klammern zu",
+      "description": "Hyper: Put closing Angel Brackets to Backslash (Shift)",
       "manipulators": [
         {
           "from": {
-            "key_code": "backslash",
+            "key_code": "grave_accent_and_tilde",
             "modifiers": {
               "mandatory": [
                 "left_shift",
-                "right_shift",
+                "left_option",
+                "left_command",
                 "right_command",
-                "right_option",
-                "right_control"
+                "right_option"
               ]
             }
           },
           "to": [
             {
-              "key_code": "dot",
+              "key_code": "period",
+              "modifiers": [
+                "left_shift"
+              ]
+            }
+          ],
+          "type": "basic"
+        }
+      ]
+    },
+    {
+      "description": "Hyper: Put Underscore to Slash",
+      "manipulators": [
+        {
+          "from": {
+            "key_code": "slash",
+            "modifiers": {
+              "mandatory": [
+                "left_option",
+                "left_command",
+                "right_command",
+                "right_option"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "hyphen",
+              "modifiers": [
+                "left_shift"
+              ]
+            }
+          ],
+          "type": "basic"
+        }
+      ]
+    },
+    {
+      "description": "Hyper: Put Semicolon to Comma",
+      "manipulators": [
+        {
+          "from": {
+            "key_code": "comma",
+            "modifiers": {
+              "mandatory": [
+                "left_option",
+                "left_command",
+                "right_command",
+                "right_option"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "semicolon",
+              "modifiers": [
+              ]
+            }
+          ],
+          "type": "basic"
+        }
+      ]
+    },
+    {
+      "description": "Hyper: Put Colon to Period",
+      "manipulators": [
+        {
+          "from": {
+            "key_code": "period",
+            "modifiers": {
+              "mandatory": [
+                "left_option",
+                "left_command",
+                "right_command",
+                "right_option"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "semicolon",
+              "modifiers": [
+                "left_shift"
+              ]
+            }
+          ],
+          "type": "basic"
+        }
+      ]
+    },
+    {
+      "description": "Left Alt + L for At sign (MacOS)",
+      "manipulators": [
+        {
+          "from": {
+            "key_code": "l",
+            "modifiers": {
+              "mandatory": [
+                "left_option"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "2",
+              "modifiers": [
+                "left_shift"
+              ]
+            }
+          ],
+          "type": "basic"
+        }
+      ]
+    },
+    {
+      "description": "Hyper: L for At sign (Similar to Left ALt + L in MacOS)",
+      "manipulators": [
+        {
+          "from": {
+            "key_code": "l",
+            "modifiers": {
+              "mandatory": [
+                "left_option",
+                "left_command",
+                "right_command",
+                "right_option"
+              ]
+            }
+          },
+          "to": [
+            {
+              "`ey_code": "2",
+              "modifiers": [
+                "left_shift"
+              ]
+            }
+          ],
+          "type": "basic"
+        }
+      ]
+    },
+    {
+      "description": "Hyper: Put At sign to Q. Right Alt (Alt Gr) + Q (Windows) not possible because it quits the app",
+      "manipulators": [
+        {
+          "from": {
+            "key_code": "q",
+            "modifiers": {
+              "mandatory": [
+                "left_option",
+                "left_command",
+                "right_command",
+                "right_option"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "2",
               "modifiers": [
                 "left_shift"
               ]
