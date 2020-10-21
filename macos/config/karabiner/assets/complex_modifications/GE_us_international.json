@@ -1178,7 +1178,7 @@
           },
           "to": [
             {
-              "`ey_code": "2",
+              "key_code": "2",
               "modifiers": [
                 "left_shift"
               ]
