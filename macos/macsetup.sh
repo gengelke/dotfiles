@@ -38,20 +38,18 @@ brew cask install \
      audio-hijack \
      balenaetcher \
      bartender \
-     brave-browser \
      caffeine \
      carbon-copy-cloner \
      cryptomator \
      cyberduck \
      dash \ 
+     dozer \
      duet \
      drawio \
      fantastical \
      firefox \
-     fluor \
      gimp \
      google-chrome \
-     istat-menus \
      iterm2 \
      java \
      jumpcut \
@@ -68,7 +66,6 @@ brew cask install \
      powershell \
      skype \
      soundsource \
-     spectacle \
      spotify \
      tigervnc-viewer \
      tripmode \
@@ -77,7 +74,6 @@ brew cask install \
      vlc \
      vmware-fusion \
      vnc-viewer \
-     vox \
      wireshark \
      xnviewmp \
      xquartz
@@ -88,18 +84,22 @@ brew cask install \
 #     clementine \
 #     evernote \
 #     firefox \
+#     fluor \
 #     google-chrome \
 #     hex-fiend \
+#     istat-menus \
 #     keepassx \
 #     libreoffice \
 #     pycharm-ce \
 #     slack \
 #     snagit \
+#     spectacle \
 #     spotify \
 #     telegram \
 #     textual \
 #     tunnelblick \
 #     veracrypt \
+#     vox \
 
 brew cask install \
      virtualbox \
@@ -125,7 +125,6 @@ brew install \
      packer \
      pulseaudio \
      pygments \
-     python2 \
      python3 \
      socat \
      telnet \
