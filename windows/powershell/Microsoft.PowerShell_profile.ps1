@@ -1,17 +1,13 @@
 # (C) 2020 Gordon Engelke <reject@email.de>
-
+#
 # Powershell Core:   ~\Documents\PowerShell\Microsoft.PowerShell_profile.ps1
 # Powershell:        ~\Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1
 # Azure Cloud Shell: ~/.config/PowerShell/Microsoft.PowerShell_profile.ps1
 
 write-host "Loading powershell profile...";
 
-[system.net.webrequest]::defaultwebproxy = new-object system.net.webproxy('http://rb-proxy-de.bosch.com:8080')
-[system.net.webrequest]::defaultwebproxy.credentials = [System.Net.CredentialCache]::DefaultNetworkCredentials
-[system.net.webrequest]::defaultwebproxy.BypassProxyOnLocal = $True
-
-# $host.UI.RawUI.ForegroundColor = "Gray"
-# $host.UI.RawUI.BackgroundColor = "Black"
+#$host.UI.RawUI.ForegroundColor = "Gray"
+#$host.UI.RawUI.BackgroundColor = "Black"
 
 #set-executionpolicy RemoteSigned process
 
@@ -69,11 +65,6 @@ if ($osType -eq "Windows") { Set-Alias vim "C:\tools\vim\vim82\vim.exe"; Set-Ali
 # which <app>: Get path for an executable
 function which($app) {
     (Get-Command $app).Definition
-}
-
-if ($osType -eq "Windows") {
-    Set-Alias vim "C:\tools\vim\vim82\vim.exe"
-    Set-Alias vi vim
 }
 
 #=============#
@@ -146,14 +137,14 @@ function prompt {
         }
     }
 
-    Write-Host ([Environment]::UserName) -nonewline -foregroundcolor DarkGreen
-    Write-Host (" at ") -nonewline -foregroundcolor Gray
+    Write-Host ([Environment]::UserName) -nonewline -foregroundcolor Green
+    Write-Host ("@") -nonewline -foregroundcolor Blue
     if (Test-Path env:AZURE_HTTP_USER_AGENT) { 
         Write-Host ("Azure") -nonewline -foregroundcolor Blue
     } else {
         Write-Host ([Environment]::MachineName) -nonewline -foregroundcolor Blue
     }
-    Write-Host (" in ") -nonewline -foregroundcolor Gray
+    Write-Host (" ") -nonewline -foregroundcolor Gray
     Write-Host ($cwd_short) -nonewline -foregroundcolor Yellow
 
     if ($git_branch -ne $NULL) {
@@ -188,11 +179,11 @@ function prompt {
         Write-Host("]") -nonewline -foregroundcolor Gray
     }
 
-    Write-Host("")
+#    Write-Host("")
 
-    $prompt = "PS>"
+    $prompt = " pwsh>"
     if ($git_branch -ne $NULL) {
-        $prompt = "PS>"
+        $prompt = " pwsh>"
     }
     Write-Host($prompt) -nonewline -foregroundcolor Gray
 
@@ -221,7 +212,7 @@ if (-Not (Get-Module -ListAvailable -Name posh-git)) {
     Import-Module posh-git
 }
 if (-Not (Get-Module -ListAvailable -Name oh-my-posh)) {
-    Install-Module -Name oh-my-posh -Scope CurrentUser -SkipPublisherCheck -Confirm:$False -Force -RequiredVersion 2.0.496
+    Install-Module -Name oh-my-posh -Scope CurrentUser -Confirm:$False -Force
     Import-Module oh-my-posh
 }
 
