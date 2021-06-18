@@ -167,10 +167,10 @@ nore ; :
 nore , ;
 
 " Disable arrow keys - just for educational purposes (learn to use hjkl instead) :-)
-noremap <Up> <nop>
-noremap <Down> <nop>
-noremap <Left> <nop>
-noremap <Right> <nop>
+"noremap <Up> <nop>
+"noremap <Down> <nop>
+"noremap <Left> <nop>
+"noremap <Right> <nop>
 
 " Automatically closing brackets
 inoremap " ""<left>
