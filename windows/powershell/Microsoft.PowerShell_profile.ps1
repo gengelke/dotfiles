@@ -139,13 +139,13 @@ function prompt {
     }
 
     Write-Host ([Environment]::UserName) -nonewline -foregroundcolor Green
-    Write-Host ("@") -nonewline -foregroundcolor Blue
+    Write-Host ("@") -nonewline -foregroundcolor Gray
     if (Test-Path env:AZURE_HTTP_USER_AGENT) { 
         Write-Host ("Azure") -nonewline -foregroundcolor Blue
     } else {
         Write-Host ([Environment]::MachineName) -nonewline -foregroundcolor Blue
     }
-    Write-Host (" ") -nonewline -foregroundcolor Gray
+    Write-Host (": ") -nonewline -foregroundcolor Gray
     Write-Host ($cwd_short) -nonewline -foregroundcolor Yellow
 
     if ($git_branch -ne $NULL) {
@@ -180,11 +180,11 @@ function prompt {
         Write-Host("]") -nonewline -foregroundcolor Gray
     }
 
-#    Write-Host("")
+    Write-Host("")
 
-    $prompt = " pwsh>"
+    $prompt = "pwsh>"
     if ($git_branch -ne $NULL) {
-        $prompt = " pwsh>"
+        $prompt = "pwsh>"
     }
     Write-Host($prompt) -nonewline -foregroundcolor Gray
 
