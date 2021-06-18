@@ -38,12 +38,18 @@ brew cask install \
      caffeine \
      carbon-copy-cloner \
      cyberduck \
+     dash \
+     dozer \
+     duet \
      drawio \
      firefox \
      gimp \
      iterm2 \
      java \
      jumpcut \
+     karabiner-elements \
+     keycastr \
+     keepassx \
      mountain-duck \
      powershell \
      spotify \
@@ -52,7 +58,6 @@ brew cask install \
      visual-studio-code \
      vlc \
      vnc-viewer \
-     vox \
      wireshark \
      xnviewmp \
      xquartz
@@ -96,7 +101,6 @@ brew install \
      packer \
      pulseaudio \
      pygments \
-     python2 \
      python3 \
      socat \
      telnet \
