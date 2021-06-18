@@ -6,8 +6,12 @@
 
 write-host "Loading powershell profile...";
 
-$host.UI.RawUI.ForegroundColor = "Gray"
-$host.UI.RawUI.BackgroundColor = "Black"
+[system.net.webrequest]::defaultwebproxy = new-object system.net.webproxy('http://rb-proxy-de.bosch.com:8080')
+[system.net.webrequest]::defaultwebproxy.credentials = [System.Net.CredentialCache]::DefaultNetworkCredentials
+[system.net.webrequest]::defaultwebproxy.BypassProxyOnLocal = $True
+
+# $host.UI.RawUI.ForegroundColor = "Gray"
+# $host.UI.RawUI.BackgroundColor = "Black"
 
 #set-executionpolicy RemoteSigned process
 
@@ -65,6 +69,11 @@ if ($osType -eq "Windows") { Set-Alias vim "C:\tools\vim\vim82\vim.exe"; Set-Ali
 # which <app>: Get path for an executable
 function which($app) {
     (Get-Command $app).Definition
+}
+
+if ($osType -eq "Windows") {
+    Set-Alias vim "C:\tools\vim\vim82\vim.exe"
+    Set-Alias vi vim
 }
 
 #=============#
