@@ -149,13 +149,14 @@ brew cask install \
 
 echo "Installing Homebrew font packages"
 brew tap homebrew/cask-fonts
-brew cask install font-terminus \
-                font-terminus-nerd-font \
-                font-terminus-nerd-font-mono \
-                font-menlo-for-powerline \
-                font-meslo-for-powerline \
-                font-powerline-symbols
-
+brew install font-terminus \
+             font-menlo-for-powerline \
+             font-meslo-for-powerline \
+             font-powerline-symbols
+             
+             #font-terminus-nerd-font \
+             #font-terminus-nerd-font-mono \
+                
 echo "Installing Homebrew Cloud packages"
 brew install awscli \
              azure-cli \
