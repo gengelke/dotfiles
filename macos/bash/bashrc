@@ -126,6 +126,7 @@ alias mv='mv -i'
 alias vi='vim'
 alias ll='ls -al'
 alias lll='ls -strahl'
+alias posh='pwsh -nologo'
 
 if ! [[ "$OSTYPE" == "darwin"* ]]; then
   alias pbcopy='xsel --clipboard --input'    #emulate OS X pbcopy. copes text-input to clipboard.
