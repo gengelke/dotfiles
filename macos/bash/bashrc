@@ -176,8 +176,8 @@ if ${use_color} ; then
         fi
 
         if [[ ${EUID} == 0 ]] ; then
-                #PS1='${debian_chroot:+($debian_chroot)}\[\033[0;31m\]\u@\[\033[1;31m\]\h\[\033[01;33m\] \w \$\[\033[00m\] '
-                PS1="${debian_chroot:+($debian_chroot)}\[\033[0;32m\]\u\[\033[1;32m\]@\h \033[01;33m\]\w\033[01;36m\]\$(parse_git_branch) \[\033[00m\]\$ "
+            #PS1='${debian_chroot:+($debian_chroot)}\[\033[0;31m\]\u@\[\033[1;31m\]\h\[\033[01;33m\] \w \$\[\033[00m\] '
+            PS1="${debian_chroot:+($debian_chroot)}\[\033[0;32m\]\u\[\033[1;34m\]@\h \033[0;33m\]\w\033[1;36m\]\$(parse_git_branch) \[\033[00m\]\$ "
         else
             PS1="${debian_chroot:+($debian_chroot)}\[\033[0;32m\]\u\[\033[1;34m\]@\h \033[0;33m\]\w\033[1;36m\]\$(parse_git_branch) \[\033[00m\]\$ "
             #PS1="${debian_chroot:+($debian_chroot)}\[\033[0;32m\]\u \[\033[00m\]at \[\033[1;30m\]\h \[\033[00m\]in \033[01;33m\]\w\033[01;36m\]\$(parse_git_branch) \[\033[00m\]\$ "
