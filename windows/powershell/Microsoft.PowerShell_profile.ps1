@@ -221,7 +221,7 @@ if (-Not (Get-Module -ListAvailable -Name posh-git)) {
     Import-Module posh-git
 }
 if (-Not (Get-Module -ListAvailable -Name oh-my-posh)) {
-    Install-Module -Name oh-my-posh -Scope CurrentUser -Confirm:$False -Force
+    Install-Module -Name oh-my-posh -Scope CurrentUser -SkipPublisherCheck -Confirm:$False -Force -RequiredVersion 2.0.496
     Import-Module oh-my-posh
 }
 
