@@ -112,13 +112,14 @@ Set-PSReadlineKeyHandler -Key Tab -Function Complete
 
 function prompt {
     $cwd = $(get-location)
-    $cwd_short = Get-ShortPath $cwd
+    #$cwd_short = Get-ShortPath $cwd
+    $cwd_short = ($pwd.path).Replace($env:HOME,"~")
     if($UserType -eq "Admin") {
          $host.UI.RawUI.WindowTitle = "" + $cwd_short + " : *Administrator*"
          $host.UI.RawUI.ForegroundColor = "white"
      }
      else {
-#         $host.ui.rawui.WindowTitle = $cwd_short
+         $host.ui.rawui.WindowTitle = $cwd_short
      }
 
     Write-Host("")
