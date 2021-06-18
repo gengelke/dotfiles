@@ -4,7 +4,7 @@
 # Powershell:        ~\Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1
 # Azure Cloud Shell: ~/.config/PowerShell/Microsoft.PowerShell_profile.ps1
 
-write-host "Loading powershell profile...";
+write-host "`n>-{ gengelke posh profile }-<";
 
 #$host.UI.RawUI.ForegroundColor = "Gray"
 #$host.UI.RawUI.BackgroundColor = "Black"
@@ -182,9 +182,9 @@ function prompt {
 
     Write-Host("")
 
-    $prompt = "pwsh>"
+    $prompt = "posh>"
     if ($git_branch -ne $NULL) {
-        $prompt = "pwsh>"
+        $prompt = "posh>"
     }
     Write-Host($prompt) -nonewline -foregroundcolor Gray
 
@@ -249,7 +249,7 @@ Register-EngineEvent -SourceIdentifier powershell.exiting -SupportEvent -Action 
 # Load previous history, if it exists
 if ((Test-Path $historyPath)) {
     Import-Clixml $historyPath | ? {$count++;$true} | Add-History
-    Write-Host -Fore Green "`nLoaded $count history item(s).`n"
+#    Write-Host -Fore Green "Loaded $count history item(s)."
 }
 
 # Aliases and functions to make it useful
