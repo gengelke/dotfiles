@@ -4,6 +4,7 @@
 # Powershell:        ~\Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1
 # Azure Cloud Shell: ~/.config/PowerShell/Microsoft.PowerShell_profile.ps1
 
+clear
 write-host "`n-{ gengelke posh profile }-";
 
 #$host.UI.RawUI.ForegroundColor = "Gray"
