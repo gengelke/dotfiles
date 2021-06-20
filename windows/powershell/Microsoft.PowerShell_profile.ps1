@@ -62,6 +62,7 @@ if ($env:ConEmuANSI -eq 'ON')
 
 Set-PSReadLineOption -MaximumHistoryCount 10000
 Set-PSReadLineOption -HistoryNoDuplicates
+Set-PSReadlineOption -HistorySaveStyle SaveIncrementally
 Set-PSReadLineOption -BellStyle Visual
 # Exit Powershell on Ctrl+d
 Set-PSReadLineKeyHandler -Key Ctrl+d -Function DeleteCharOrExit
