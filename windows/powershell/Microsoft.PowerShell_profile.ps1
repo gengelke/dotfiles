@@ -31,6 +31,257 @@ function Get-OsType() {
 $osType = Get-OsType
 #Write-Host "Running on $osType platform."
 
+
+#=====================================#
+# Install required Powershell modules #
+#=====================================#
+
+if (-Not (Get-Module -ListAvailable -Name PSReadLine)) {
+    Install-Module -Name PSReadLine -Scope CurrentUser -SkipPublisherCheck -Confirm:$False -Force
+    Import-Module PSReadLine
+}
+if (-Not (Get-Module -ListAvailable -Name posh-git)) {
+    Install-Module -Name posh-git -Scope CurrentUser -Confirm:$False -Force
+    Import-Module posh-git
+}
+if (-Not (Get-Module -ListAvailable -Name oh-my-posh)) {
+    Install-Module -Name oh-my-posh -Scope CurrentUser -Confirm:$False -Force
+    Import-Module oh-my-posh
+}
+
+if ($env:ConEmuANSI -eq 'ON')
+{
+    Import-Module oh-my-posh
+    Set-Theme Honukai
+}
+
+
+#==================#
+# PSReadLine Stuff #
+#==================#
+
+Set-PSReadLineOption -MaximumHistoryCount 10000
+Set-PSReadLineOption -HistoryNoDuplicates
+Set-PSReadLineOption -BellStyle Visual
+# Exit Powershell on Ctrl+d
+Set-PSReadLineKeyHandler -Key Ctrl+d -Function DeleteCharOrExit
+Set-PSReadLineOption -EditMode emacs
+# Automatically copy text to Clipboard
+Set-PSReadLineKeyHandler -Key Ctrl+C -Function Copy
+Set-PSReadLineKeyHandler -Key Ctrl+v -Function Paste
+
+# This key handler shows the entire or filtered history using Out-GridView. The
+# typed text is used as the substring pattern for filtering. A selected command
+# is inserted to the command line without invoking. Multiple command selection
+# is supported, e.g. selected by Ctrl + Click.
+Set-PSReadLineKeyHandler -Key F7 `
+                         -BriefDescription History `
+                         -LongDescription 'Show command history' `
+                         -ScriptBlock {
+    $pattern = $null
+    [Microsoft.PowerShell.PSConsoleReadLine]::GetBufferState([ref]$pattern, [ref]$null)
+    if ($pattern)
+    {
+        $pattern = [regex]::Escape($pattern)
+    }
+
+    $history = [System.Collections.ArrayList]@(
+        $last = ''
+        $lines = ''
+        foreach ($line in [System.IO.File]::ReadLines((Get-PSReadLineOption).HistorySavePath))
+        {
+            if ($line.EndsWith('`'))
+            {
+                $line = $line.Substring(0, $line.Length - 1)
+                $lines = if ($lines)
+                {
+                    "$lines`n$line"
+                }
+                else
+                {
+                    $line
+                }
+                continue
+            }
+
+            if ($lines)
+            {
+                $line = "$lines`n$line"
+                $lines = ''
+            }
+
+            if (($line -cne $last) -and (!$pattern -or ($line -match $pattern)))
+            {
+                $last = $line
+                $line
+            }
+        }
+    )
+    $history.Reverse()
+
+    $command = $history | Out-GridView -Title History -PassThru
+    if ($command)
+    {
+        [Microsoft.PowerShell.PSConsoleReadLine]::RevertLine()
+        [Microsoft.PowerShell.PSConsoleReadLine]::Insert(($command -join "`n"))
+    }
+}
+
+# The next four key handlers are designed to make entering matched quotes
+# parens, and braces a nicer experience.  I'd like to include functions
+# in the module that do this, but this implementation still isn't as smart
+# as ReSharper, so I'm just providing it as a sample.
+
+Set-PSReadlineKeyHandler -Key '"',"'" `
+                            -BriefDescription SmartInsertQuote `
+                            -LongDescription "Insert paired quotes if not already on a quote" `
+                            -ScriptBlock {
+    param($key, $arg)
+
+    $line = $null
+    $cursor = $null
+    [Microsoft.PowerShell.PSConsoleReadLine]::GetBufferState([ref]$line, [ref]$cursor)
+
+    if ($line[$cursor] -eq $key.KeyChar) {
+        # Just move the cursor
+        [Microsoft.PowerShell.PSConsoleReadLine]::SetCursorPosition($cursor + 1)
+    }
+    else {
+        # Insert matching quotes, move cursor to be in between the quotes
+        [Microsoft.PowerShell.PSConsoleReadLine]::Insert("$($key.KeyChar)" * 2)
+        [Microsoft.PowerShell.PSConsoleReadLine]::GetBufferState([ref]$line, [ref]$cursor)
+        [Microsoft.PowerShell.PSConsoleReadLine]::SetCursorPosition($cursor - 1)
+    }
+}
+
+Set-PSReadlineKeyHandler -Key '(','{','[' `
+                            -BriefDescription InsertPairedBraces `
+                            -LongDescription "Insert matching braces" `
+                            -ScriptBlock {
+    param($key, $arg)
+
+    $closeChar = switch ($key.KeyChar)
+    {
+        <#case#> '(' { [char]')'; break }
+        <#case#> '{' { [char]'}'; break }
+        <#case#> '[' { [char]']'; break }
+    }
+
+    [Microsoft.PowerShell.PSConsoleReadLine]::Insert("$($key.KeyChar)$closeChar")
+    $line = $null
+    $cursor = $null
+    [Microsoft.PowerShell.PSConsoleReadLine]::GetBufferState([ref]$line, [ref]$cursor)
+    [Microsoft.PowerShell.PSConsoleReadLine]::SetCursorPosition($cursor - 1)        
+}
+
+Set-PSReadlineKeyHandler -Key ')',']','}' `
+                            -BriefDescription SmartCloseBraces `
+                            -LongDescription "Insert closing brace or skip" `
+                            -ScriptBlock {
+    param($key, $arg)
+
+    $line = $null
+    $cursor = $null
+    [Microsoft.PowerShell.PSConsoleReadLine]::GetBufferState([ref]$line, [ref]$cursor)
+
+    if ($line[$cursor] -eq $key.KeyChar)
+    {
+        [Microsoft.PowerShell.PSConsoleReadLine]::SetCursorPosition($cursor + 1)
+    }
+    else
+    {
+        [Microsoft.PowerShell.PSConsoleReadLine]::Insert("$($key.KeyChar)")
+    }
+}
+
+Set-PSReadlineKeyHandler -Key Backspace `
+                            -BriefDescription SmartBackspace `
+                            -LongDescription "Delete previous character or matching quotes/parens/braces" `
+                            -ScriptBlock {
+    param($key, $arg)
+
+    $line = $null
+    $cursor = $null
+    [Microsoft.PowerShell.PSConsoleReadLine]::GetBufferState([ref]$line, [ref]$cursor)
+
+    if ($cursor -gt 0)
+    {
+        $toMatch = $null
+        switch ($line[$cursor])
+        {
+            <#case#> '"' { $toMatch = '"'; break }
+            <#case#> "'" { $toMatch = "'"; break }
+            <#case#> ')' { $toMatch = '('; break }
+            <#case#> ']' { $toMatch = '['; break }
+            <#case#> '}' { $toMatch = '{'; break }
+        }
+
+        if ($toMatch -ne $null -and $line[$cursor-1] -eq $toMatch)
+        {
+            [Microsoft.PowerShell.PSConsoleReadLine]::Delete($cursor - 1, 2)
+        }
+        else
+        {
+            [Microsoft.PowerShell.PSConsoleReadLine]::BackwardDeleteChar($key, $arg)
+        }
+    }
+}
+
+#endregion Smart Insert/Delete
+
+# Sometimes you enter a command but realize you forgot to do something else first.
+# This binding will let you save that command in the history so you can recall it,
+# but it doesn't actually execute.  It also clears the line with RevertLine so the
+# undo stack is reset - though redo will still reconstruct the command line.
+Set-PSReadlineKeyHandler -Key Alt+w `
+                            -BriefDescription SaveInHistory `
+                            -LongDescription "Save current line in history but do not execute" `
+                            -ScriptBlock {
+    param($key, $arg)
+
+    $line = $null
+    $cursor = $null
+    [Microsoft.PowerShell.PSConsoleReadLine]::GetBufferState([ref]$line, [ref]$cursor)
+    [Microsoft.PowerShell.PSConsoleReadLine]::AddToHistory($line)
+    [Microsoft.PowerShell.PSConsoleReadLine]::RevertLine()
+}
+
+# Insert text from the clipboard as a here string
+Set-PSReadlineKeyHandler -Key Ctrl+Shift+v `
+                            -BriefDescription PasteAsHereString `
+                            -LongDescription "Paste the clipboard text as a here string" `
+                            -ScriptBlock {
+    param($key, $arg)
+
+    Add-Type -Assembly PresentationCore
+    if ([System.Windows.Clipboard]::ContainsText())
+    {
+        # Get clipboard text - remove trailing spaces, convert \r\n to \n, and remove the final \n.
+        $text = ([System.Windows.Clipboard]::GetText() -replace "\p{Zs}*`r?`n","`n").TrimEnd()
+        [Microsoft.PowerShell.PSConsoleReadLine]::Insert("@'`n$text`n'@")
+    }
+    else
+    {
+        [Microsoft.PowerShell.PSConsoleReadLine]::Ding()
+    }
+}
+    
+# Tips:
+# Insert the last argument from the previous command with Alt+.
+
+
+#=========================#
+# History Search - CTRL-R #
+#=========================#
+
+Set-PSReadLineOption -HistorySearchCursorMovesToEnd
+Set-PSReadlineKeyHandler -Key UpArrow -Function HistorySearchBackward
+Set-PSReadlineKeyHandler -Key DownArrow -Function HistorySearchForward
+#Set-PSReadlineKeyHandler -Key Tab -Function Complete
+Set-PSReadlineKeyHandler -Key Tab -Function MenuComplete
+function hh { Get-content (Get-PSReadLineOption).HistorySavePath }
+
+
 #============#
 # Colored ls #
 #============#
@@ -51,6 +302,7 @@ if ($osType -eq "Windows") {
     Set-Alias -Name ls -Value ls_color -Option AllScope
 }
 
+
 #=============#
 # CLI helpers #
 #=============#
@@ -67,6 +319,8 @@ if ($osType -eq "Windows") { Set-Alias vim "C:\tools\vim\vim82\vim.exe"; Set-Ali
 function which($app) {
     (Get-Command $app).Definition
 }
+set-alias wget      Get-WebItem
+
 
 #=============#
 # Git helpers #
@@ -81,6 +335,7 @@ function get() { git pull }
 # Output verbose git status?
 $git_status_verbose = $true
 
+
 #================================#
 # Shortcuts for quick navigation #
 #================================#
@@ -91,21 +346,6 @@ $desktop   = $home + "\Desktop"
 $downloads = $home + "\Downloads"
 $modules   = $home + "\Documents\WindowsPowerShell\Modules"
 
-#=========================#
-# History Search - CTRL-R #
-#=========================#
-
-Set-PSReadlineKeyHandler -Key UpArrow -Function HistorySearchBackward
-Set-PSReadlineKeyHandler -Key DownArrow -Function HistorySearchForward
-Set-PSReadlineKeyHandler -Key Tab -Function Complete
-
-#$Global:CurrentUser = [System.Security.Principal.WindowsIdentity]::GetCurrent()
-#$UserType = "User"
-#$CurrentUser.Groups | foreach { 
-#    if ($_.value -eq "S-1-5-32-544") {
-#        $UserType = "Admin"
-#    } 
-#}
 
 #===================#
 # Customized Prompt #
@@ -201,23 +441,6 @@ function prompt {
 #    (New-Object Security.Principal.WindowsPrincipal $user).IsInRole([Security.Principal.WindowsBuiltinRole]::Administrator)
 #}
 
-#=================#
-# Powerline stuff #
-#=================#
-
-if (-Not (Get-Module -ListAvailable -Name PSReadLine)) {
-    Install-Module -Name PSReadLine -Scope CurrentUser -SkipPublisherCheck -Confirm:$False -Force
-    Import-Module PSReadLine
-}
-if (-Not (Get-Module -ListAvailable -Name posh-git)) {
-    Install-Module -Name posh-git -Scope CurrentUser -Confirm:$False -Force
-    Import-Module posh-git
-}
-if (-Not (Get-Module -ListAvailable -Name oh-my-posh)) {
-    Install-Module -Name oh-my-posh -Scope CurrentUser -Confirm:$False -Force
-    Import-Module oh-my-posh
-}
-
 function Get-Uptime {
     param([String] $ComputerName = $env:COMPUTERNAME)
     $os = Get-WmiObject -ComputerName $ComputerName -Class Win32_OperatingSystem -ErrorAction SilentlyContinue
@@ -232,14 +455,15 @@ function Get-Uptime {
     Write-Host ""
 }
 
+
 #====================#
 # Persistent History #
 #====================#
 
-# Source: https://stackoverflow.com/questions/16474973/windows-powershell-persistent-history
+# Source: https://stackoverflow.com/questions/16474973/windows-powershell-persistent-history#
 
 # Save last 200 history items on exit
-$MaximumHistoryCount = 200
+$MaximumHistoryCount = 10000
 $historyPath = Join-Path (split-path $profile) history.clixml
 
 # Hook powershell's exiting event & hide the registration with -supportevent (from nivot.org)
