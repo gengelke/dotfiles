@@ -1,4 +1,4 @@
-# (C) 2020 Gordon Engelke <reject@email.de>
+# (C) 2020-2021 Gordon Engelke <reject@email.de>
 #
 # Powershell Core:   ~\Documents\PowerShell\Microsoft.PowerShell_profile.ps1
 # Powershell:        ~\Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1
