@@ -320,7 +320,6 @@ if ($osType -eq "Windows") { Set-Alias vim "C:\tools\vim\vim82\vim.exe"; Set-Ali
 function which($app) {
     (Get-Command $app).Definition
 }
-set-alias wget Get-WebItem
 function ll  { ls -al @args }
 function lll { ls -strahl @args }
 
