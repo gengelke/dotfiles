@@ -3,6 +3,14 @@
 # Powershell Core:   ~\Documents\PowerShell\Microsoft.PowerShell_profile.ps1
 # Powershell:        ~\Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1
 # Azure Cloud Shell: ~/.config/PowerShell/Microsoft.PowerShell_profile.ps1
+#
+# Get-History | Export-Clixml -Path ./powershell.history.xml
+# Add-History -InputObject (Import-Clixml -Path ./powershell.history.xml)
+#
+# Get-content (Get-PSReadLineOption).HistorySavePath > ./powershell.history
+# cat ./powershell.history >> (Get-PSReadLineOption).HistorySavePath
+
+
 
 clear
 write-host "`n-{ gengelke posh profile }-";
