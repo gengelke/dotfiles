@@ -38,6 +38,7 @@ brew cask install \
      audio-hijack \
      balenaetcher \
      bartender \
+     bat \
      caffeine \
      carbon-copy-cloner \
      cryptomator \
