@@ -1,0 +1,75 @@
+{
+  "$schema": "https://raw.githubusercontent.com/gengelke/dotfiles/master/windows/powershell/ge.theme.omp.json",
+  "blocks": [
+    {
+      "alignment": "left",
+      "segments": [
+        {
+          "foreground": "#CB4B16",
+          "style": "plain",
+          "type": "exit"
+        },
+        {
+          "foreground": "#CECE04",
+          "style": "plain",
+          "type": "root"
+        },
+        {
+          "foreground": "#CCCCCC",
+          "style": "plain",
+          "properties": {
+            "prefix": "",
+            "postfix": ""
+          },
+          "type": "session"
+        },
+        {
+          "foreground": "#0973C0",
+          "properties": {
+            "prefix": "",
+            "style": "full"
+          },
+          "style": "plain",
+          "type": "path"
+        },
+        {
+          "foreground": "#C1C106",
+          "properties": {
+            "prefix": ""
+          },
+          "style": "plain",
+          "type": "git"
+        },
+        {
+          "foreground": "#100e23",
+          "properties": {
+            "prefix": "  "
+          },
+          "style": "plain",
+          "type": "python"
+        },
+        {
+          "type": "az",
+          "style": "powerline",
+          "foreground": "#9ec3f0",
+          "properties": {
+            "template": "{{ .EnvironmentName }}",
+            "prefix": "",
+            "postfix": ""
+          }
+        },
+        {
+          "foreground": "#ffffff",
+          "properties": {
+            "prefix": "\n",
+            "postfix": " ",
+            "text": "<#CB4B16>❯</><#CACA02>❯</><#4E9A06>❯</>"
+          },
+          "style": "plain",
+          "type": "text"
+        }
+      ],
+      "type": "prompt"
+    }
+  ]
+}
