@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# (C) 2017-2021 Gordon Engelke
+# (C) 2017-2023 Gordon Engelke
 
 hostname="genmac12"
 username="Gordon Engelke"
@@ -43,17 +43,14 @@ fi
 # Magnet
 # Microsoft Remote Desktop
 
-echo "Installing desired/required Homebrew Cask packages"
+echo "======> Installing desired/required Homebrew Cask packages"
 brew tap homebrew/cask
 brew install --cask \
      1password \
      1password-cli \
      angry-ip-scanner \
-     awscli \
-     azure-cli \
      balenaetcher \
      bartender \
-     browsh \
      caffeine \
      carbon-copy-cloner \
      copyq \
@@ -67,41 +64,29 @@ brew install --cask \
      firefox \
      gimp \
      google-chrome \
-     grc \
      iterm2 \
      karabiner-elements \
      keycastr \
-     kubectl \
-     kubernetes-helm \
      little-snitch \
      lynx \
      micro-snitch \
      microsoft-office \
      microsoft-teams \
-     minikube \
      mountain-duck \
-     mosh \
-     nordvpn \
-     onedrive \
      pdf-expert \
-     pngpaste \
      powershell \
-     qrencode \
-     sipcalc \
      tigervnc-viewer \
      tripmode \
      vagrant \
      virtualbox \
-     virtualbox-extension-pack \
      visual-studio-code \
      vlc \
      vmware-fusion \
      vnc-viewer \
-     w3m \
      wireshark \
      xnviewmp \
      xquartz
-  
+
 #     alfred \
 #     amazon-music \
 #     audio-hijack \
@@ -116,6 +101,8 @@ brew install --cask \
 #     jumpcut \
 #     keepassx \
 #     libreoffice \
+#     nordvpn \
+#     onedrive \
 #     pycharm-ce \
 #     skype \
 #     slack \
@@ -127,37 +114,50 @@ brew install --cask \
 #     textual \
 #     tunnelblick \
 #     veracrypt \
+#     virtualbox-extension-pack \
 #     vox \
 
 # Install required/desired software through Homebrew
-echo "Installing desired/required Homebrew packages"
+echo "======> Installing desired/required Homebrew packages"
 brew install \
      ack \
-     bat \
      ansible \
+     awscli \
+     azure-cli \
+     bat \
      bash \
      bash-completion \
+     browser \
      freerdp \
      gdb \
      git \
      glances \
      gnu-sed \
+     grc \
+     helm \
      java \
      jq \
+     kubectl \
      mas \
+     mosh \
+     minikube \
      netcat \
      nmap \
      node \
      openssl \
      packer \
+     pngpaste \
      pulseaudio \
      pygments \
      python3 \
+     qrencode \
+     sipcalc \
      socat \
      telnet \
      terraform \
      tmux \
      tree \
+     w3m \
      wget \
      xbar
 
@@ -166,18 +166,18 @@ brew install \
 #     mono \
 #     textbar \
 
-echo "Installing security applications through Homebrew"
+echo "======> Installing security applications through Homebrew"
 brew install --cask \
      blockblock \
      do-not-disturb \
      KextViewr \
      knockknock \
      Lockdown \
-     lulu \
      RansomWhere \
      taskexplorer
+     #lulu \
 
-echo "Installing Homebrew font packages"
+echo "======> Installing Homebrew font packages"
 brew tap homebrew/cask-fonts
 brew install font-terminus \
              font-menlo-for-powerline \
@@ -197,10 +197,11 @@ brew install font-terminus \
 #brew tap cloudfoundry/tap
 #brew install cf-cli
 
-echo "Installing Python stuff"
+echo "======> Installing Python stuff"
 brew install brew-pip pip-completion python
 python3 -m pip install --upgrade pip
-pip3 install nose tornado msrest msrestazure azure ansible[azure] openshift --upgrade
+pip3 install nose tornado msrest openshift --upgrade
+pip3 install azure-mgmt-compute azure-mgmt-storage azure-mgmt-resource azure-keyvault-secrets azure-storage-blob msrestazure ansible[azure]
 
 #wget https://downloads.citrix.com/19721/CitrixWorkspaceApp.dmg?__gda__=exp=1628196887~acl=/*~hmac=64c654dfbb629db7eaa4cf96fe4cd9d0e6827a5406b417eec96098aa267cf9f8 -P ~/Downloads
 #https://www.citrix.com/de-de/downloads/workspace-app/mac/
@@ -214,7 +215,7 @@ pip3 install nose tornado msrest msrestazure azure ansible[azure] openshift --up
 # Security                                                                    #
 ###############################################################################
 
-echo "Setting security preferences"
+echo "======> Setting security preferences"
 
 # Turn off the “Application Downloaded from Internet” quarantine warning:
 defaults write com.apple.LaunchServices LSQuarantine -bool NO
@@ -241,7 +242,7 @@ sudo dscl . create /Users/admin IsHidden 1
 # Software updates                                                            #
 ###############################################################################
 
-echo "Setting software updates preferences"
+echo "======> Setting software updates preferences"
 
 sudo softwareupdate --schedule OFF
 
@@ -270,7 +271,7 @@ sudo softwareupdate --schedule ON
 # Files and folders                                                           #
 ###############################################################################
 
-echo "Setting files and folders preferences"
+echo "======> Setting files and folders preferences"
 
 # Show the ~/Library directory
 chflags nohidden "${HOME}/Library"
@@ -301,7 +302,7 @@ defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true
 # Set energy preferences                                                      #
 ###############################################################################
 
-echo "Setting energy preferences"
+echo "======> Setting energy preferences"
 
 # From <https://github.com/rtrouton/rtrouton_scripts/>
 IS_LAPTOP=`/usr/sbin/system_profiler SPHardwareDataType | grep "Model Identifier" | grep "Book"`
@@ -320,7 +321,7 @@ sudo pmset -a standbydelay 86400
 # Audio and sound effects                                                     #
 ###############################################################################
 
-echo "Setting audio and sound preferences"
+echo "======> Setting audio and sound preferences"
 
 # Disable feedback when changing volume
 defaults write NSGlobalDomain com.apple.sound.beep.feedback -bool false
@@ -339,7 +340,7 @@ defaults write NSGlobalDomain com.apple.sound.uiaudio.enabled -bool false
 # Ambient light sensor                                                        #
 ###############################################################################
 
-echo "Setting ambient light sensor preferences"
+echo "======> Setting ambient light sensor preferences"
 
 # Display -> Do not automatically adjust brightness
 sudo defaults write /Library/Preferences/com.apple.iokit.AmbientLightSensor "Automatic Display Enabled" -bool false
@@ -353,7 +354,7 @@ sudo defaults write /Library/Preferences/com.apple.iokit.AmbientLightSensor "Key
 # Login screen                                                                #
 ###############################################################################
 
-echo "Setting login screen preferences"
+echo "======> Setting login screen preferences"
 
 # Display login window as: Name and password
 sudo defaults write /Library/Preferences/com.apple.loginwindow SHOWFULLNAME -bool false
@@ -379,7 +380,7 @@ sudo defaults write /Library/Preferences/com.apple.loginwindow Hide500Users -boo
 # Menu bar                                                                    #
 ###############################################################################
 
-echo "Setting Menu bar preferencers"
+echo "======> Setting Menu bar preferencers"
 
 defaults write com.apple.systemuiserver menuExtras -array \
     "/System/Library/CoreServices/Menu Extras/Volume.menu" \
@@ -417,7 +418,7 @@ sudo defaults write /Library/Preferences/com.apple.loginwindow showInputMenu -bo
 # General UI/UX                                                               #
 ###############################################################################
 
-echo "Setting general UI/UX preferences"
+echo "======> Setting general UI/UX preferences"
 
 # Set UI interface theme to dark
 sudo defaults write /Library/Preferences/.GlobalPreferences AppleInterfaceTheme Dark
@@ -500,7 +501,7 @@ defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
 # Trackpad, mouse, keyboard, Bluetooth accessories, and time & languages      #
 ###############################################################################
 
-echo "Setting trackpad, keyboard and time & languages preferences"
+echo "======> Setting trackpad, keyboard and time & languages preferences"
 
 # Disable â€œnaturalâ€ (Lion-style) scrolling
 defaults write NSGlobalDomain com.apple.swipescrolldirection -bool false
@@ -543,7 +544,7 @@ systemsetup -settimezone "Europe/Berlin" > /dev/null
 # Screen                                                                      #
 ###############################################################################
 
-echo "Setting screen preferences"
+echo "======> Setting screen preferences"
 
 defaults write -g NSWindowShouldDragOnGesture -bool true
 
@@ -580,7 +581,7 @@ defaults write NSGlobalDomain AppleMiniaturizeOnDoubleClick -bool false
 # Finder                                                                      #
 ###############################################################################
 
-echo "Setting Finder preferences"
+echo "======> Setting Finder preferences"
 
 # Disable the macOS Crash reporter (quit dialog after an application crash)
 defaults write com.apple.CrashReporter DialogType prompt
@@ -659,7 +660,7 @@ defaults write com.apple.finder WarnOnEmptyTrash -bool false
 # Activity Monitor                                                            #
 ###############################################################################
 
-echo "Setting Activity Monitor preferences"
+echo "======> Setting Activity Monitor preferences"
 
 # Show the main window when launching Activity Monitor
 defaults write com.apple.ActivityMonitor OpenMainWindow -bool true
@@ -707,7 +708,7 @@ defaults write com.apple.ActivityMonitor NetworkGraphType -int 1
 # Dock, Dashboard, and hot corners                                            #
 ###############################################################################
 
-echo "Setting Dock and Dashboard preferences"
+echo "======> Setting Dock and Dashboard preferences"
 
 # Set the icon size of Dock items to 36 pixels
 defaults write com.apple.dock tilesize -int 36
@@ -779,7 +780,7 @@ defaults write com.apple.dock autohide -bool false
 # Safari & WebKit                                                             #
 ###############################################################################
 
-echo "Setting Safari & WebKit preferences"
+echo "======> Setting Safari & WebKit preferences"
 
 # Appearance
 
@@ -965,7 +966,7 @@ defaults write com.apple.Safari SendDoNotTrackHTTPHeader -bool true
 # Disk Utility                                                                #
 ###############################################################################
 
-echo "Setting Disk Utility preferences"
+echo "======> Setting Disk Utility preferences"
 
 # Enable the debug menu in Disk Utility
 defaults write com.apple.DiskUtility DUDebugMenuEnabled -bool true
@@ -979,7 +980,7 @@ defaults write com.apple.DiskUtility SidebarShowAllDevices -bool true
 # Contacts (Address Book)                                                     #
 ###############################################################################
 
-echo "Setting Contacts preferences"
+echo "======> Setting Contacts preferences"
 
 # Address format
 defaults write com.apple.AddressBook ABDefaultAddressCountryCode -string "fi"
@@ -998,7 +999,7 @@ defaults write NSGlobalDomain NSPersonNameDefaultShouldPreferNicknamesPreference
 # Calendar (iCal)                                                             #
 ###############################################################################
 
-echo "Setting Calendar preferences"
+echo "======> Setting Calendar preferences"
 
 # Show week numbers
 defaults write com.apple.iCal "Show Week Numbers" -bool true
@@ -1026,7 +1027,7 @@ defaults write com.apple.iCal "Show heat map in Year View" -bool true
 # Mail                                                                        #
 ###############################################################################
 
-echo "Setting Mail preferences"
+echo "======> Setting Mail preferences"
 
 # Copy email addresses as `foo@example.com` instead of `Foo Bar <foo@example.com>` in Mail.app
 defaults write com.apple.mail AddressesIncludeNameOnPasteboard -bool false
@@ -1042,7 +1043,7 @@ defaults write com.apple.mail ConversationViewMarkAllAsRead -bool true
 # Terminal & iTerm 2                                                          #
 ###############################################################################
 
-echo "Setting Terminal preferences"
+echo "======> Setting Terminal preferences"
 
 cp ./Library/Preferences/com.googlecode.iterm2.plist ~/Library/Preferences/com.googlecode.iterm2.plist
 
@@ -1109,7 +1110,7 @@ defaults write com.googlecode.iterm2 PromptOnQuit -bool false
 # Time Machine                                                                #
 ###############################################################################
 
-echo "Setting Time Machine preferences"
+echo "======> Setting Time Machine preferences"
 
 # Prevent Time Machine from prompting to use new hard drives as backup volume
 defaults write com.apple.TimeMachine DoNotOfferNewDisksForBackup -bool true
@@ -1119,7 +1120,7 @@ defaults write com.apple.TimeMachine DoNotOfferNewDisksForBackup -bool true
 # Disable CD & DVD actions
 # ==============================================
 
-echo "Setting CD & DVD preferences"
+echo "======> Setting CD & DVD preferences"
 
 # Disable blank CD automatic action.
 defaults write com.apple.digihub com.apple.digihub.blank.cd.appeared -dict action 1
@@ -1141,7 +1142,7 @@ defaults write com.apple.digihub com.apple.digihub.dvd.video.appeared -dict acti
 # TextEdit                                                                    #
 ###############################################################################
 
-echo "Setting TextEdit preferences"
+echo "======> Setting TextEdit preferences"
 
 # Use plain text mode for new TextEdit documents
 defaults write com.apple.TextEdit RichText -int 0
@@ -1155,7 +1156,7 @@ defaults write com.apple.TextEdit PlainTextEncodingForWrite -int 4
 # VMware Fusion                                                               #
 ###############################################################################
 
-echo "Setting VMware Fusion preferences"
+echo "======> Setting VMware Fusion preferences"
 
 # Applications menu: Show in Menu Bar
 defaults write com.vmware.fusion showStartMenu3 -int 1
@@ -1163,7 +1164,7 @@ defaults write com.vmware.fusion showStartMenu3 -int 1
 # Show the toolbar items
 defaults write com.vmware.fusion fusionDevicesToolbarItemIsExpanded -bool true
 
-echo "Removing Quarantine from VMware Fusion Helpers"
+echo "======> Removing Quarantine from VMware Fusion Helpers"
 sudo xattr -rd com.apple.quarantine /Applications/VMware\ Fusion.app/Contents/Library/LaunchServices/
 
 
@@ -1171,7 +1172,7 @@ sudo xattr -rd com.apple.quarantine /Applications/VMware\ Fusion.app/Contents/Li
 # Mac App Store                                                               #
 ###############################################################################
 
-echo "Setting Mac App Store preferences"
+echo "======> Setting Mac App Store preferences"
 
 # Enable the automatic update check
 defaults write com.apple.SoftwareUpdate AutomaticCheckEnabled -bool true
@@ -1199,7 +1200,7 @@ defaults write com.apple.commerce AutoUpdateRestartRequired -bool true
 # Photos                                                                      #
 ###############################################################################
 
-echo "Setting Photos preferences"
+echo "======> Setting Photos preferences"
 
 # Prevent Photos from opening automatically when devices are plugged in
 defaults -currentHost write com.apple.ImageCapture disableHotPlug -bool true
@@ -1209,7 +1210,7 @@ defaults -currentHost write com.apple.ImageCapture disableHotPlug -bool true
 # XQuartz                                                                     #
 ###############################################################################
 
-echo "Setting XQuartz preferences"
+echo "======> Setting XQuartz preferences"
 
 # Prevent XQuartz from opening an xterm when it starts
 defaults write org.macosforge.xquartz.X11 app_to_run /usr/bin/true
@@ -1225,7 +1226,7 @@ defaults write org.macosforge.xquartz.X11 wm_ffm -boolean true
 # Setup ViM                                                                   #
 ###############################################################################
 
-echo "Setting ViM preferences"
+echo "======> Setting ViM preferences"
 # Install Vundle plugin manager (https://github.com/VundleVim/Vundle.vim)
 if test -f "~/.vim/bundle/Vundle.vim"; then
     git -C ~/.vim/bundle/Vundle.vim pull
@@ -1242,7 +1243,7 @@ cp vim/vimrc ~/.vimrc
 # Setup Bash                                                                  #
 ###############################################################################
 
-echo "Setting Bash preferences"
+echo "======> Setting Bash preferences"
 #wget --quiet https://raw.githubusercontent.com/gengelke/dotfiles/master/macos/bashrc -P /tmp
 mv ~/.bashrc ~/.bashrc_old
 cp bash/bashrc ~/.bashrc
@@ -1254,7 +1255,7 @@ sudo chsh -s /bin/bash
 # Setup Tmux                                                                  #
 ###############################################################################
 
-echo "Setting Tmux preferences"
+echo "======> Setting Tmux preferences"
 #wget --quiet https://raw.githubusercontent.com/gengelke/dotfiles/master/macos/tmux.conf -P /tmp
 mv ~/.tmux.conf ~/.tmux.conf_old
 cp tmux/tmux.conf ~/.tmux.conf
@@ -1265,7 +1266,7 @@ cp tmux/tmux.conf ~/.tmux.conf
 # Setup user accounts                                                         #
 ###############################################################################
 
-echo "Setting up user account $useraccount"
+echo "======> Setting up user account $useraccount"
 sudo dscl . -create /Users/$useraccount
 sudo dscl . -create /Users/$useraccount UserShell /bin/bash
 sudo dscl . -create /Users/$useraccount RealName "$username"
@@ -1280,7 +1281,7 @@ sudo dscl . -passwd /Users/$useraccount $useraccount$userid
 # Final cleanup tasks                                                         #
 ###############################################################################
 
-echo "Doing some final cleanup"
+echo "======> Doing some final cleanup"
 # Restart UI services in order to enable previously made changes
 killall Dock
 killall SystemUIServer
