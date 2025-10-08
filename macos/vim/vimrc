@@ -1,4 +1,4 @@
-" (C) 2017 Gordon Engelke
+" (C) 2017-2025 Gordon Engelke
 
 " git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 " :PluginInstall
@@ -29,7 +29,8 @@ set formatoptions=tcrql                " t - autowrap to textwidth
 set encoding=utf-8
 set report=0                           " report back on all changes
 set shortmess=atI                      " shorten messages and don't show intro
-set mouse=a                            " try to use a mouse in the console (wimp!)
+set mouse=r                            " try to use a mouse in the console (wimp!)
+set clipboard=unnamedplus              " copy selected text to system clipboard
 set textwidth=80                       " we like 80 columns
 set viminfo=%100,'100,/100,h,\"500,:100,n~/.viminfo
                                        " Tell vim to remember certain things when we exit
