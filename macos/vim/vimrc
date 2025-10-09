@@ -1,10 +1,20 @@
-" (C) 2017-2025 Gordon Engelke
+"        _
+" __   _(_)_ __ ___  _ __ ___
+" \ \ / / | '_ ` _ \| '__/ __|
+"  \ V /| | | | | | | | | (__
+" (_)_/ |_|_| |_| |_|_|  \___|
+" Config for VIM (C) 2017-2025 Gordon Engelke, reject@email.de
 
+
+" Install Vundle:
 " git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 " :PluginInstall
 
-"------ Meta ------
-"
+
+"###################################
+"## Mic
+"###################################
+
 " clear all autocommands!
 autocmd!
 set autoread                           " Watch for file changes
@@ -41,8 +51,10 @@ set viminfo=%100,'100,/100,h,\"500,:100,n~/.viminfo
                                        "  n... :  where to save the viminfo files
 
 
-"----- Backup and file safety -----
-"
+"###################################
+"## Backup and file safety
+"###################################
+
 set swapfile                           " Protect changes between writes. Default values of
                                        " updatecount (200 keystrokes) and updatetime
                                        " (4 seconds) are fine
@@ -64,8 +76,10 @@ set undofile                           " persist the undo tree for each file
 set undodir^=~/.vim/undo//
 
 
-"------ Colors ------
-"
+"###################################
+"## Colors
+"###################################
+
 syntax enable                          " Enable syntax highlighting
 "set cursorline
 "set cursorcolumn
@@ -85,8 +99,10 @@ hi CursorLine term=none cterm=none ctermfg=none ctermbg=235
 "hi CursorColumn cterm=NONE ctermbg=DarkGrey ctermfg=NONE guibg=NONE guifg=NONE
 
 
-"----- Spaces, Tabs and Indents -----
-"
+"###################################
+"## Spaces, Tabs and Indents
+"###################################
+
 set tabstop=8                          " Number of spaces per TAB
 set softtabstop=4                      " Number of spaces in TAB when editing
 set shiftwidth=4                       " Affects what happens when you press >>, << or == and with auto indents
@@ -102,8 +118,10 @@ set preserveindent                     " save as much indent structure as possib
 set wrap                               " soft wrap long lines
 
 
-"----- Folding -----
-"
+"###################################
+"## Folding
+"###################################
+
 set foldenable                         " enable folding
 set foldlevelstart=10                  " open most folds by default
 set foldnestmax=10                     " 10 nested fold max
@@ -111,8 +129,10 @@ set foldmethod=indent                  " fold based on indent level
 " space open/closes folds
 nnoremap <space> za
 
-"----- UI Configuration -----
-"
+"###################################
+"## UI Configuration
+"###################################
+
 set laststatus=2                       " Show statusline
 set number                             " Show line numbers
 set numberwidth=5                      " Change the width of the "gutter" column used for numbering
@@ -146,8 +166,10 @@ else
   let &showbreak = '>'
 endif
 
-"----- Searching -----
-"
+"###################################
+"## Searching
+"###################################
+
 set ignorecase                         " Do case insensitive matching
 set smartcase                          " Do smart case matching
 set nohlsearch                         " Turn off highlighting for searched expressions
@@ -157,11 +179,13 @@ set showmatch                          " show matching bracket
 set matchtime=5                        " Blink matching chars for .x seconds
 set diffopt=filler,iwhite              " ignore all whitespace and sync
 
-"----- Mappings -----
-"
-" toggle list mode
+"###################################
+"## Mappings
+"###################################
+
+" Toggle list mode
 nmap <LocalLeader>tl :set list!<cr>
-" toggle paste mode
+" Toggle paste mode
 nmap <LocalLeader>pp :set paste!<cr>"
 nnoremap <F2> :set invpaste paste?<CR>
 set pastetoggle=<F2>
@@ -184,10 +208,12 @@ inoremap { {}<left>
 inoremap {<CR> {<CR>}<ESC>O
 inoremap {;<CR> {<CR>};<ESC>O
 
-"----- Install Vundle and all desired VIM plugins -----
-"
+"###################################
+"## Install Vundle and all desired VIM plugins
+"###################################
+
 "  git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-"
+
 filetype off                           " required
 set rtp+=~/.vim/bundle/Vundle.vim      " set the runtime path to include Vundle and initialize
 call vundle#begin()                    " alternatively, pass a path where Vundle should install plugins
@@ -206,10 +232,10 @@ Plugin 'flazz/vim-colorschemes'
 Plugin 'patstockwell/vim-monokai-tasty'
 Plugin 'stephpy/vim-yaml'
 
-" All of your Plugins must be added before the following line
+" All desired/required plugins must be added before the following line
 call vundle#end()                      " required
 filetype plugin indent on              " required
-"
+
 " Brief help
 " :PluginList       - lists configured plugins
 " :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
