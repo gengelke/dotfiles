@@ -1,8 +1,8 @@
 #!/bin/bash
 
-# (C) 2017-2023 Gordon Engelke
+# (C) 2017-2025 Gordon Engelke
 
-hostname="genmac12"
+hostname="gemini"
 username="Gordon Engelke"
 useraccount="gengelke"
 userid="502"
@@ -20,6 +20,7 @@ while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 xcode-select --install
 #xcode-select --reset
 #sleep 120
+softwareupdate --install-rosetta
 
 cp bash/bashrc ~/.bashrc
 cp vim/vimrc ~/.vimrc
@@ -32,7 +33,7 @@ echo "Installing Homebrew package manager"
 which -s brew
 if [[ $? != 0 ]] ; then
     # Install Homebrew
-    /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 else
     brew update
 fi
@@ -44,23 +45,16 @@ fi
 # Microsoft Remote Desktop
 
 echo "======> Installing desired/required Homebrew Cask packages"
-brew tap homebrew/cask
-brew install --cask \
+#brew tap homebrew/cask
+brew install \
      1password \
      1password-cli \
-     angry-ip-scanner \
      balenaetcher \
      bartender \
      caffeine \
-     carbon-copy-cloner \
      copyq \
-     cryptomator \
      cyberduck \
      dash \
-     docker \
-     dozer \
-     drawio \
-     duet \
      firefox \
      gimp \
      google-chrome \
@@ -71,17 +65,19 @@ brew install --cask \
      lynx \
      micro-snitch \
      microsoft-office \
+     microsoft-remote-desktop \
      microsoft-teams \
      mountain-duck \
      pdf-expert \
      powershell \
+     rancher \
+     rancher-cli \
      tigervnc-viewer \
      tripmode \
      vagrant \
      virtualbox \
      visual-studio-code \
      vlc \
-     vmware-fusion \
      vnc-viewer \
      wireshark \
      xnviewmp \
@@ -114,11 +110,27 @@ brew install --cask \
 #     textual \
 #     tunnelblick \
 #     veracrypt \
+#     vmware-fusion \
 #     virtualbox-extension-pack \
 #     vox \
+#     angry-ip-scanner \
+#     carbon-copy-cloner \
+#     cryptomator \
+#     drawio \
+#     duet \
+
+#     browser \
+#     ext4fuse \
+#     graphviz \
+#     minikube \
+#     mono \
+#     packer \
+#     textbar \
 
 # Install required/desired software through Homebrew
 echo "======> Installing desired/required Homebrew packages"
+brew tap hashicorp/tap
+brew install hashicorp/tap/packer
 brew install \
      ack \
      ansible \
@@ -127,7 +139,7 @@ brew install \
      bat \
      bash \
      bash-completion \
-     browser \
+     docker \
      freerdp \
      gdb \
      git \
@@ -137,15 +149,15 @@ brew install \
      helm \
      java \
      jq \
+     k9s \
      kubectl \
      mas \
      mosh \
-     minikube \
      netcat \
      nmap \
      node \
+     openshift-cli \
      openssl \
-     packer \
      pngpaste \
      pulseaudio \
      pygments \
@@ -161,21 +173,16 @@ brew install \
      wget \
      xbar
 
-#     ext4fuse \
-#     graphviz \
-#     mono \
-#     textbar \
-
 echo "======> Installing security applications through Homebrew"
 brew install --cask \
      blockblock \
-     do-not-disturb \
      KextViewr \
      knockknock \
      Lockdown \
      RansomWhere \
      taskexplorer
-     #lulu \
+#     lulu \
+#     do-not-disturb \
 
 echo "======> Installing Homebrew font packages"
 brew tap homebrew/cask-fonts
