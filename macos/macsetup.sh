@@ -1,6 +1,11 @@
 #!/bin/bash
 
-# (C) 2017-2025 Gordon Engelke
+#  __  __            ____       _               
+# |  \/  | __ _  ___/ ___|  ___| |_ _   _ _ __  
+# | |\/| |/ _` |/ __\___ \ / _ \ __| | | | '_ \ 
+# | |  | | (_| | (__ ___) |  __/ |_| |_| | |_) |
+# |_|  |_|\__,_|\___|____/ \___|\__|\__,_| .__/ 
+#          (C) 2017-2025 Gordon Engelke  |_|
 
 hostname="gemini"
 username="Gordon Engelke"
@@ -38,7 +43,7 @@ else
     brew update
 fi
 
-# AppStore:
+# Manually install from AppStore:
 # Bandwith+
 # Greenshot
 # Magnet
@@ -174,15 +179,15 @@ brew install \
      xbar
 
 echo "======> Installing security applications through Homebrew"
-brew install --cask \
+brew install \
      blockblock \
      KextViewr \
      knockknock \
      Lockdown \
      RansomWhere \
      taskexplorer
-#     lulu \
-#     do-not-disturb \
+     lulu \
+     do-not-disturb \
 
 echo "======> Installing Homebrew font packages"
 brew tap homebrew/cask-fonts
@@ -207,8 +212,8 @@ brew install font-terminus \
 echo "======> Installing Python stuff"
 brew install brew-pip pip-completion python
 python3 -m pip install --upgrade pip
-pip3 install nose tornado msrest openshift --upgrade
-pip3 install azure-mgmt-compute azure-mgmt-storage azure-mgmt-resource azure-keyvault-secrets azure-storage-blob msrestazure ansible[azure]
+pip3 install nose tornado msrest --upgrade #openshift
+#pip3 install azure-mgmt-compute azure-mgmt-storage azure-mgmt-resource azure-keyvault-secrets azure-storage-blob msrestazure ansible[azure]
 
 #wget https://downloads.citrix.com/19721/CitrixWorkspaceApp.dmg?__gda__=exp=1628196887~acl=/*~hmac=64c654dfbb629db7eaa4cf96fe4cd9d0e6827a5406b417eec96098aa267cf9f8 -P ~/Downloads
 #https://www.citrix.com/de-de/downloads/workspace-app/mac/
