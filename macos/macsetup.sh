@@ -210,7 +210,7 @@ brew install font-terminus \
 #brew install cf-cli
 
 echo "======> Installing Python stuff"
-brew install brew-pip pip-completion python
+brew install brew-pip pip-completion #python
 python3 -m pip install --upgrade pip
 pip3 install nose tornado msrest --upgrade #openshift
 #pip3 install azure-mgmt-compute azure-mgmt-storage azure-mgmt-resource azure-keyvault-secrets azure-storage-blob msrestazure ansible[azure]
